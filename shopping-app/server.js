@@ -2,30 +2,44 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const mongoose = require("mongoose");
+const { Sequelize, DataTypes, Model } = require("sequelize");
+const lodash = require("lodash");
 const PORT = process.env.PORT || 4000;
 const routes = express.Router();
+const fs = require("fs");
 const path = require("path");
-const { findPeople, findFamilies } = require("./serverFunctions");
+const { applyExtraSetup } = require("./extra-setup");
+const db = {};
+//const { findPeople, findFamilies } = require("./serverFunctions");
+//const router = require("./routes");
+const { triggerAsyncId } = require("async_hooks");
 
-var Family = require("./family.js").family;
-exports.Family = Family;
-var Person = require("./family.js").person;
-exports.Person = Person;
-var FamilyGroup = require("./family.js").FamilyGroup;
-exports.FamilyGroup = FamilyGroup;
+//Connection to database
+const sequelize = new Sequelize(
+  "oJXx5IKlWW",
+  "oJXx5IKlWW",
+  process.env.DB_PASSWORD,
+  {
+    host: "remotemysql.com",
+    dialect: "mysql",
+  }
+);
 
-const uri =
-  "mongodb+srv://admin:" +
-  process.env.MONGO_PASS +
-  "@cluster0-qjfez.mongodb.net/geneology?retryWrites=true&w=majority";
-const connection = mongoose.connection;
+const modelDefiners = [
+  require("./models/user"),
+  require("./models/cart"),
+  require("./models/shopItem"),
+  // Add more models here...
+  // require('./models/item'),
+];
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// We define all models according to their files.
+for (const modelDefiner of modelDefiners) {
+  modelDefiner(sequelize);
+}
 
-connection.once("open", function () {
-  console.log("MongoDB database connection established successfully");
-});
+// We execute any extra setup after the models are defined, such as adding associations.
+applyExtraSetup(sequelize);
 
 // Choose the port and start the server
 app.listen(PORT, () => {
@@ -44,7 +58,19 @@ exports.routes = routes;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/", require("./routes/create"));
+app.get("/db", async function (req, res) {
+  try {
+    await sequelize.authenticate();
+    console.log("Connection has been established successfully.");
+    await sequelize.sync({ alter: true }); //Changes all tables to make them match the model
+    //console.log(User.getFullName());
+    //await User.drop()
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+});
+
+/*app.use("/", require("./routes/create"));
 app.use("/", require("./routes/read"));
 app.use("/", require("./routes/update"));
 app.use("/", require("./routes/delete"));
@@ -53,3 +79,4 @@ app.use("/", require("./routes/delete"));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
+*/
