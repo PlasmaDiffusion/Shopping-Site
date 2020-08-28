@@ -3,15 +3,10 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const { Sequelize, DataTypes, Model } = require("sequelize");
-const lodash = require("lodash");
 const PORT = process.env.PORT || 4000;
 const routes = express.Router();
-const fs = require("fs");
 const path = require("path");
 const { applyExtraSetup } = require("./extra-setup");
-const db = {};
-//const { findPeople, findFamilies } = require("./serverFunctions");
-//const router = require("./routes");
 const { triggerAsyncId } = require("async_hooks");
 
 //Connection to database
@@ -25,12 +20,12 @@ const sequelize = new Sequelize(
   }
 );
 
+//Put models here --------------------
 const modelDefiners = [
   require("./models/user"),
   require("./models/cart"),
+  require("./models/cartItem"),
   require("./models/shopItem"),
-  // Add more models here...
-  // require('./models/item'),
 ];
 
 // We define all models according to their files.
@@ -55,6 +50,7 @@ app.use((req, res, next) => {
 });
 
 exports.routes = routes;
+exports.sequelize = sequelize;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -62,21 +58,19 @@ app.get("/db", async function (req, res) {
   try {
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
+    //await sequelize.drop();
     await sequelize.sync({ alter: true }); //Changes all tables to make them match the model
-    //console.log(User.getFullName());
-    //await User.drop()
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
 });
 
-/*app.use("/", require("./routes/create"));
-app.use("/", require("./routes/read"));
-app.use("/", require("./routes/update"));
-app.use("/", require("./routes/delete"));
+app.use("/", require("./routes/shopItemRoutes"));
+app.use("/", require("./routes/cartItemRoutes"));
+app.use("/", require("./routes/cartRoutes"));
+app.use("/", require("./routes/userRoutes"));
 
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
-*/
