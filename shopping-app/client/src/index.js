@@ -5,5 +5,16 @@ import App from "./App";
 import serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 
-const element = <h1>Hello World</h1>;
-ReactDOM.render(<App />, document.getElementById("root"));
+import { BrowserRouter as Router } from "react-router-dom";
+import Auth0ProviderWithHistory from "./auth0-provider-with-history";
+
+import "./index.css";
+
+ReactDOM.render(
+  <Router>
+    <Auth0ProviderWithHistory>
+      <App />
+    </Auth0ProviderWithHistory>
+  </Router>,
+  document.getElementById("root")
+);

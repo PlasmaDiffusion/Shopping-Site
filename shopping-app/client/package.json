@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": false,
   "dependencies": {
+    "@auth0/auth0-react": "^1.0.0",
     "@okta/okta-auth-js": "^3.2.0",
     "@okta/okta-react": "^3.0.2",
     "@okta/okta-signin-widget": "^2.3.0",
@@ -10,13 +11,18 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
-    "bootstrap": "^4.5.0",
+    "bootstrap": "^4.5.2",
+    "css-loader": "^4.2.2",
+    "meta-theme-color": "^0.1.2",
+    "node": "^14.8.0",
     "react": "^16.13.1",
+    "react-bootstrap-validation": "^0.1.11",
     "react-collapse": "^5.0.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.3"
+    "react-scripts": "^3.4.3",
+    "scss": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
