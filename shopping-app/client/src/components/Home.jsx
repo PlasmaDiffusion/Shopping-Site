@@ -9,6 +9,10 @@ import {
   useHistory,
 } from "react-router-dom";
 
+import AuthNav from "./navbar.jsx";
+import Profile from "./profile.jsx";
+import PrivateRoute from "./private-route.jsx";
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -26,8 +30,11 @@ class Home extends Component {
           */}
         <Switch>
           <Route exact path="/">
-            <h1>Hello World</h1>
+            <AuthNav />
           </Route>
+          <PrivateRoute exact path="/profile">
+            <Profile />
+          </PrivateRoute>
         </Switch>
       </Router>
     );
