@@ -16,13 +16,17 @@ module.exports = (sequelize) => {
       allowNull: false,
       type: DataTypes.STRING,
     },
+    description: {
+      allowNull: true,
+      type: DataTypes.STRING,
+    },
     imageLink: {
       allowNull: false,
       type: DataTypes.STRING,
     },
     price: {
       allowNull: false,
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
     },
     amountInStock: {
       allowNull: false,

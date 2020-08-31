@@ -12,6 +12,8 @@ import {
 import AuthNav from "./navbar.jsx";
 import Profile from "./profile.jsx";
 import PrivateRoute from "./private-route.jsx";
+import ExternalApi from "./external-api.jsx";
+import ShopItemForm from "./adminComponents/shopItemForm";
 
 class Home extends Component {
   constructor(props) {
@@ -34,6 +36,12 @@ class Home extends Component {
           </Route>
           <PrivateRoute exact path="/profile">
             <Profile />
+          </PrivateRoute>
+          <PrivateRoute exact path="/api">
+            <ExternalApi />
+          </PrivateRoute>
+          <PrivateRoute exact path="/admin">
+            <ShopItemForm />
           </PrivateRoute>
         </Switch>
       </Router>
