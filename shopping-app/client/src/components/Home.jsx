@@ -41,7 +41,8 @@ class Home extends Component {
             <ExternalApi />
           </PrivateRoute>
           <PrivateRoute exact path="/admin">
-            <ShopItemForm />
+            <ShopItemForm updatingItem={false} />
+            <ShopItemForm updatingItem={true} />
           </PrivateRoute>
         </Switch>
       </Router>

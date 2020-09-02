@@ -4,11 +4,12 @@ models = sequelize.models;
 
 //Creating shop item
 routes.post("/create/shopItem", async function (req, res) {
-  if (req.body.id || req.body.user != "Scott50000@gmail.com") {
+  if (req.body.id || req.body.user != process.env.ADMIN) {
+    console.log(req.body.user);
     res.status(400).send(`Bad request. Are you not logged in as an admin?`);
   } else {
     await models.shopItem.create(req.body);
-    res.status(201).end();
+    res.status(201).send(req.body.name + " was added successfully.");
   }
 });
 
@@ -26,8 +27,8 @@ routes.get("/read/shopItem/:id", async function (req, res) {
 });
 
 //Updating shop item
-routes.post("/update/shopItems/:id", async function (req, res) {
-  if (req.body.user == "Scott50000@gmail.com") {
+routes.post("/update/shopItem/:id", async function (req, res) {
+  if (req.body.user != process.env.ADMIN) {
     res.status(400).send(`Not an admin.`);
     return;
   }
@@ -35,13 +36,13 @@ routes.post("/update/shopItems/:id", async function (req, res) {
   const id = req.params.id;
 
   const shopItem = await models.shopItem.findByPk(id);
-  if (req.body.id === id) {
+  if (shopItem) {
     await models.shopItem.update(req.body, {
       where: {
         id: id,
       },
     });
-    res.status(200).end();
+    res.status(200).send(req.body.name + " was updated.");
   } else {
     res
       .status(400)
@@ -53,7 +54,7 @@ routes.post("/update/shopItems/:id", async function (req, res) {
 
 //Delete shop item
 routes.post("/delete/shopItem/:id", async function (req, res) {
-  if (req.body.user == "Scott50000@gmail.com") {
+  if (req.body.user == process.env.ADMIN) {
     res.status(400).send(`Not an admin.`);
     return;
   }
