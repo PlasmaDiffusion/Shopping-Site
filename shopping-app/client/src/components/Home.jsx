@@ -14,6 +14,8 @@ import Profile from "./profile.jsx";
 import PrivateRoute from "./private-route.jsx";
 import ExternalApi from "./external-api.jsx";
 import ShopItemForm from "./adminComponents/shopItemForm";
+import AdminNavigation from "./adminComponents/adminNavigation";
+import AdminSearch from "./adminComponents/adminSearch";
 
 class Home extends Component {
   constructor(props) {
@@ -41,7 +43,16 @@ class Home extends Component {
             <ExternalApi />
           </PrivateRoute>
           <PrivateRoute exact path="/admin">
+            <AdminNavigation currentPage={"Add Product"} />
             <ShopItemForm updatingItem={false} />
+          </PrivateRoute>
+          <PrivateRoute exact path="/admin/search">
+            <AdminNavigation currentPage={"Find Products to Edit"} />
+            <AdminSearch />
+          </PrivateRoute>
+          <PrivateRoute exact path="/admin/update/:id">
+            <h1>Update</h1>
+            <AdminNavigation />
             <ShopItemForm updatingItem={true} />
           </PrivateRoute>
         </Switch>
