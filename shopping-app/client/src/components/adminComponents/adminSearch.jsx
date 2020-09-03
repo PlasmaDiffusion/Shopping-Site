@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import SearchBar from "../searchBar";
+import SearchBar from "../searchComponents/searchBar";
 
 class AdminSearch extends Component {
   constructor(props) {

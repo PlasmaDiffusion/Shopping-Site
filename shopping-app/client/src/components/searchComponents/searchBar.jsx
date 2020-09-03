@@ -1,13 +1,29 @@
 import React, { Component } from "react";
-import { getClientUrl } from "../getUrl.js";
+import { getClientUrl, getServerUrl } from "../../getUrl.js";
+import SearchResult from "../searchComponents/searchResult";
+
+import axios from "axios";
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { keywords: "" };
+    this.state = { keywords: "", results: [] };
 
     this.updateSearchBar = this.updateSearchBar.bind(this);
+    this.listResults = this.listResults.bind(this);
+  }
+
+  //Search for stuff on mount, if there's search keywords in the url that is
+  componentDidMount() {
+    let url = new URLSearchParams(window.location.search);
+    let keywords = url.get("search");
+
+    if (keywords) {
+      axios.get(getServerUrl() + "/read/shopItems/" + keywords).then((res) => {
+        this.setState({ results: res.data });
+      });
+    }
   }
 
   updateSearchBar(e) {
@@ -18,12 +34,20 @@ class SearchBar extends Component {
   confirmSearch() {
     if (this.props.admin)
       window.location.replace(
-        getClientUrl() + "/admin/search/?keywords=" + this.state.keywords
+        getClientUrl() + "/admin/search/?search=" + this.state.keywords
       );
     else
       window.location.replace(
-        getClientUrl() + "/search/?keywords=" + this.state.keywords
+        getClientUrl() + "/search/?search=" + this.state.keywords
       );
+  }
+
+  listResults() {
+    const listItems = this.state.results.map((product) => (
+      <SearchResult product={product} />
+    ));
+
+    return listItems;
   }
 
   render() {
@@ -41,30 +65,8 @@ class SearchBar extends Component {
           <div className="form-group">
             <input type="submit" value="Search" className="btn btn-primary" />
           </div>
-          {/*<div className="container">
-            <div className="row">
-              <div className="col-lg-10">
-                <div className="form-group">
-                  <input
-                    type="text"
-                    name="search"
-                    placeholder="Enter products to search for here..."
-                    onChange={this.updateSearchBar}
-                  ></input>
-                </div>
-              </div>
-              <div className="col-sm">
-                <div className="form-group">
-                  <input
-                    type="submit"
-                    value="Search"
-                    className="btn btn-primary"
-                  />
-                </div>
-              </div>
-            </div>
-    </div>*/}
         </form>
+        <div>{this.listResults()}</div>
       </React.Fragment>
     );
   }

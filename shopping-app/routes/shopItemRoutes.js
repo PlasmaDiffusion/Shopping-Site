@@ -1,4 +1,5 @@
 const { routes, sequelize } = require("../server");
+const { Op } = require("sequelize");
 
 models = sequelize.models;
 
@@ -18,6 +19,20 @@ routes.get("/read/shopItems", async function (req, res) {
   const shopItems = await models.shopItem.findAll();
 
   res.status(200).json(shopItems);
+});
+
+//Reading shop item(s) from search terms
+routes.get("/read/shopItems/:search", async function (req, res) {
+  const search = req.params.search;
+
+  // SELECT * FROM shopItem WHERE name LIKE %search keyword%
+  var foundItems = await models.shopItem.findAll({
+    where: {
+      name: { [Op.substring]: search },
+    },
+  });
+
+  res.status(200).json(foundItems);
 });
 
 routes.get("/read/shopItem/:id", async function (req, res) {
