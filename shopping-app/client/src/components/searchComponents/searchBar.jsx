@@ -42,12 +42,19 @@ class SearchBar extends Component {
       );
   }
 
+  //List all products found in the search here
   listResults() {
-    const listItems = this.state.results.map((product) => (
-      <SearchResult product={product} />
+    const listItems = this.state.results.map((product, index) => (
+      <div class="col">
+        <SearchResult product={product} />
+      </div>
     ));
 
-    return listItems;
+    return (
+      <div class="container">
+        <div className="row">{listItems}</div>
+      </div>
+    );
   }
 
   render() {
@@ -60,6 +67,7 @@ class SearchBar extends Component {
               name="search"
               placeholder="Enter products to search for here..."
               onChange={this.updateSearchBar}
+              className="searchbar"
             ></input>
           </div>
           <div className="form-group">

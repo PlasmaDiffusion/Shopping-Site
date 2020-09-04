@@ -10,9 +10,23 @@ class SearchResult extends Component {
   render() {
     return (
       <React.Fragment>
-        <h2>{this.props.product.name}</h2>
-        <p>{this.props.product.price}</p>
-        <p>{this.props.product.description}</p>
+        <a href={this.props.product.id}>
+          <img
+            src={this.props.product.imageLink}
+            width={256}
+            height={256}
+            title={this.props.product.name}
+            onClick
+          />
+        </a>
+
+        <div className="searchResult">
+          <a href={this.props.product.id}>
+            <h2>{this.props.product.name}</h2>
+          </a>
+          <p>${this.props.product.price}</p>
+          <p>{this.props.product.description}</p>
+        </div>
       </React.Fragment>
     );
   }

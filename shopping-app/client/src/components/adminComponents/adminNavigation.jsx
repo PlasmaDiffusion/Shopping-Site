@@ -30,8 +30,8 @@ class AdminNavigation extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <Navbar color="light" light expand="md">
+      <div className="navbar">
+        <Navbar dark expand="md">
           <NavbarBrand href="/admin/">Admin</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -46,7 +46,7 @@ class AdminNavigation extends Component {
             <NavbarText></NavbarText>
           </Collapse>
         </Navbar>
-      </React.Fragment>
+      </div>
     );
   }
 }
