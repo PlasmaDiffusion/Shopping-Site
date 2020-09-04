@@ -6,7 +6,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 const Auth0ProviderWithHistory = ({ children }) => {
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;
   const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
-  const audience = process.env.REACT_APP_AUDIENCE;
+  //const audience = process.env.REACT_APP_AUDIENCE;
 
   const history = useHistory();
 
@@ -14,13 +14,16 @@ const Auth0ProviderWithHistory = ({ children }) => {
     history.push(appState?.returnTo || window.location.pathname);
   };
 
+  alert("Domain: " + domain);
+  alert("ClientId: " + clientId);
+
   return (
     <Auth0Provider
       domain={domain}
       clientId={clientId}
       redirectUri={window.location.origin}
       onRedirectCallback={onRedirectCallback}
-      audience={audience}
+      /*audience={audience}*/
     >
       {children}
     </Auth0Provider>
