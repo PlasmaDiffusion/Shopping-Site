@@ -8,7 +8,7 @@ const Profile = (props) => {
   const { user } = useAuth0();
   const { name, picture, email } = user;
 
-  console.log(user);
+  //console.log(user);
 
   //Call a parent function if it was set
   if (props.onAuthenticated) props.onAuthenticated(name);

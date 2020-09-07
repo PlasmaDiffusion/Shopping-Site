@@ -27,7 +27,6 @@ export default function BasicExample() {
       </Helmet>
 
       <BrowserRouter>
-        <h1>Hello World</h1>
         <Home />
       </BrowserRouter>
     </React.Fragment>

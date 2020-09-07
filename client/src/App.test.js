@@ -1,45 +1,35 @@
 import React from "react";
-import ReactRouter from "react-router";
 import ReactDOM from "react-dom";
-import { act } from "react-dom/test-utils";
+import { configure, shallow } from "enzyme";
 import { expect } from "chai";
-var jsdom = require("mocha-jsdom");
-
-global.document = jsdom({
-  url: "http://localhost:3000/",
-});
-
 import App from "./App";
+import Adapter from "enzyme-adapter-react-16";
+import Loading from "./components/loading";
 
-let rootContainer;
+configure({ adapter: new Adapter() });
 
-beforeEach(() => {
-  rootContainer = document.createElement("div");
-  document.body.appendChild(rootContainer);
-});
-
-afterEach(() => {
-  document.body.removeChild(rootContainer);
-  rootContainer = null;
-});
-
-describe("App Component Testing", () => {
-  it("Renders Hello World Title", () => {
-    act(() => {
-      ReactDOM.render(<App />, rootContainer);
-    });
-    const h1 = rootContainer.querySelector("h1");
-    expect(h1.textContent).to.equal("Hello World");
+//Main component
+describe("App component testing", function () {
+  it("renders welcome message", function () {
+    const wrapper = shallow(<App />);
+    const welcome = <h1>Hello World</h1>;
+    expect(wrapper.contains(welcome)).to.equal(true);
   });
 });
 
-/*import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
-
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+//Loading component
+describe("Loading component", function () {
+  it("renders a basic loading <p> message", function () {
+    const container = shallow(<Loading />);
+    const msg = <p>Loading...</p>;
+    expect(container.find("p").length).to.equal(1);
+  });
 });
-*/
+
+//Profile component
+describe("Profile component", function () {
+  it("renders a name in h2, but not when logged in", function () {
+    const container = shallow(<Loading />);
+    expect(container.find("h2").length).to.equal(0);
+  });
+});
