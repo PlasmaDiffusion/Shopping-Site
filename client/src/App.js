@@ -11,7 +11,7 @@ import {
 import { Helmet } from "react-helmet";
 import Home from "./components/Home";
 import { useAuth0 } from "@auth0/auth0-react";
-import "./App.css";
+//import "./App.css";
 
 export default function BasicExample() {
   const { isLoading } = useAuth0();
