@@ -71,7 +71,12 @@ class SearchBar extends Component {
             ></input>
           </div>
           <div className="form-group">
-            <input type="submit" value="Search" className="btn btn-primary" />
+            <input
+              type="submit"
+              id="searchButton"
+              value="Search"
+              className="btn btn-primary"
+            />
           </div>
         </form>
         <div>{this.listResults()}</div>

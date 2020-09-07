@@ -16,6 +16,8 @@ import ExternalApi from "./external-api.jsx";
 import ShopItemForm from "./adminComponents/shopItemForm";
 import AdminNavigation from "./adminComponents/adminNavigation";
 import AdminSearch from "./adminComponents/adminSearch";
+import SearchBar from "./searchComponents/searchBar.jsx";
+import ProductPage from "./productPage.jsx";
 
 class Home extends Component {
   constructor(props) {
@@ -36,6 +38,15 @@ class Home extends Component {
           <Route exact path="/">
             <AuthNav />
           </Route>
+          <Route exact path="/search">
+            <AuthNav />
+            <SearchBar />
+          </Route>
+          <Route exact path="/product">
+            <AuthNav />
+            <ProductPage />
+          </Route>
+          {/* Private routes go below */}
           <PrivateRoute exact path="/profile">
             <Profile />
           </PrivateRoute>
