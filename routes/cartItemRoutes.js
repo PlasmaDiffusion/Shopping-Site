@@ -17,8 +17,10 @@ routes.post("/create/cartItem", async function (req, res) {
 });
 
 //Reading cart item(s)
-routes.get("/read/cartItems", async function (req, res) {
-  const cartItems = await models.cartItem.findAll();
+routes.get("/read/cartItems/:id", async function (req, res) {
+  const cartItems = await models.cartItem.findAll({
+    where: { id: req.params.id },
+  });
 
   res.status(200).json(cartItems);
 });

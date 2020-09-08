@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
     },
     totalPrice: {
       allowNull: false,
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
     },
     owner: {
       allowNull: false,

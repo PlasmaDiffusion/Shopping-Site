@@ -18,6 +18,7 @@ import AdminNavigation from "./adminComponents/adminNavigation";
 import AdminSearch from "./adminComponents/adminSearch";
 import SearchBar from "./searchComponents/searchBar.jsx";
 import ProductPage from "./productPage.jsx";
+import Cart from "./cartComponents/cart.jsx";
 
 class Home extends Component {
   constructor(props) {
@@ -49,6 +50,10 @@ class Home extends Component {
           {/* Private routes go below */}
           <PrivateRoute exact path="/profile">
             <Profile />
+          </PrivateRoute>
+          <PrivateRoute exact path="/cart">
+            <Cart test={true} />
+            {/*<Cart test={true} />*/}
           </PrivateRoute>
           <PrivateRoute exact path="/api">
             <ExternalApi />

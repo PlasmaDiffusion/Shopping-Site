@@ -13,8 +13,8 @@ class SearchResult extends Component {
         <a href={"/product/?id=" + this.props.product.id}>
           <img
             src={this.props.product.imageLink}
-            width={256}
-            height={256}
+            width={this.props.imageSize}
+            height={this.props.imageSize}
             title={this.props.product.name}
             onClick
           />
@@ -31,5 +31,9 @@ class SearchResult extends Component {
     );
   }
 }
+
+SearchResult.defaultProps = {
+  imageSize: 256,
+};
 
 export default SearchResult;

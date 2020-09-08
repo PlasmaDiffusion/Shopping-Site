@@ -70,6 +70,7 @@ class ProductPage extends Component {
 
           <QuantityButtons
             max={this.state.amountInStock}
+            amount={0}
             onAmountChanged={this.updateAmountToAdd}
           />
 

@@ -4,7 +4,7 @@ class QuantityButtons extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { amount: 0 };
+    this.state = { amount: this.props.amount };
 
     this.onIncrement = this.onIncrement.bind(this);
     this.onDecrement = this.onDecrement.bind(this);

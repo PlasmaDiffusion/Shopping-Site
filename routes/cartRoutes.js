@@ -25,10 +25,13 @@ routes.get("/read/carts", async function (req, res) {
 
 //Read a cart of a specific user, or create one if it is yet to exist
 routes.post("/read/cart", async function (req, res) {
+  console.log("Trying to find cart with username: " + req.body.username);
+
   const [cart, created] = await models.cart.findOrCreate({
-    where: { id: req.body.userId },
+    where: { owner: req.body.username },
     defaults: {
-      userId: "Technical Lead JavaScript",
+      owner: req.body.username,
+      totalPrice: 0.0,
     },
   });
 

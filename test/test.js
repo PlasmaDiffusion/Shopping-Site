@@ -50,4 +50,13 @@ describe("The shopItem model object using findAll with LIKE", function () {
     assert.ok(foundItems.length > 1, "Length is " + foundItems.length);
   });
 });
+
+//Cart read testing -----------------------------------------------------------------------------------
+describe("The cart model object using find", function () {
+  it("should not be null with id 1", async function () {
+    const cart = await models.cart.findByPk(1);
+
+    assert.notEqual("undefined", cart);
+  });
+});
 //------------------------------------------------------------------------------------------------------
