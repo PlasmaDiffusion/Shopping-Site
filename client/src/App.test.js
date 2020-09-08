@@ -8,6 +8,7 @@ import Adapter from "enzyme-adapter-react-16";
 import Loading from "./components/loading";
 import SearchBar from "./components/searchComponents/searchBar";
 import ProductPage from "./components/productPage";
+import Cart from "./components/cartComponents";
 
 configure({ adapter: new Adapter() });
 
@@ -44,6 +45,30 @@ describe("Product Page component", function () {
     expect(wrapper.state().loaded).to.equal(true);
     const name = <h2>Apple</h2>;
     expect(wrapper.contains(name)).to.equal(true);
+  });
+});
+
+//Product
+describe("Product Page component", function () {
+  it("renders an apple if id is 1", async function () {
+    const wrapper = shallow(<ProductPage />);
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    expect(wrapper.state().loaded).to.equal(true);
+    const name = <h2>Apple</h2>;
+    expect(wrapper.contains(name)).to.equal(true);
+  });
+});
+
+//Cart
+describe("Cart component", function () {
+  it("Should have at least one item", function () {
+    const wrapper = shallow(<Cart test={true} />);
+
+    //await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    expect(container.find("h2").length).to.be.greaterThan(0);
   });
 });
 

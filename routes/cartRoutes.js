@@ -23,9 +23,17 @@ routes.get("/read/carts", async function (req, res) {
   res.status(200).json(carts);
 });
 
-routes.get("/read/cart/:id", async function (req, res) {
-  const id = req.params.id;
-  const cart = await models.cart.findByPk(id);
+//Read a cart of a specific user, or create one if it is yet to exist
+routes.post("/read/cart", async function (req, res) {
+  const [cart, created] = await models.cart.findOrCreate({
+    where: { id: req.body.userId },
+    defaults: {
+      userId: "Technical Lead JavaScript",
+    },
+  });
+
+  if (created) console.log("New cart created!");
+
   res.status(200).json(cart);
 });
 

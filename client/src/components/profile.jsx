@@ -32,6 +32,12 @@ const Profile = (props) => {
             <p className="lead text-muted">{email}</p>
           </Col>
         </Row>
+        <Row className="align-items-center profile-header mb-5 text-center text-md-left">
+          <Col md>
+            <a href="/cart">Cart</a>
+            <p className="lead text-muted">{email}</p>
+          </Col>
+        </Row>
       </Container>
     );
 };

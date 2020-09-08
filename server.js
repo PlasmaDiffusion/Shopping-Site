@@ -22,7 +22,6 @@ const sequelize = new Sequelize(
 
 //Put models here --------------------
 const modelDefiners = [
-  require("./models/user"),
   require("./models/cart"),
   require("./models/cartItem"),
   require("./models/shopItem"),
@@ -68,7 +67,6 @@ app.get("/db", async function (req, res) {
 app.use("/", require("./routes/shopItemRoutes"));
 app.use("/", require("./routes/cartItemRoutes"));
 app.use("/", require("./routes/cartRoutes"));
-app.use("/", require("./routes/userRoutes"));
 
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {
