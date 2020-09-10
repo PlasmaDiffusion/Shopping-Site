@@ -3,7 +3,7 @@ const { routes, sequelize } = require("../server");
 models = sequelize.models;
 
 //Creating cart item
-routes.post("/create/cartItem", async function (req, res) {
+routes.post("/create/cartItem/", async function (req, res) {
   if (req.body.id) {
     res
       .status(400)
@@ -16,13 +16,38 @@ routes.post("/create/cartItem", async function (req, res) {
   }
 });
 
-//Reading cart item(s)
-routes.get("/read/cartItems/:id", async function (req, res) {
+//Reading cart item(s) that belong to a cart of a given id
+routes.get("/read/cartItems/:cartId", async function (req, res) {
   const cartItems = await models.cartItem.findAll({
-    where: { id: req.params.id },
+    where: { cartId: req.params.cartId },
   });
 
-  res.status(200).json(cartItems);
+  var responseData = [];
+
+  //Read in information the shopItemId
+  for (let i = 0; i < cartItems.length; i++) {
+    let product = await models.shopItem.findByPk(cartItems[i].shopItemId);
+
+    responseData.push({
+      //Regular cart item stuff
+      id: cartItems[i].id,
+      cartId: cartItems[i].cartId,
+      shopItemId: cartItems[i].shopItemId,
+      amountInCart: cartItems[i].amountInCart,
+      //Information on the product
+
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      imageLink: product.imageLink,
+      amountInStock: product.amountInStock,
+      productId: product.id,
+    });
+  }
+
+  console.log(responseData);
+
+  res.status(200).json(responseData);
 });
 
 routes.get("/read/cartItem/:id", async function (req, res) {

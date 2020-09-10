@@ -52,13 +52,14 @@ class Home extends Component {
             <Profile />
           </PrivateRoute>
           <PrivateRoute exact path="/cart">
-            <Cart test={true} />
-            {/*<Cart test={true} />*/}
+            <AuthNav />
+            <Cart />
           </PrivateRoute>
           <PrivateRoute exact path="/api">
             <ExternalApi />
           </PrivateRoute>
           <PrivateRoute exact path="/admin">
+            <AuthNav />
             <AdminNavigation currentPage={"Add Product"} />
             <ShopItemForm updatingItem={false} />
           </PrivateRoute>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getClientUrl, getServerUrl } from "../getUrl.js";
 import axios from "axios";
 import QuantityButtons from "./quantityButtons";
+import AddToCart from "./cartComponents/addToCart";
 
 //A component that shows information of the product and the ability to add one or more of it to your cart.
 class ProductPage extends Component {
@@ -74,12 +75,11 @@ class ProductPage extends Component {
             onAmountChanged={this.updateAmountToAdd}
           />
 
-          <a
-            href={"/addToCart/" + this.state.id}
-            className="btn btn-primary btn-lg active"
-          >
-            Add to cart
-          </a>
+          <AddToCart
+            productId={this.state.id}
+            amountInStock={this.state.amountInStock}
+            amountToAdd={this.state.amountToAdd}
+          />
         </React.Fragment>
       );
     else return "Loading...";

@@ -73,7 +73,7 @@ class Cart extends Component {
           this.setState({
             cartItems: cartItemRes.data,
           });
-          console.log(this.state.cartItems);
+          console.log("Cart data", cartItemRes.data);
         });
     });
   }
