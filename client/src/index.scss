@@ -1,4 +1,4 @@
-$bgCol: #f3b354;
+$bgCol: #f3a154;
 $navCol: #ef7547;
 
 body {
@@ -16,7 +16,14 @@ code {
 }
 
 .navbar {
+  background-color: $bgCol;
+}
+
+.navItem {
   background-color: $navCol;
+}
+.navItem:hover {
+  background-color: lighten($navCol, 30%);
 }
 
 .searchResult {

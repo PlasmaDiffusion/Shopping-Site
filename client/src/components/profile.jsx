@@ -2,11 +2,17 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 import Loading from "./loading";
 
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = (props) => {
+  //This prop does nothing unless user is logged in already
+  //const { isAuthenticated, } = useAuth0();
+  //if (!isAuthenticated) return <React.Fragment></React.Fragment>;
+
   const { user } = useAuth0();
   const { name, picture, email } = user;
+
+  if (!user) return <React.Fragment></React.Fragment>;
 
   //console.log(user);
 
@@ -18,30 +24,33 @@ const Profile = (props) => {
   else if (props.adminPage) return "";
   else
     return (
-      <Container className="mb-5">
-        <Row className="align-items-center profile-header mb-5 text-center text-md-left">
+      <Container>
+        <Row className="align-items-center profile-header text-center text-md-left">
           <Col md={2}>
             <img
               src={picture}
               alt="Profile"
               className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
+              width={32}
+              height={32}
             />
           </Col>
           <Col md>
-            <h2>{name}</h2>
             <p className="lead text-muted">{email}</p>
           </Col>
         </Row>
-        <Row className="align-items-center profile-header mb-5 text-center text-md-left">
+        {/*<Row className="align-items-center profile-header mb-5 text-center text-md-left">
           <Col md>
             <a href="/cart">Cart</a>
             <p className="lead text-muted">{email}</p>
           </Col>
-        </Row>
+    </Row>*/}
       </Container>
     );
 };
 
-export default withAuthenticationRequired(Profile, {
+export default Profile;
+
+/*export default withAuthenticationRequired(Profile, {
   onRedirecting: () => <Loading />,
-});
+});*/

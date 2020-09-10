@@ -8,17 +8,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
 
 .navbar {
+  background-color: #f3a154; }
+
+.navItem {
   background-color: #ef7547; }
+
+.navItem:hover {
+  background-color: #fbdfd4; }
 
 .searchResult {
   background-color: #ef7547;
-  border: 2px double #f3b354; }
+  border: 2px double #f3a154; }
 
 .searchbar {
   width: 50%; }
 
 a:link {
-  color: #f3b354; }
+  color: #f3a154; }
 
 a:hover {
   color: #bf4011; }

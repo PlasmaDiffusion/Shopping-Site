@@ -10,7 +10,7 @@ var tests = 0;
 // Will run after every test in every file
 afterEach(function () {
   tests++;
-  if (tests >= 4) {
+  if (tests >= 5) {
     sequelize.close();
     console.log("Sequlize connection closed");
   }

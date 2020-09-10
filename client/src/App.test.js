@@ -10,15 +10,13 @@ import SearchBar from "./components/searchComponents/searchBar";
 import ProductPage from "./components/productPage";
 import Cart from "./components/cartComponents/cart";
 import SearchResult from "./components/searchComponents/searchResult";
+import QuantityButtons from "./components/quantityButtons";
 
 configure({ adapter: new Adapter() });
 
 const clickSpy = sinon.spy();
 
-/*const wrapper = shallow(<App />);
-  const welcome = <h1>Hello World</h1>;
-  expect(wrapper.contains(welcome)).to.equal(true);*/
-
+/*
 //Loading component
 describe("Loading component", function () {
   it("renders a basic loading <p> message", function () {
@@ -34,7 +32,7 @@ describe("Profile component", function () {
     const container = shallow(<Loading />);
     expect(container.find("h2").length).to.equal(0);
   });
-});
+});*/
 
 //Product
 describe("Product Page component", function () {
@@ -51,12 +49,28 @@ describe("Product Page component", function () {
 
 //Cart
 describe("Cart component", function () {
-  it("Should have at least two items", async function () {
+  it("should have at least two items", async function () {
     const wrapper = shallow(<Cart test={true} />);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    expect(wrapper.find("div")).to.have.lengthOf(3);
+  });
+});
 
-    expect(wrapper.find("a")).to.have.lengthOf(1);
+//Quantity buttons
+describe("Quanity button component", function () {
+  it("should have two buttons", function () {
+    const wrapper = shallow(<QuantityButtons amount={1} max={2} />);
+
+    expect(wrapper.find("button")).to.have.lengthOf(2);
+  });
+
+  it("should be clickable", async function () {
+    const wrapper = shallow(
+      <QuantityButtons amount={1} max={2} onAmountChanged={() => {}} />
+    );
+
+    wrapper.find("#increment").simulate("click");
+    expect(clickSpy.calledOnce).to.equal(true);
   });
 });
 

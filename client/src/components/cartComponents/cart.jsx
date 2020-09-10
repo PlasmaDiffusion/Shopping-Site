@@ -82,7 +82,7 @@ class Cart extends Component {
     return (
       <div className="container">
         {this.state.cartItems.map((product, index) => (
-          <div className="row">
+          <div className="row" key={index}>
             <SearchResult product={product} imageSize={128} />
             <QuantityButtons
               max={product.amountInStock}
