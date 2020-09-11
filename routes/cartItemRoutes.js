@@ -59,15 +59,41 @@ routes.get("/read/cartItem/:id", async function (req, res) {
 });
 
 //Updating cart item (i.e. update the amount in cart)
-routes.post("/update/cartItem/:id", async function (req, res) {
-  const id = req.params.id;
+routes.post("/update/cartItem/", async function (req, res) {
+  const id = req.body.id;
 
+  //First get the old amount in cart (to be used in a calculation later)
+  const cartItem = await models.cartItem.findByPk(id);
+  const prevCartAmount = cartItem.amountInCart;
+  const currentAmount = req.body.amountInCart;
+
+  //Update the item
   if (req.body.id == id) {
-    await models.cartItem.update(req.body, {
-      where: {
-        id: id,
+    await models.cartItem.update(
+      { amountInCart: req.body.amountInCart },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+
+    //After updating make sure to change the amount in stock
+    const shopItem = await models.shopItem.findByPk(req.body.shopItemId);
+
+    await models.shopItem.update(
+      {
+        //Amount
+        amountInStock:
+          shopItem.amountInStock - (currentAmount - prevCartAmount),
       },
-    });
+      {
+        where: {
+          id: req.body.shopItemId,
+        },
+      }
+    );
+
     res.status(200).end();
   } else {
     res

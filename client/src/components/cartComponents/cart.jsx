@@ -15,6 +15,8 @@ class Cart extends Component {
       id: -1,
       totalPrice: 0.0,
       cartItems: [],
+      initialMaxAmounts: [],
+      amountToDisplayInStock: [],
     };
 
     //We read this from profile
@@ -74,7 +76,20 @@ class Cart extends Component {
           this.setState({
             cartItems: cartItemRes.data,
           });
+
+          //Set initial amount array (This is used for recording the original max)
+          let initialMax = [];
+          let amountToDisplay = [];
           console.log("Cart data", cartItemRes.data);
+          for (let i = 0; i < cartItemRes.data.length; i++) {
+            let item = cartItemRes.data[i];
+            initialMax.push(item.amountInStock + item.amountInCart);
+            amountToDisplay.push(item.amountInStock);
+          }
+          this.setState({
+            initialMaxAmounts: [...initialMax],
+            amountToDisplayInStock: [...amountToDisplay],
+          });
         });
     });
   }
@@ -86,7 +101,9 @@ class Cart extends Component {
           <div className="row" key={index}>
             <CartItem product={product} imageSize={128} />
             <QuantityButtons
-              max={product.amountInStock}
+              max={this.state.initialMaxAmounts[index]}
+              min={1}
+              stockAmount={this.state.amountToDisplayInStock[index]}
               amount={product.amountInCart}
               onAmountChanged={(newAmount) => {
                 //Function that updates item count

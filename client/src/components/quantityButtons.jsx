@@ -12,7 +12,7 @@ class QuantityButtons extends Component {
 
   onIncrement() {
     //Make sure don't go over max
-    if (this.state.amount < this.props.max) {
+    if (this.props.max - this.state.amount > 0) {
       this.props.onAmountChanged(this.state.amount + 1); //Update early because setState is asyncrhonous
       this.setState({ amount: this.state.amount + 1 });
     }
@@ -20,7 +20,7 @@ class QuantityButtons extends Component {
 
   onDecrement() {
     //Make sure don't go under 0
-    if (this.state.amount > 0) {
+    if (this.state.amount > this.props.min) {
       this.props.onAmountChanged(this.state.amount - 1); //Update early because setState is asyncrhonous
       this.setState({ amount: this.state.amount - 1 });
     }
@@ -56,7 +56,7 @@ class QuantityButtons extends Component {
           <div className="col-sm-1"> </div>
           <div className="col-sm-1">
             <p>
-              <i>{this.props.max} in Stock</i>
+              <i>{this.props.stockAmount} in stock</i>
             </p>
           </div>
         </div>

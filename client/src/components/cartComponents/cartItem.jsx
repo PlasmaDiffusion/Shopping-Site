@@ -12,6 +12,7 @@ class CartItem extends Component {
     this.updateAmount = this.updateAmount.bind(this);
   }
 
+  //Delete the item from the cart. Also increase the stock of said item.
   deleteItem() {
     axios
       .post(getServerUrl() + "/delete/cartItem", {
@@ -24,7 +25,18 @@ class CartItem extends Component {
       });
   }
 
-  updateAmount() {}
+  //Quantity was changed. Update the cart price and that item's stock.
+  updateAmount() {
+    axios
+      .post(getServerUrl() + "/update/cartItem", {
+        id: this.props.product.id,
+        amountInCart: this.props.product.amountInCart,
+        shopItemId: this.props.product.shopItemId,
+      })
+      .then((res) => {
+        window.location.reload();
+      });
+  }
 
   render() {
     return (
@@ -32,7 +44,7 @@ class CartItem extends Component {
         <div className="container">
           <div className="row searchResult">
             <div className="col-sm-">
-              <a href={"/product/?id=" + this.props.product.id}>
+              <a href={"/product/?id=" + this.props.product.shopItemId}>
                 <img
                   src={this.props.product.imageLink}
                   width={this.props.imageSize}
@@ -43,7 +55,7 @@ class CartItem extends Component {
               </a>
             </div>
             <div className="col-sm-4">
-              <a href={"/product/?id=" + this.props.product.id}>
+              <a href={"/product/?id=" + this.props.product.shopItemId}>
                 <h2>{this.props.product.name}</h2>
               </a>
               <p>${this.props.product.price}</p>
