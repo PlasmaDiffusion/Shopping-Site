@@ -28,7 +28,7 @@ class QuantityButtons extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container searchResult">
         <div className="row">
           <div className="col-sm-1">
             <button

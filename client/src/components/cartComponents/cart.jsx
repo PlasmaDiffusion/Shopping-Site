@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SearchResult from "../searchComponents/searchResult";
+import CartItem from "../cartComponents/cartItem";
 import Profile from "../profile";
 
 import { getClientUrl, getServerUrl } from "../../getUrl.js";
@@ -84,7 +84,7 @@ class Cart extends Component {
       <div className="container">
         {this.state.cartItems.map((product, index) => (
           <div className="row" key={index}>
-            <SearchResult product={product} imageSize={128} />
+            <CartItem product={product} imageSize={128} />
             <QuantityButtons
               max={product.amountInStock}
               amount={product.amountInCart}
@@ -95,6 +95,7 @@ class Cart extends Component {
                 this.setState({ cartItems: [...arr] });
               }}
             />
+            <div style={{ margin: "10px" }}></div>
           </div>
         ))}
       </div>
@@ -111,7 +112,7 @@ class Cart extends Component {
         <Profile onAuthenticated={this.getUsername} invisible={true} />
         {this.showItemsInCart()}
         <h3>
-          Total Price: $<i>{this.state.totalPrice}</i>{" "}
+          Total Price: $<i>{this.state.totalPrice}</i>
         </h3>
       </React.Fragment>
     );

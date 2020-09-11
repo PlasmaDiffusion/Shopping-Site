@@ -79,13 +79,26 @@ routes.post("/update/cartItem/:id", async function (req, res) {
 });
 
 //Delete cart item
-routes.post("/delete/cartItem/:id", async function (req, res) {
-  const id = req.params.id;
+routes.post("/delete/cartItem/", async function (req, res) {
+  const id = req.body.id;
+
   await models.cartItem.destroy({
     where: {
       id: id,
     },
   });
+
+  //After deleting make sure to change the amount in stock
+  const shopItem = await models.shopItem.findByPk(req.body.shopItemId);
+
+  await models.shopItem.update(
+    { amountInStock: shopItem.amountInStock + req.body.amountInCart },
+    {
+      where: {
+        id: req.body.shopItemId,
+      },
+    }
+  );
 
   res.status(200).end();
 });
