@@ -12,6 +12,7 @@ routes.post("/create/cartItem/", async function (req, res) {
       );
   } else {
     await models.cartItem.create(req.body);
+
     res.status(201).end();
   }
 });
@@ -45,8 +46,6 @@ routes.get("/read/cartItems/:cartId", async function (req, res) {
     });
   }
 
-  console.log(responseData);
-
   res.status(200).json(responseData);
 });
 
@@ -59,11 +58,11 @@ routes.get("/read/cartItem/:id", async function (req, res) {
   res.status(200).json(cartItem);
 });
 
-//Updating cart item
-routes.post("/update/cartItems/:id", async function (req, res) {
+//Updating cart item (i.e. update the amount in cart)
+routes.post("/update/cartItem/:id", async function (req, res) {
   const id = req.params.id;
-  const cartItem = await models.cartItem.findByPk(id);
-  if (req.body.id === id) {
+
+  if (req.body.id == id) {
     await models.cartItem.update(req.body, {
       where: {
         id: id,

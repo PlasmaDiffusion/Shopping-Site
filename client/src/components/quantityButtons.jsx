@@ -13,16 +13,16 @@ class QuantityButtons extends Component {
   onIncrement() {
     //Make sure don't go over max
     if (this.state.amount < this.props.max) {
+      this.props.onAmountChanged(this.state.amount + 1); //Update early because setState is asyncrhonous
       this.setState({ amount: this.state.amount + 1 });
-      this.props.onAmountChanged(this.state.amount);
     }
   }
 
   onDecrement() {
     //Make sure don't go under 0
     if (this.state.amount > 0) {
+      this.props.onAmountChanged(this.state.amount - 1); //Update early because setState is asyncrhonous
       this.setState({ amount: this.state.amount - 1 });
-      this.props.onAmountChanged(this.state.amount);
     }
   }
 

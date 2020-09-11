@@ -42,7 +42,6 @@ class AddToCart extends Component {
     //Get/create the cart for the user
     axios.post(getServerUrl() + "/read/cart", req).then((res) => {
       this.setState({ cartId: res.data.id });
-      alert(res.cartId);
       //Create a cart item
       this.addItemToCart();
     });
@@ -57,8 +56,24 @@ class AddToCart extends Component {
     };
 
     axios.post(getServerUrl() + "/create/cartItem", newCartItem).then((res) => {
-      //If successful then add to cart
-      window.location.replace(getClientUrl() + "/cart");
+      let finished = 0;
+
+      //Update the stock too
+      let newStockData = {
+        id: newCartItem.shopItemId,
+        amountInStock: this.props.amountInStock - this.props.amountToAdd,
+      };
+
+      axios
+        .post(getServerUrl() + "/update/shopItemStock", newStockData)
+        .then((res) => {
+          //Update the total price of the cart (Server side handles this)
+          axios
+            .post(getServerUrl() + "/update/cart", { id: this.state.cartId })
+            .then((res) => {
+              window.location.replace(getClientUrl() + "/cart");
+            });
+        });
     });
   }
 

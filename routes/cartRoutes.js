@@ -41,10 +41,24 @@ routes.post("/read/cart", async function (req, res) {
 });
 
 //Updating cart
-routes.post("/update/carts/:id", async function (req, res) {
-  const id = req.params.id;
-  const cart = await models.cart.findByPk(id);
-  if (req.body.id === id) {
+routes.post("/update/cart/", async function (req, res) {
+  const id = req.body.id;
+  if (id) {
+    //Calculate price in cart here
+    const cartItems = await models.cartItem.findAll({
+      where: { cartId: id },
+      include: models.shopItem,
+    });
+
+    let totalPrice = 0.0;
+    //Go through each item in the cart and calculate a price for each one.
+    cartItems.forEach((product) => {
+      totalPrice += product.shopItem.price * product.amountInCart;
+    });
+
+    req.body.totalPrice = totalPrice;
+
+    //Update the cart data here
     await models.cart.update(req.body, {
       where: {
         id: id,

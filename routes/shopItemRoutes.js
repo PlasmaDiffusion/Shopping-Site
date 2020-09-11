@@ -67,6 +67,23 @@ routes.post("/update/shopItem/:id", async function (req, res) {
   }
 });
 
+//Updating shop item stock
+routes.post("/update/shopItemStock", async function (req, res) {
+  const id = req.body.id;
+
+  const shopItem = await models.shopItem.findByPk(id);
+  if (shopItem) {
+    await models.shopItem.update(req.body, {
+      where: {
+        id: id,
+      },
+    });
+    res.status(200).send(shopItem.name + " stock was updated.");
+  } else {
+    res.status(400).send(`Bad request: invalid (${id})`);
+  }
+});
+
 //Delete shop item
 routes.post("/delete/shopItem/:id", async function (req, res) {
   if (req.body.user == process.env.ADMIN) {

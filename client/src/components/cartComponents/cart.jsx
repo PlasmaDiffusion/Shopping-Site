@@ -56,6 +56,7 @@ class Cart extends Component {
     const request = { username: this.user };
 
     if (!this.user) {
+      //TODO: Make an anonymous cart work
       alert("User not loaded yet. A new cart can't be created");
       return;
     }
@@ -107,8 +108,11 @@ class Cart extends Component {
   render() {
     return (
       <React.Fragment>
-        <Profile onAuthenticated={this.getUsername} />
+        <Profile onAuthenticated={this.getUsername} invisible={true} />
         {this.showItemsInCart()}
+        <h3>
+          Total Price: $<i>{this.state.totalPrice}</i>{" "}
+        </h3>
       </React.Fragment>
     );
   }

@@ -21,7 +21,7 @@ const Profile = (props) => {
 
   if (props.adminPage && user.email != "scott50000@gmail.com")
     return <p>Not logged in as an admin.</p>;
-  else if (props.adminPage) return "";
+  else if (props.adminPage || props.invisible) return "";
   else
     return (
       <Container>
