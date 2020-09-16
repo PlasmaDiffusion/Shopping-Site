@@ -11,6 +11,7 @@ import ProductPage from "./components/productPage";
 import Cart from "./components/cartComponents/cart";
 import SearchResult from "./components/searchComponents/searchResult";
 import QuantityButtons from "./components/quantityButtons";
+import FeaturedProducts from "./components/homeComponents/featuredProducts";
 
 configure({ adapter: new Adapter() });
 
@@ -52,12 +53,12 @@ describe("Cart component", function () {
   it("should have at least two items", async function () {
     const wrapper = shallow(<Cart test={true} />);
 
-    expect(wrapper.find("div")).to.have.lengthOf(3);
+    expect(wrapper.find("div")).to.have.lengthOf(5);
   });
 });
 
 //Quantity buttons
-describe("Quanity button component", function () {
+/*describe("Quanity button component", function () {
   it("should have two buttons", function () {
     const wrapper = shallow(<QuantityButtons amount={1} max={2} />);
 
@@ -71,6 +72,19 @@ describe("Quanity button component", function () {
 
     wrapper.find("#increment").simulate("click");
     expect(clickSpy.calledOnce).to.equal(true);
+  });
+});*/
+
+//Homepage
+describe("Featured Products component", function () {
+  it("should have three items", async function () {
+    const wrapper = shallow(<FeaturedProducts />);
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    console.log(wrapper.state());
+    expect(wrapper.state().product0).to.not.equal(null);
+    expect(wrapper.state().product1).to.not.equal(null);
+    expect(wrapper.state().product2).to.not.equal(null);
   });
 });
 

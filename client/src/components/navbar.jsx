@@ -14,6 +14,9 @@ const AuthNav = (props) => {
     <div className="navbar">
       <Nav className="justify-content-left">
         <NavItem className="navItem">
+          <NavLink href="/">Home</NavLink>
+        </NavItem>
+        <NavItem className="navItem">
           <NavLink href="/search">Catalogue</NavLink>
         </NavItem>
 
@@ -21,7 +24,6 @@ const AuthNav = (props) => {
           {isAuthenticated ? <NavLink href="/cart">Cart</NavLink> : ""}
         </NavItem>
       </Nav>
-
       <Nav className="justify-content-end">
         <NavItem>
           {isAuthenticated ? <LogoutButton /> : <LoginButton />}

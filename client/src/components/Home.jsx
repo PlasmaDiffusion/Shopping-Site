@@ -19,6 +19,8 @@ import AdminSearch from "./adminComponents/adminSearch";
 import SearchBar from "./searchComponents/searchBar.jsx";
 import ProductPage from "./productPage.jsx";
 import Cart from "./cartComponents/cart.jsx";
+import ProductCarousel from "./homeComponents/productCarousel";
+import FeaturedProducts from "./homeComponents/featuredProducts.jsx";
 
 class Home extends Component {
   constructor(props) {
@@ -38,6 +40,7 @@ class Home extends Component {
         <Switch>
           <Route exact path="/">
             <AuthNav />
+            <FeaturedProducts />
           </Route>
           <Route exact path="/search">
             <AuthNav />
