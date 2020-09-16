@@ -17,7 +17,12 @@ class AddToCart extends Component {
 
   //After clicking the button, add to cart!
   addToCartClicked() {
-    if (this.state.clicked) return;
+    if (this.props.amountInStock <= 0) {
+      alert("Not in stock. Check back later!");
+      return;
+    }
+
+    if (this.state.clicked || this.props.amountToAdd == 0) return;
 
     this.setState({ clicked: true });
 

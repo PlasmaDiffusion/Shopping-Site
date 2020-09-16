@@ -17,7 +17,7 @@ class ProductPage extends Component {
       id: -1,
       imageLink: "",
       amountInStock: 0,
-      amountToAdd: 0,
+      amountToAdd: 1,
     };
 
     this.updateAmountToAdd = this.updateAmountToAdd.bind(this);
@@ -53,34 +53,41 @@ class ProductPage extends Component {
     if (this.state.loaded)
       return (
         <React.Fragment>
-          <img
-            src={this.state.imageLink}
-            width={256}
-            height={256}
-            title={this.state.name}
-            onClick
-          />
+          <div className="container">
+            <img
+              src={this.state.imageLink}
+              width={256}
+              height={256}
+              title={this.state.name}
+              onClick
+            />
 
-          <div className="searchResult">
-            <a href={this.state.id}>
-              <h2>{this.state.name}</h2>
-            </a>
-            <p>${this.state.price}</p>
-            <p>{this.state.description}</p>
+            <div>
+              <a href={this.state.id}>
+                <h2>{this.state.name}</h2>
+              </a>
+              <p>${this.state.price}</p>
+              <p>{this.state.description}</p>
+            </div>
+
+            <div className="row">
+              <QuantityButtons
+                max={this.state.amountInStock}
+                min={1}
+                stockAmount={this.state.amountInStock}
+                amount={this.state.amountInStock > 0 ? 1 : 0} //Either default 1 or 0 if nothing in stock
+                onAmountChanged={this.updateAmountToAdd}
+              />
+            </div>
+
+            <div className="row searchResult">
+              <AddToCart
+                productId={this.state.id}
+                amountInStock={this.state.amountInStock}
+                amountToAdd={this.state.amountToAdd}
+              />
+            </div>
           </div>
-
-          <QuantityButtons
-            max={this.state.amountInStock}
-            min={1}
-            amount={0}
-            onAmountChanged={this.updateAmountToAdd}
-          />
-
-          <AddToCart
-            productId={this.state.id}
-            amountInStock={this.state.amountInStock}
-            amountToAdd={this.state.amountToAdd}
-          />
         </React.Fragment>
       );
     else return "Loading...";

@@ -59,6 +59,17 @@ class CartItem extends Component {
                 <h2>{this.props.product.name}</h2>
               </a>
               <p>${this.props.product.price}</p>
+              {this.props.product.amountInCart > 1 ? ( //Show total price if more than 1
+                <p>
+                  ($
+                  {(
+                    this.props.product.price * this.props.product.amountInCart
+                  ).toFixed(2)}{" "}
+                  Total)
+                </p>
+              ) : (
+                ""
+              )}
             </div>
             <div className="col-sm-">
               <button className="btn btn-danger" onClick={this.deleteItem}>

@@ -104,7 +104,7 @@ const ProductCarousel = (props) => {
         />
       </Carousel>
       {showInfo ? (
-        <p className="bg-warning border border-danger">
+        <div class="jumbotron">
           <button
             type="button"
             class="close"
@@ -115,10 +115,17 @@ const ProductCarousel = (props) => {
           >
             <span aria-hidden="true">&times;</span>
           </button>
-          This website is a mock up to display products and let you add them to
-          your cart. <br></br>
-          You can either sign up or add items to the cart as an anonymous user.
-        </p>
+          <h1 class="display-4">About</h1>
+          <p class="lead">
+            This website is a mock up to display products and let you add them
+            to your cart. <br></br>
+            You can either just browse or sign up to try adding items to your
+            cart.
+            {/*You can either sign up or add items to the cart as an anonymous
+            user.*/}
+          </p>
+          <hr class="my-4"></hr>
+        </div>
       ) : (
         ""
       )}
