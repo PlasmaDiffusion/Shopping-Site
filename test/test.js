@@ -70,20 +70,3 @@ describe("The category model object using find", function () {
   });
 });
 //-----------------------------------------------------
-
-/*var request = {};
-var response = {
-  viewName: "",
-  data: {},
-  render: function (view, viewData) {
-    this.viewName = view;
-    this.data = viewData;
-  },
-};
-
-describe("Category read all routing", function () {
-  it("should return multiple categories", function () {
-    routes.index(request, response);
-    response.viewName.should.equal("index");
-  });
-});*/

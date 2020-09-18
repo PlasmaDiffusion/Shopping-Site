@@ -3,8 +3,7 @@ const { app } = require("../server");
 var assert = require("assert");
 
 describe("The category route should read all categories", function () {
-  it("should get multiple items", async function () {
-    // SELECT * FROM shopItem WHERE name LIKE %search keyword%
+  it("should get multiple categories", async function () {
     return request(app)
       .get("/read/categories")
       .then(function (response) {
