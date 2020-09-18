@@ -25,6 +25,7 @@ const modelDefiners = [
   require("./models/cart"),
   require("./models/cartItem"),
   require("./models/shopItem"),
+  require("./models/category"),
 ];
 
 // We define all models according to their files.
@@ -67,8 +68,11 @@ app.get("/db", async function (req, res) {
 app.use("/", require("./routes/shopItemRoutes"));
 app.use("/", require("./routes/cartItemRoutes"));
 app.use("/", require("./routes/cartRoutes"));
+app.use("/", require("./routes/categoryRoutes"));
 
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
+
+exports.app = app;
