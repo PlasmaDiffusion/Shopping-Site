@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { configure, shallow } from "enzyme";
+import { configure, shallow, mount } from "enzyme";
 import { expect } from "chai";
 import sinon from "sinon";
 import App from "./App";
@@ -40,7 +40,7 @@ describe("Product Page component", function () {
   it("renders an apple if id is 1", async function () {
     const wrapper = shallow(<ProductPage />);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     expect(wrapper.state().loaded).to.equal(true);
     const name = <h2>Apple</h2>;
@@ -80,21 +80,24 @@ describe("Featured Products component", function () {
   it("should have three items", async function () {
     const wrapper = shallow(<FeaturedProducts />);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(wrapper.state());
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     expect(wrapper.state().product0).to.not.equal(null);
     expect(wrapper.state().product1).to.not.equal(null);
     expect(wrapper.state().product2).to.not.equal(null);
   });
 });
 
-/*/Search bar
+//Search bar
 describe("Searchbar", function () {
-  it("should have some results after you enter 'a'", function () {
-    const container = shallow(<SearchBar />);
+  it("should read in multiple categories", async function () {
+    const container = mount(<SearchBar />);
 
-    container.find("#searchButton").simulate("click");
-    expect(clickSpy.calledOnce).to.equal(true);
+    await container.instance().componentDidMount();
+
+    expect(container.state().categories.length).to.be.greaterThan(1);
+
+    //container.find("#searchButton").simulate("click");
+    //expect(clickSpy.calledOnce).to.equal(true);
     //expect(container.find("#searchButton")).to.equal(true);
   });
-});*/
+});
