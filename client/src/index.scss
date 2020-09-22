@@ -1,5 +1,6 @@
 $bgCol: #f3a154;
 $navCol: #ef7547;
+$light: lighten($navCol, 30%);
 
 body {
   margin: 0;
@@ -23,16 +24,19 @@ code {
   background-color: $navCol;
 }
 .navItem:hover {
-  background-color: lighten($navCol, 30%);
+  background-color: $light;
 }
 
 .searchResult {
-  background-color: $navCol;
-  border: 2px double $bgCol;
+  border: 2px double whitesmoke;
+  border-right: none;
+  border-left: none;
+  border-top: none;
 }
 
 .searchbar {
-  width: 50%;
+  width: 100%;
+  font-size: 16pt;
 }
 
 a:link {
@@ -63,6 +67,22 @@ a:hover {
 .orange {
   color: $navCol;
   text-emphasis-color: $navCol;
+}
+
+#searchButton,
+#dropdown button {
+  border-radius: 0 0 0 0;
+  background-color: $navCol;
+  border-color: $bgCol;
+  z-index: 1;
+  position: relative;
+}
+
+#dropdown button:hover,
+#searchButton input:hover {
+  border-radius: 0 0 0 0;
+  background-color: $light;
+  border-color: $light;
 }
 
 /* The sidebar menu ------------------------------------------------------------------------------------------------------------------------ */

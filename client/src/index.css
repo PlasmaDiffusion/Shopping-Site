@@ -17,11 +17,14 @@ code {
   background-color: #fbdfd4; }
 
 .searchResult {
-  background-color: #ef7547;
-  border: 2px double #f3a154; }
+  border: 2px double whitesmoke;
+  border-right: none;
+  border-left: none;
+  border-top: none; }
 
 .searchbar {
-  width: 50%; }
+  width: 100%;
+  font-size: 16pt; }
 
 a:link {
   color: #f3a154; }
@@ -45,6 +48,20 @@ a:hover {
 .orange {
   color: #ef7547;
   text-emphasis-color: #ef7547; }
+
+#searchButton,
+#dropdown button {
+  border-radius: 0 0 0 0;
+  background-color: #ef7547;
+  border-color: #f3a154;
+  z-index: 1;
+  position: relative; }
+
+#dropdown button:hover,
+#searchButton input:hover {
+  border-radius: 0 0 0 0;
+  background-color: #fbdfd4;
+  border-color: #fbdfd4; }
 
 /* The sidebar menu ------------------------------------------------------------------------------------------------------------------------ */
 .sidenav {

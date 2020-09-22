@@ -90,9 +90,10 @@ describe("Featured Products component", function () {
 //Search bar
 describe("Searchbar", function () {
   it("should read in multiple categories", async function () {
-    const container = mount(<SearchBar />);
+    const container = shallow(<SearchBar />);
 
-    await container.instance().componentDidMount();
+    //await container.instance().componentDidMount();
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     expect(container.state().categories.length).to.be.greaterThan(1);
 

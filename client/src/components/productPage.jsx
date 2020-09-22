@@ -63,7 +63,7 @@ class ProductPage extends Component {
             />
 
             <div>
-              <a href={this.state.id}>
+              <a href={"?id=" + this.state.id}>
                 <h2>{this.state.name}</h2>
               </a>
               <p>${this.state.price}</p>

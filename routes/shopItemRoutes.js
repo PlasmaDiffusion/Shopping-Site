@@ -21,16 +21,29 @@ routes.get("/read/shopItems", async function (req, res) {
   res.status(200).json(shopItems);
 });
 
-//Reading shop item(s) from search terms
-routes.get("/read/shopItems/:search", async function (req, res) {
+//Reading shop item(s) from search terms (and with a category)
+routes.get("/read/shopItems/:search/:category", async function (req, res) {
   const search = req.params.search;
+  const category = req.params.category;
 
-  // SELECT * FROM shopItem WHERE name LIKE %search keyword%
-  var foundItems = await models.shopItem.findAll({
-    where: {
-      name: { [Op.substring]: search },
-    },
-  });
+  var foundItems = null;
+
+  if (category == "All") {
+    // SELECT * FROM shopItem WHERE name LIKE %search keyword%
+    foundItems = await models.shopItem.findAll({
+      where: {
+        name: { [Op.substring]: search },
+      },
+    });
+  } else {
+    // SELECT * FROM shopItem WHERE name LIKE %search keyword% and catergory LIKE %category%
+    foundItems = await models.shopItem.findAll({
+      where: {
+        name: { [Op.substring]: search },
+        category: category,
+      },
+    });
+  }
 
   res.status(200).json(foundItems);
 });

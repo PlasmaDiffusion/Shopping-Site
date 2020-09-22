@@ -35,14 +35,23 @@ class SearchBar extends Component {
     let url = new URLSearchParams(window.location.search);
     let keywords = url.get("search");
 
-    //TODO: Filter search by categories on backend
-    //Check to search for keywords (and filter by category too)
-    if (keywords) {
+    //If keywords were entered and this component has the showResults flag, try searching for items from the server.
+    if (this.props.searchResults && keywords) {
       let categories = url.get("categories");
 
-      axios.get(getServerUrl() + "/read/shopItems/" + keywords).then((res) => {
-        this.setState({ results: res.data });
-      });
+      //Find all items by default if you click catalogue
+      if (keywords == "default")
+        axios.get(getServerUrl() + "/read/shopItems/").then((res) => {
+          this.setState({ results: res.data });
+        });
+      else
+        axios
+          .get(
+            getServerUrl() + "/read/shopItems/" + keywords + "/" + categories
+          )
+          .then((res) => {
+            this.setState({ results: res.data });
+          });
     }
 
     //Get all categories the user can pick
@@ -108,33 +117,46 @@ class SearchBar extends Component {
 
   //Dropdown, followed by search field, followed by search results
   render() {
-    return (
+    return this.props.searchResults ? (
+      <div>{this.listResults()}</div>
+    ) : (
       <React.Fragment>
         <form onSubmit={this.confirmSearch}>
-          <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-            <DropdownToggle caret>{this.state.category}</DropdownToggle>
-            <DropdownMenu>{this.getCategories()}</DropdownMenu>
-          </Dropdown>
-
-          <div className="form-group">
-            <input
-              type="text"
-              name="search"
-              placeholder="Enter products to search for here..."
-              onChange={this.updateSearchBar}
-              className="searchbar"
-            ></input>
-          </div>
-          <div className="form-group">
-            <input
-              type="submit"
-              id="searchButton"
-              value="Search"
-              className="btn btn-primary"
-            />
+          <div className="container">
+            <div className="row">
+              <div className="col-sm-1"></div>
+              <div className="col-sm-">
+                <Dropdown
+                  id="dropdown"
+                  isOpen={this.state.dropdownOpen}
+                  toggle={this.toggle}
+                >
+                  <DropdownToggle caret>{this.state.category}</DropdownToggle>
+                  <DropdownMenu>{this.getCategories()}</DropdownMenu>
+                </Dropdown>
+              </div>
+              <div className="col-lg-7 " style={{ padding: 0 }}>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="search"
+                    placeholder="Search for products..."
+                    onChange={this.updateSearchBar}
+                    className="searchbar"
+                  ></input>
+                </div>
+              </div>
+              <div className="col-sm-">
+                <input
+                  type="submit"
+                  id="searchButton"
+                  value="Search"
+                  className="btn btn-primary"
+                />
+              </div>
+            </div>
           </div>
         </form>
-        <div>{this.listResults()}</div>
       </React.Fragment>
     );
   }

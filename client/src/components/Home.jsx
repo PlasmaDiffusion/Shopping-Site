@@ -44,7 +44,7 @@ class Home extends Component {
           </Route>
           <Route exact path="/search">
             <AuthNav />
-            <SearchBar />
+            <SearchBar searchResults={true} />
           </Route>
           <Route exact path="/product">
             <AuthNav />
