@@ -8,7 +8,7 @@ describe("The category route should read all categories", function () {
       .get("/read/categories")
       .then(function (response) {
         assert.ok(response.body.length > 1, "Greater than 1?");
-        assert.strictEqual(response.body[0].name, "Food");
+        assert.strictEqual(response.body[0].name, "All");
         assert.strictEqual(response.status, 200);
       });
   });
