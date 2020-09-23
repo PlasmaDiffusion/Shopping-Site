@@ -62,7 +62,6 @@ class Home extends Component {
             <ExternalApi />
           </PrivateRoute>
           <PrivateRoute exact path="/admin">
-            <AuthNav />
             <AdminNavigation currentPage={"Add Product"} />
             <ShopItemForm updatingItem={false} />
           </PrivateRoute>
@@ -70,8 +69,7 @@ class Home extends Component {
             <AdminNavigation currentPage={"Find Products to Edit"} />
             <AdminSearch />
           </PrivateRoute>
-          <PrivateRoute exact path="/admin/update/:id">
-            <h1>Update</h1>
+          <PrivateRoute exact path="/admin/update">
             <AdminNavigation />
             <ShopItemForm updatingItem={true} />
           </PrivateRoute>

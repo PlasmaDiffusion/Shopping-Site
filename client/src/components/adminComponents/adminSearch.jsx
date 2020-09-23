@@ -12,7 +12,8 @@ class AdminSearch extends Component {
   render() {
     return (
       <React.Fragment>
-        <SearchBar></SearchBar>
+        <SearchBar admin={true}></SearchBar>
+        <SearchBar admin={true} searchResults={true}></SearchBar>
       </React.Fragment>
     );
   }

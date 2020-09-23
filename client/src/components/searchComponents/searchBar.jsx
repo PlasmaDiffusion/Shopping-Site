@@ -32,13 +32,12 @@ class SearchBar extends Component {
 
   //Search for stuff on mount, if there's search keywords in the url that is
   componentDidMount() {
-    let url = new URLSearchParams(window.location.search);
-    let keywords = url.get("search");
+    var url = new URLSearchParams(window.location.search);
+    var keywords = url.get("search");
+    var categories = url.get("categories");
 
     //If keywords were entered and this component has the showResults flag, try searching for items from the server.
     if (this.props.searchResults && keywords) {
-      let categories = url.get("categories");
-
       //Find all items by default if you click catalogue
       if (keywords == "default")
         axios.get(getServerUrl() + "/read/shopItems/").then((res) => {
@@ -50,9 +49,21 @@ class SearchBar extends Component {
             getServerUrl() + "/read/shopItems/" + keywords + "/" + categories
           )
           .then((res) => {
-            this.setState({ results: res.data });
+            this.setState({
+              results: res.data,
+            });
           });
     }
+
+    //Search values to default to when nothing is entered
+    if (!keywords || keywords == "default") keywords = "";
+    if (!categories) categories = "All";
+
+    //Set previous search values
+    this.setState({
+      keywords: keywords,
+      category: categories,
+    });
 
     //Get all categories the user can pick
     axios.get(getServerUrl() + "/read/categories/").then((res) => {
@@ -77,7 +88,7 @@ class SearchBar extends Component {
   listResults() {
     const listItems = this.state.results.map((product, index) => (
       <div className="col">
-        <SearchResult product={product} />
+        <SearchResult product={product} admin={this.props.admin} />
       </div>
     ));
 
@@ -142,6 +153,7 @@ class SearchBar extends Component {
                     name="search"
                     placeholder="Search for products..."
                     onChange={this.updateSearchBar}
+                    value={this.state.keywords}
                     className="searchbar"
                   ></input>
                 </div>

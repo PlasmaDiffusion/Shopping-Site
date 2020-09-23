@@ -10,7 +10,12 @@ class SearchResult extends Component {
   render() {
     return (
       <React.Fragment>
-        <a href={"/product/?id=" + this.props.product.id}>
+        <a
+          href={
+            (this.props.admin ? "/admin/update/?id=" : "/product/?id=") +
+            this.props.product.id
+          }
+        >
           <img
             src={this.props.product.imageLink}
             width={this.props.imageSize}
@@ -21,7 +26,12 @@ class SearchResult extends Component {
         </a>
 
         <div className="searchResult">
-          <a href={"/product/?id=" + this.props.product.id}>
+          <a
+            href={
+              (this.props.admin ? "/admin/update/?id=" : "/product/?id=") +
+              this.props.product.id
+            }
+          >
             <h2>{this.props.product.name}</h2>
           </a>
           <p>${this.props.product.price}</p>

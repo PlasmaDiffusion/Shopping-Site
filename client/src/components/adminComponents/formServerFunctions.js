@@ -10,6 +10,7 @@ export function submitProduct(state, user) {
     imageLink: state.imageLink,
     price: state.price,
     amountInStock: state.amountInStock,
+    category: state.category,
   };
 
   axios
@@ -30,6 +31,7 @@ export function updateProduct(state, id, user) {
     imageLink: state.imageLink,
     price: state.price,
     amountInStock: state.amountInStock,
+    category: state.category,
   };
 
   axios

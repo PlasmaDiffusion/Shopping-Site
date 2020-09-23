@@ -21,6 +21,8 @@ class ShopItemForm extends Component {
       imageLink: "",
       price: null,
       amountInStock: null,
+      category: "All",
+      categories: [],
     };
 
     this.user = "";
@@ -30,6 +32,7 @@ class ShopItemForm extends Component {
     this.onSubmitShopItem = this.onSubmitShopItem.bind(this);
 
     this.adminCheck = this.adminCheck.bind(this);
+    this.getCategories = this.getCategories.bind(this);
   }
 
   //Load stuff from the data base here if editing
@@ -47,9 +50,15 @@ class ShopItemForm extends Component {
           imageLink: res.data.imageLink,
           price: res.data.price,
           amountInStock: res.data.amountInStock,
+          category: res.data.category,
         });
       });
     }
+
+    //Get all categories the user can pick
+    axios.get(getServerUrl() + "/read/categories/").then((res) => {
+      this.setState({ categories: res.data });
+    });
   }
 
   //Submit form data here
@@ -73,13 +82,19 @@ class ShopItemForm extends Component {
       [e.target.name]: value,
     });
 
-    console.log(this.state);
+    //console.log(this.state);
   }
 
   //A profile component will call this function to send the user that's currently logged in
   adminCheck(username) {
     //this.setState({ user: username });
     this.user = username;
+  }
+
+  getCategories() {
+    return this.state.categories.map((category, index) => (
+      <option>{category.name}</option>
+    ));
   }
 
   render() {
@@ -122,6 +137,18 @@ class ShopItemForm extends Component {
               onChange={this.onChangeField}
               required
             />
+          </div>
+          <div class="form-group">
+            <label for="category">Category:</label>
+            <select
+              name="category"
+              class="form-control"
+              id="category"
+              onChange={this.onChangeField}
+              value={this.state.category}
+            >
+              {this.getCategories()}
+            </select>
           </div>
           <div className="form-group">
             <label>Price:</label>
