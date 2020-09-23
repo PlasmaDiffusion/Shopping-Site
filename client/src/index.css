@@ -26,9 +26,9 @@ code {
   width: 100%;
   font-size: 16pt; }
 
-a:link {
-  color: #f3a154; }
-
+/*a:link {
+  color: $bgCol;
+}*/
 a:hover {
   color: #bf4011; }
 
