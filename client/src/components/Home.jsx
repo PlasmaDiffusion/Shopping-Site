@@ -21,6 +21,7 @@ import ProductPage from "./productPage.jsx";
 import Cart from "./cartComponents/cart.jsx";
 import ProductCarousel from "./homeComponents/productCarousel";
 import FeaturedProducts from "./homeComponents/featuredProducts.jsx";
+import SupportPage from "./supportPage.jsx";
 
 class Home extends Component {
   constructor(props) {
@@ -49,6 +50,10 @@ class Home extends Component {
           <Route exact path="/product">
             <AuthNav />
             <ProductPage />
+          </Route>
+          <Route exact path="/support">
+            <AuthNav />
+            <SupportPage />
           </Route>
           {/* Private routes go below */}
           <PrivateRoute exact path="/profile">

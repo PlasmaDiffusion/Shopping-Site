@@ -23,6 +23,7 @@ const sequelize = new Sequelize(
 //Put models here --------------------
 const modelDefiners = [
   require("./models/cart"),
+  require("./models/order"),
   require("./models/cartItem"),
   require("./models/shopItem"),
   require("./models/category"),

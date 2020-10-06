@@ -1,7 +1,5 @@
-const cartItem = require("./models/cartItem");
-
 function applyExtraSetup(sequelize) {
-  const { cart, shopItem, cartItem } = sequelize.models;
+  const { cart, shopItem, cartItem, order } = sequelize.models;
 
   //A cart item has a reference to a shop item so it knows what it actually is
   shopItem.hasMany(cartItem);
@@ -10,6 +8,9 @@ function applyExtraSetup(sequelize) {
   //A cart item is one of several items in a user's cart
   cart.hasMany(cartItem);
   cartItem.belongsTo(cart);
+
+  //When a cart is submitted, an order is created and has a reference to that cart
+  order.belongsTo(cart);
 }
 
 //(User) Select * from carts where owner = username

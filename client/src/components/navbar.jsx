@@ -23,6 +23,10 @@ const AuthNav = (props) => {
           </NavItem>
 
           <NavItem className="navItem">
+            <NavLink href="/support">Support</NavLink>
+          </NavItem>
+
+          <NavItem className="navItem">
             {isAuthenticated ? <NavLink href="/cart">Cart</NavLink> : ""}
           </NavItem>
         </Nav>
