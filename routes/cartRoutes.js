@@ -75,6 +75,39 @@ routes.post("/delete/cart/:id", async function (req, res) {
   res.status(200).end();
 });
 
+//Prepare the cart for an order, renaming the owner to something else so the user gets a new cart
+routes.post("/prepareForOrder", async function (req, res) {
+  const id = req.body.id;
+  var oldOwner = null;
+
+  const cart = await models.cart.findByPk(id);
+  if (cart === null) {
+    console.log("Not found!");
+  } else {
+    oldOwner = cart.owner;
+  }
+
+  //Add the cart id onto the owner name, and also count the price again
+  if (id && oldOwner) {
+    //Calculate price in cart
+    req.body.totalPrice = await calculateTotalPrice(id);
+    req.body.owner = oldOwner + ":" + id;
+    //Update the cart data here
+    await models.cart.update(req.body, {
+      where: {
+        id: id,
+      },
+    });
+    res.status(200).end();
+  } else {
+    res
+      .status(400)
+      .send(
+        `Bad request: param ID (${id}) does not match body ID (${req.body.id}).`
+      );
+  }
+});
+
 //Find the total price in a cart
 async function calculateTotalPrice(id) {
   const cartItems = await models.cartItem.findAll({

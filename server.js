@@ -70,6 +70,7 @@ app.use("/", require("./routes/shopItemRoutes"));
 app.use("/", require("./routes/cartItemRoutes"));
 app.use("/", require("./routes/cartRoutes"));
 app.use("/", require("./routes/categoryRoutes"));
+app.use("/", require("./routes/orderRoutes"));
 
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {

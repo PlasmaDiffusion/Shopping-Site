@@ -12,7 +12,7 @@ routes.post("/create/order", async function (req, res) {
       );
   } else {
     await models.order.create(req.body);
-    res.status(201).end();
+    res.status(201).send("The order has been placed.");
   }
 });
 
@@ -23,11 +23,11 @@ routes.get("/read/orders", async function (req, res) {
   res.status(200).json(orders);
 });
 
-//Read a order of a specific user, or create one if it is yet to exist
+//Read orders of a specific user
 routes.post("/read/order", async function (req, res) {
   console.log("Trying to find order with username: " + req.body.username);
 
-  const [order, created] = await models.order.findOrCreate({
+  const [order, created] = await models.order.findOne({
     where: { owner: req.body.username },
     defaults: {
       owner: req.body.username,

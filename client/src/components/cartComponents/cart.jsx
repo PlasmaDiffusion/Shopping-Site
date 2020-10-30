@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CartItem from "../cartComponents/cartItem";
 import Profile from "../profile";
+import OrderList from "../orderComponents/orderList"
 
 import { getClientUrl, getServerUrl } from "../../getUrl.js";
 
@@ -15,8 +16,10 @@ class Cart extends Component {
       id: -1,
       totalPrice: 0.0,
       cartItems: [],
-      initialMaxAmounts: [],
-      amountToDisplayInStock: [],
+      initialMaxAmounts: [], //Original max amounts, so you don't have more items than are in stock
+      amountToDisplayInStock: [], //Starting stock amount?
+      initialCartAmounts: [], //Initial, saved cart amounts
+      placingOrder: false,
     };
 
     //We read this from profile
@@ -24,6 +27,7 @@ class Cart extends Component {
 
     this.showItemsInCart = this.showItemsInCart.bind(this);
     this.getUsername = this.getUsername.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
   }
 
   componentDidMount() {
@@ -82,15 +86,19 @@ class Cart extends Component {
           //Set initial amount array (This is used for recording the original max)
           let initialMax = [];
           let amountToDisplay = [];
+          let initialCartAmounts = [];
           console.log("Cart data", cartItemRes.data);
           for (let i = 0; i < cartItemRes.data.length; i++) {
             let item = cartItemRes.data[i];
             initialMax.push(item.amountInStock + item.amountInCart);
             amountToDisplay.push(item.amountInStock);
+            initialCartAmounts.push(item.amountInCart);
           }
           this.setState({
             initialMaxAmounts: [...initialMax],
             amountToDisplayInStock: [...amountToDisplay],
+            initialCartAmounts: [...initialCartAmounts],
+
           });
         });
     });
@@ -115,6 +123,8 @@ class Cart extends Component {
               }}
             />
             <div style={{ margin: "10px" }}></div>
+            <br></br><br></br><br></br><br></br><br></br>
+
           </div>
         ))}
       </div>
@@ -125,15 +135,44 @@ class Cart extends Component {
     this.user = username;
   }
 
+  //Show a confirm message before placing an order.
+  placeOrder()
+  {
+    var text = "The following order will be placed: \n";
+    
+    //Add each product name along with their saved amounts to the message.
+    this.state.cartItems.map((item, index) =>{
+      text += item.name + " (" + this.state.initialCartAmounts[index] + ")\n";
+    });
+
+    text += "\nTotal Price: $" + this.state.totalPrice;
+    
+    text +="\n(Make sure all item quantities were updated if you changed them.)"
+
+    var msg = window.confirm(text);
+
+    //Confirm the order. If the user says yes, the state will change and the OrderList should handle the rest.
+    if (msg)
+    {
+      alert("The order will now be placed.");
+      this.setState({placingOrder: true});
+    }
+
+  }
+
   render() {
     return (
       <React.Fragment>
         <Profile onAuthenticated={this.getUsername} invisible={true} />
         {this.showItemsInCart()}
-        <h3>
+        <div className="container">
+          <h3>
           Total Price: $<i>{this.state.totalPrice}</i>
-        </h3>
-        <a className="btn btn-primary" >Place Order</a>
+          </h3>
+          <button className="btn btn-warning" onClick={this.placeOrder} >Place Order</button>
+          <div style={{ margin: "100px" }}></div>
+        </div>
+        <OrderList id={this.state.id} placingOrder={this.state.placingOrder} user={this.user} />
       </React.Fragment>
     );
   }
