@@ -44,19 +44,8 @@ routes.post("/read/cart", async function (req, res) {
 routes.post("/update/cart/", async function (req, res) {
   const id = req.body.id;
   if (id) {
-    //Calculate price in cart here
-    const cartItems = await models.cartItem.findAll({
-      where: { cartId: id },
-      include: models.shopItem,
-    });
-
-    let totalPrice = 0.0;
-    //Go through each item in the cart and calculate a price for each one.
-    cartItems.forEach((product) => {
-      totalPrice += product.shopItem.price * product.amountInCart;
-    });
-
-    req.body.totalPrice = totalPrice;
+    //Calculate price in cart
+    req.body.totalPrice = await calculateTotalPrice(id);
 
     //Update the cart data here
     await models.cart.update(req.body, {
@@ -85,5 +74,20 @@ routes.post("/delete/cart/:id", async function (req, res) {
 
   res.status(200).end();
 });
+
+//Find the total price in a cart
+async function calculateTotalPrice(id) {
+  const cartItems = await models.cartItem.findAll({
+    where: { cartId: id },
+    include: models.shopItem,
+  });
+
+  let totalPrice = 0.0;
+  //Go through each item in the cart and calculate a price for each one.
+  for (let i = 0; i < cartItems.length; i++) {
+    totalPrice += cartItems[i].shopItem.price * cartItems[i].amountInCart;
+  }
+  return totalPrice;
+}
 
 module.exports = routes;

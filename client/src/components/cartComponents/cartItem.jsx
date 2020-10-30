@@ -21,7 +21,17 @@ class CartItem extends Component {
         shopItemId: this.props.product.shopItemId,
       })
       .then((res) => {
-        window.location.reload();
+        
+        //Update the cart to recount the total price
+        axios
+        .post(getServerUrl() + "/update/cart", {
+          id: this.props.cartId
+        })
+        .then((res) => {
+
+          window.location.reload();
+        });
+
       });
   }
 
@@ -34,7 +44,15 @@ class CartItem extends Component {
         shopItemId: this.props.product.shopItemId,
       })
       .then((res) => {
-        window.location.reload();
+          //Update the cart to recount the total price
+          axios
+          .post(getServerUrl() + "/update/cart", {
+            id: this.props.cartId
+          })
+          .then((res) => {
+  
+            window.location.reload();
+          });
       });
   }
 
@@ -77,7 +95,7 @@ class CartItem extends Component {
               </button>
               <br></br>
               <button className="btn btn-secondary" onClick={this.updateAmount}>
-                Change Amount
+                Update Quantity
               </button>
             </div>
           </div>

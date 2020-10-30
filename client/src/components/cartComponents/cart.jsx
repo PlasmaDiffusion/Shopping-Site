@@ -69,6 +69,8 @@ class Cart extends Component {
         totalPrice: cartRes.data.totalPrice,
       });
 
+      console.log(cartRes);
+
       //After getting the id it's time to search for items within the cart
       axios
         .get(getServerUrl() + "/read/cartItems/" + this.state.id)
@@ -99,7 +101,7 @@ class Cart extends Component {
       <div className="container">
         {this.state.cartItems.map((product, index) => (
           <div className="row" key={index}>
-            <CartItem product={product} imageSize={128} />
+            <CartItem product={product} imageSize={128} cartId={this.state.id} />
             <QuantityButtons
               max={this.state.initialMaxAmounts[index]}
               min={1}
@@ -131,6 +133,7 @@ class Cart extends Component {
         <h3>
           Total Price: $<i>{this.state.totalPrice}</i>
         </h3>
+        <a className="btn btn-primary" >Place Order</a>
       </React.Fragment>
     );
   }
