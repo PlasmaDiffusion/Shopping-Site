@@ -12,6 +12,8 @@ code {
 
 .navItem {
   background-color: #ef7547; }
+  .navItem a {
+    color: black; }
 
 .navItem:hover {
   background-color: #fbdfd4; }
@@ -55,7 +57,8 @@ a:hover {
   background-color: #ef7547;
   border-color: #f3a154;
   z-index: 1;
-  position: relative; }
+  position: relative;
+  color: black; }
 
 #dropdown button:hover,
 #searchButton input:hover {

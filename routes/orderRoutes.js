@@ -24,20 +24,14 @@ routes.get("/read/orders", async function (req, res) {
 });
 
 //Read orders of a specific user
-routes.post("/read/order", async function (req, res) {
+routes.post("/read/orders", async function (req, res) {
   console.log("Trying to find order with username: " + req.body.username);
 
-  const [order, created] = await models.order.findOne({
+  const orders = await models.order.findAll({
     where: { owner: req.body.username },
-    defaults: {
-      owner: req.body.username,
-      totalPrice: 0.0,
-    },
   });
 
-  if (created) console.log("New order created!");
-
-  res.status(200).json(order);
+  res.status(200).json(orders);
 });
 
 //Updating order

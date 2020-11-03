@@ -138,6 +138,9 @@ class Cart extends Component {
   //Show a confirm message before placing an order.
   placeOrder()
   {
+    //Of course do nothing if there's no price
+    if (this.state.totalPrice <= 0.0) return;
+
     var text = "The following order will be placed: \n";
     
     //Add each product name along with their saved amounts to the message.
@@ -165,14 +168,16 @@ class Cart extends Component {
       <React.Fragment>
         <Profile onAuthenticated={this.getUsername} invisible={true} />
         {this.showItemsInCart()}
-        <div className="container">
+        {this.state.totalPrice > 0 ? (<div className="container">
           <h3>
           Total Price: $<i>{this.state.totalPrice}</i>
           </h3>
           <button className="btn btn-warning" onClick={this.placeOrder} >Place Order</button>
           <div style={{ margin: "100px" }}></div>
-        </div>
-        <OrderList id={this.state.id} placingOrder={this.state.placingOrder} user={this.user} />
+        </div>)
+        : (<div className="container"><br></br><p>Your cart seems to be empty.</p></div> )}
+
+        <OrderList id={this.state.id} placingOrder={this.state.placingOrder} user={this.user}/>
       </React.Fragment>
     );
   }

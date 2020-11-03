@@ -26,7 +26,7 @@ const Profile = (props) => {
     return (
       <Container>
         <Row className="align-items-center profile-header text-center text-md-left">
-          <Col md={2}>
+          {/*<Col md={2}>
             <img
               src={picture}
               alt="Profile"
@@ -34,7 +34,7 @@ const Profile = (props) => {
               width={32}
               height={32}
             />
-          </Col>
+          </Col>*/}
           <Col md>
             <p className="lead text-muted">{email}</p>
           </Col>

@@ -22,6 +22,9 @@ code {
 
 .navItem {
   background-color: $navCol;
+  a {
+    color: black;
+  }
 }
 .navItem:hover {
   background-color: $light;
@@ -76,6 +79,7 @@ a:hover {
   border-color: $bgCol;
   z-index: 1;
   position: relative;
+  color: black;
 }
 
 #dropdown button:hover,

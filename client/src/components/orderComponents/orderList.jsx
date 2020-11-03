@@ -8,10 +8,14 @@ class OrderList extends Component {
         super(props);
 
         this.state = {
-            orderState: 0 //0 is not placing, 1 is placing, 2 is successfully placed
+            orderState: 0, //0 is not placing, 1 is placing, 2 is successfully placed
+            showOrders: false,
+            orders: []
         }
 
+        this.getOrders = this.getOrders.bind(this);
     }
+
 
 
     componentDidUpdate() {
@@ -46,21 +50,36 @@ class OrderList extends Component {
         }
 
 
-        //Load in all previous orders if the user clicks the button to do so.
-        if (this.props.showOrders)
+    }
+
+    //Load in all previous orders if the user clicks the button to do so.
+    getOrders()
+    {
+        if (this.state.orders.length == 0)
         {
+            axios.post(getServerUrl() + "/read/orders", {username:this.props.user})
+            .then((res) => {
 
+                this.setState({orders: res});
+                console.log("Orders", res);
+            });
         }
-
     }
     
 
     render() {
         return (
-            <div className="container">
-                {(this.state.placingOrder == 1) ? (<h3>Placing Order...</h3>) : ""}
-                {(this.state.placingOrder == 2) ? (<h3>Order Placed!</h3>) : ""}
-            </div>
+            <React.Fragment>
+                <div className="container">
+                    {(this.state.placingOrder == 1) ? (<h3>Placing Order...</h3>) : ""}
+                    {(this.state.placingOrder == 2) ? (<h3>Order Placed!</h3>) : ""}
+                </div>
+                {this.state.orders.length == 0 ? (                <div className="container">
+                    <button className="btn btn-dark" onClick={this.getOrders}>Show Orders</button>
+                </div>) : ("")}
+
+            {/*TODO: Map array to show all orders*/ }
+            </React.Fragment>
         );
     }
 }
