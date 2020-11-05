@@ -89,7 +89,9 @@ class CartItem extends Component {
                 ""
               )}
             </div>
-            <div className="col-sm-">
+            {//If constant, don't let the amount be changed or item be deleted.
+            this.props.constant ? "" : (
+              <div className="col-sm-">
               <button className="btn btn-danger" onClick={this.deleteItem}>
                 Delete
               </button>
@@ -98,6 +100,7 @@ class CartItem extends Component {
                 Update Quantity
               </button>
             </div>
+            ) }
           </div>
         </div>
       </React.Fragment>

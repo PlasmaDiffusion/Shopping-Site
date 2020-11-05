@@ -85,7 +85,7 @@ class OrderList extends Component {
                 console.log("Order items", orderItems)
 
                 //this.setState({orderItems: [...orderItems]});
-                this.setState({orderItems: [["EH", "HEH"],["HUH"]]});
+                this.setState({orderItems: [[{name: "EH", price: 1.99}, {name: "ERR", price: 1.99}],[{name: "HUH", price: 4.99}]]});
 
 
                 })
@@ -97,17 +97,18 @@ class OrderList extends Component {
 
     listOrders() {
       console.log(this.state.orderItems);
-      {this.state.orderItems.map((items, index) => (
+      return(this.state.orderItems.map((items, index) => (
         <div key={index}>
-          <h2>YO{index}</h2>
+          <h2>Order {index}</h2>
           {items.map((product, i) => (
             <div key={i}>
+                {console.log(product)}
                 <h3>{product.name}</h3>
-                <CartItem product={product} imageSize={128} cartId={this.state.id} />
+                <CartItem product={product} imageSize={128} cartId={this.state.id} constant={true} />
             </div>
           ))}
         </div>
-      ))}
+      )))
       }
     
     
