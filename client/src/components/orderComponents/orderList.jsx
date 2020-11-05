@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { getServerUrl, getClientUrl } from "../../getUrl.js";
+import CartItem from "../cartComponents/cartItem";
 
 //An order displays information, like that of a cart, alongside its progress and if you can cancel it
 class OrderList extends Component {
@@ -10,10 +11,12 @@ class OrderList extends Component {
         this.state = {
             orderState: 0, //0 is not placing, 1 is placing, 2 is successfully placed
             showOrders: false,
-            orders: []
+            orders: [],
+            orderItems: []
         }
 
         this.getOrders = this.getOrders.bind(this);
+        this.listOrders = this.listOrders.bind(this);
     }
 
 
@@ -60,11 +63,53 @@ class OrderList extends Component {
             axios.post(getServerUrl() + "/read/orders", {username:this.props.user})
             .then((res) => {
 
-                this.setState({orders: res});
-                console.log("Orders", res);
-            });
+                this.setState({orders: res.data});
+                console.log("Orders", res.data);
+
+                var orderItems = []
+                for (let i = 0; i < res.data.length; i++)
+                {
+
+
+                //Each order has a cart id. We need to basically load in items as if they were a cart using each cart id.
+                axios
+                .get(getServerUrl() + "/read/cartItems/" + res.data[i].cartId)
+                .then((cartItemRes) => {
+                    
+                    orderItems.push(cartItemRes.data);
+                
+                    });
+                    
+                }
+
+                console.log("Order items", orderItems)
+
+                //this.setState({orderItems: [...orderItems]});
+                this.setState({orderItems: [["EH", "HEH"],["HUH"]]});
+
+
+                })
+                
         }
     }
+
+  
+
+    listOrders() {
+      console.log(this.state.orderItems);
+      {this.state.orderItems.map((items, index) => (
+        <div key={index}>
+          <h2>YO{index}</h2>
+          {items.map((product, i) => (
+            <div key={i}>
+                <h3>{product.name}</h3>
+                <CartItem product={product} imageSize={128} cartId={this.state.id} />
+            </div>
+          ))}
+        </div>
+      ))}
+      }
+    
     
 
     render() {
@@ -78,7 +123,7 @@ class OrderList extends Component {
                     <button className="btn btn-dark" onClick={this.getOrders}>Show Orders</button>
                 </div>) : ("")}
 
-            {/*TODO: Map array to show all orders*/ }
+            {this.listOrders()}
             </React.Fragment>
         );
     }
