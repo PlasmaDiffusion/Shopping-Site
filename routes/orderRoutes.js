@@ -29,6 +29,7 @@ routes.post("/read/orders", async function (req, res) {
 
   const orders = await models.order.findAll({
     where: { owner: req.body.username },
+    //include: { all: true },
   });
 
   res.status(200).json(orders);

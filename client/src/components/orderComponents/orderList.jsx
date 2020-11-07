@@ -67,25 +67,17 @@ class OrderList extends Component {
                 console.log("Orders", res.data);
 
                 var orderItems = []
-                for (let i = 0; i < res.data.length; i++)
-                {
 
 
-                //Each order has a cart id. We need to basically load in items as if they were a cart using each cart id.
+                //Each order has a cart id. We need to basically load in a bunch of carts.
                 axios
-                .get(getServerUrl() + "/read/cartItems/" + res.data[i].cartId)
+                .post(getServerUrl() + "/read/cartsWithItems/" , {username:this.props.user})
                 .then((cartItemRes) => {
                     
-                    orderItems.push(cartItemRes.data);
-                
-                    });
-                    
-                }
+                    console.log("Cart items", cartItemRes.data)
+                    this.setState({orderItems: cartItemRes.data});
 
-                console.log("Order items", orderItems)
-
-                //this.setState({orderItems: [...orderItems]});
-                this.setState({orderItems: [[{name: "EH", price: 1.99}, {name: "ERR", price: 1.99}],[{name: "HUH", price: 4.99}]]});
+                    })
 
 
                 })
@@ -96,17 +88,30 @@ class OrderList extends Component {
   
 
     listOrders() {
-      console.log(this.state.orderItems);
-      return(this.state.orderItems.map((items, index) => (
-        <div key={index}>
-          <h2>Order {index}</h2>
-          {items.map((product, i) => (
-            <div key={i}>
-                {console.log(product)}
-                <h3>{product.name}</h3>
-                <CartItem product={product} imageSize={128} cartId={this.state.id} constant={true} />
+      console.log("Order items (state)", this.state.orderItems);
+      return(this.state.orderItems.map((cart, index) => (
+        
+        //Display orders here. (Ignore the user's current cart) TODO: Only display orders in progress, and have an option to display all orders.
+        <div key={index} className="container">
+            <h1>Order {index+1}</h1>
+            <h2>{this.state.orders[index].status}</h2>
+            <h3>{this.state.orders[index].createdAt}</h3>
+            <h4>${cart.totalPrice} Total</h4>
+
+        
+
+            <div>
+              {cart.cartItems.map((product, i) => (
+                <div key={i}>
+                    <CartItem product={product.shopItem} imageSize={128} cartId={this.state.id} constant={true} />
+                </div>
+                
+              ))}
             </div>
-          ))}
+
+            <br></br><br></br><br></br><br></br><br></br>
+        
+
         </div>
       )))
       }

@@ -1,4 +1,5 @@
 const { routes, sequelize } = require("../server");
+const { Op } = require("sequelize");
 
 models = sequelize.models;
 
@@ -36,6 +37,21 @@ routes.post("/read/cart", async function (req, res) {
   });
 
   if (created) console.log("New cart created!");
+
+  res.status(200).json(cart);
+});
+
+//Read a cart of a specific user, and include the cart items
+routes.post("/read/cartsWithItems", async function (req, res) {
+  const cart = await models.cart.findAll({
+    where: {
+      owner: {
+        [Op.like]: "%" + req.body.username + "%",
+        [Op.ne]: req.body.username,
+      },
+    },
+    include: { model: models.cartItem, include: models.shopItem },
+  });
 
   res.status(200).json(cart);
 });
