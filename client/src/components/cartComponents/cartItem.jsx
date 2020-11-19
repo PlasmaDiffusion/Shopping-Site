@@ -62,7 +62,7 @@ class CartItem extends Component {
         <div className="container">
           <div className="row searchResult">
             <div className="col-sm-">
-              <a href={"/product/?id=" + this.props.product.shopItemId}>
+              <a href={"/product/?id=" + this.props.id}>
                 <img
                   src={this.props.product.imageLink}
                   width={this.props.imageSize}
@@ -73,15 +73,15 @@ class CartItem extends Component {
               </a>
             </div>
             <div className="col-sm-4">
-              <a href={"/product/?id=" + this.props.product.shopItemId}>
+              <a href={"/product/?id=" + this.props.id}>
                 <h2>{this.props.product.name}</h2>
               </a>
               <p>${this.props.product.price}</p>
-              {this.props.product.amountInCart > 1 ? ( //Show total price if more than 1
+              {this.props.amountInCart > 1 ? ( //Show total price if more than 1
                 <p>
                   ($
                   {(
-                    this.props.product.price * this.props.product.amountInCart
+                    this.props.product.price * this.props.amountInCart
                   ).toFixed(2)}{" "}
                   Total)
                 </p>

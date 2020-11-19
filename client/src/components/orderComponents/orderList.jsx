@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import { getServerUrl, getClientUrl } from "../../getUrl.js";
 import CartItem from "../cartComponents/cartItem";
+import OrderCancelButton from "./orderCancelButton";
 
 //An order displays information, like that of a cart, alongside its progress and if you can cancel it
 class OrderList extends Component {
@@ -97,13 +98,19 @@ class OrderList extends Component {
             <h2>{this.state.orders[index].status}</h2>
             <h3>{this.state.orders[index].createdAt}</h3>
             <h4>${cart.totalPrice} Total</h4>
+            {/* Option to cancel the order, if it's only proccessing and not delivered */}
+            {this.state.orders[index].status == "Proccessing" ?
+            <OrderCancelButton cart={cart} orderId={this.state.orders[index].id} />
+            : ""}
 
         
 
             <div>
               {cart.cartItems.map((product, i) => (
                 <div key={i}>
-                    <CartItem product={product.shopItem} imageSize={128} cartId={this.state.id} constant={true} />
+                    <CartItem product={product.shopItem} amountInCart={product.amountInCart} id={product.shopItemId} imageSize={128} cartId={this.state.id} constant={true} />
+                    <div className="searchResult" style={{paddingLeft: 128}}>{product.amountInCart}</div>
+                    <br></br><br></br>
                 </div>
                 
               ))}

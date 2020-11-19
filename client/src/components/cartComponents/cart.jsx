@@ -109,7 +109,7 @@ class Cart extends Component {
       <div className="container">
         {this.state.cartItems.map((product, index) => (
           <div className="row" key={index}>
-            <CartItem product={product} imageSize={128} cartId={this.state.id} />
+            <CartItem product={product} id={product.shopItemId} amountInCart={product.amountInCart} imageSize={128} cartId={this.state.id} />
             <QuantityButtons
               max={this.state.initialMaxAmounts[index]}
               min={1}

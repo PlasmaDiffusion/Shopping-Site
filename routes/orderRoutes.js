@@ -1,7 +1,6 @@
 const { routes, sequelize } = require("../server");
 
 models = sequelize.models;
-//TODO: Update order needs to be called when users want to cancel them, and when admins need to mark their status
 //Creating order
 routes.post("/create/order", async function (req, res) {
   if (req.body.id) {
@@ -55,14 +54,39 @@ routes.post("/update/order/", async function (req, res) {
   }
 });
 
-//Delete order
+//Delete order (but it has to be proccessing)
 routes.post("/delete/order/:id", async function (req, res) {
+  //Find the order and check if it's proccessing
   const id = req.params.id;
-  await models.order.destroy({
+  const orderToCancel = await models.order.findOne({
     where: {
       id: id,
+      status: "Proccessing",
     },
   });
+
+  //Now put all products back in stock. Two arrays are needed, one for the ids and one for the amount put in the cart.
+  const shopItemIds = req.body.shopItemIds;
+  const amountsInCart = req.body.amountsInCart;
+
+  for (let i = 0; i < shopItemIds.length; i++) {
+    const shopItem = await models.shopItem.findByPk(shopItemIds[i]);
+
+    //If the item is found, put all items back in stock.
+    if (shopItem) {
+      await models.shopItem.update(
+        { amountInStock: shopItem.amountInStock - amountsInCart[i] },
+        {
+          where: {
+            id: shopItemIds[i],
+          },
+        }
+      );
+    }
+  }
+
+  //Now destroy the order.
+  await orderToCancel.destroy();
 
   res.status(200).end();
 });
