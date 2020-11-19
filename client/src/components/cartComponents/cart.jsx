@@ -157,7 +157,6 @@ class Cart extends Component {
     //Confirm the order. If the user says yes, the state will change and the OrderList should handle the rest.
     if (msg)
     {
-      alert("The order will now be placed.");
       this.setState({placingOrder: true});
     }
 

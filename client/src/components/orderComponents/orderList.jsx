@@ -78,12 +78,32 @@ class OrderList extends Component {
                     console.log("Cart items", cartItemRes.data)
                     this.setState({orderItems: cartItemRes.data});
 
-                    })
+                    if (cartItemRes.data.length == 0) alert("No orders found.");
 
+                    })
 
                 })
                 
         }
+    }
+
+    //The date and time string seqeulize provides is ugly. Let's reformat it.
+    formatDate(dateAndTime)
+    {
+        if (dateAndTime)
+        {
+            //Get rid of the T
+            let date = dateAndTime.split("T");
+
+            //Format time (hours and minutes, minus seconds)
+            let time = date[1].split(".");
+            time = (time[0]+time[1]+time[2]).split(":");
+
+
+            return date[0] + ",  " + time[0] + ":" + time[1];
+        }
+
+        return "";
     }
 
   
@@ -96,7 +116,7 @@ class OrderList extends Component {
         <div key={index} className="container">
             <h1>Order {index+1}</h1>
             <h2>{this.state.orders[index].status}</h2>
-            <h3>{this.state.orders[index].createdAt}</h3>
+            <i>{this.formatDate(this.state.orders[index].createdAt)}</i>
             <h4>${cart.totalPrice} Total</h4>
             {/* Option to cancel the order, if it's only proccessing and not delivered */}
             {this.state.orders[index].status == "Proccessing" ?
@@ -134,6 +154,7 @@ class OrderList extends Component {
                 </div>
                 {this.state.orders.length == 0 ? (                <div className="container">
                     <button className="btn btn-dark" onClick={this.getOrders}>Show Orders</button>
+                    <div style={{margin:50}}></div>
                 </div>) : ("")}
 
             {this.listOrders()}

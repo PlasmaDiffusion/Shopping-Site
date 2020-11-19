@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import axios from "axios";
+import { getServerUrl, getClientUrl } from "../../getUrl.js";
+
 
 //Handles all code needed to send order to the server to be cancelled.
 class OrderCancelButton extends Component {
@@ -7,6 +10,8 @@ class OrderCancelButton extends Component {
 
         this.cancelOrder = this.cancelOrder.bind(this);
         this.setupCancelData = this.setupCancelData.bind(this);
+
+        this.state = {cancelled: false}
     }
 
 
@@ -18,9 +23,10 @@ class OrderCancelButton extends Component {
     cancelOrder()
     {
         //Have to have an order id prepared.
-        if (this.props.orderId)
+        if (this.props.orderId && !this.props.cancelled)
         {
-            this.setupCancelData();
+            if(window.confirm("Cancel this order?"))
+                this.setupCancelData();
         }
     }
 
@@ -41,17 +47,25 @@ class OrderCancelButton extends Component {
             });
 
             console.log("Order cancel Arrays: ", shopItemIds, itemQuantities);
+
+            axios.post(getServerUrl() + "/delete/order", {id:this.props.orderId, shopItemIds:shopItemIds, itemQuantities:itemQuantities})
+            .then((res) => {
+
+                alert(res.data);
+                this.setState({cancelled: true})
+
+            });
         }
         else
         {
-            alert("No cart in props.");
+            alert("Error cancelling order.");
         }
     }
 
     render() {
         return (
             <React.Fragment>
-                <button type="button" className="btn btn-danger" onClick={this.cancelOrder}><i class="fa fa-stop" ></i> Cancel Order</button>
+                <button type="button" className="btn btn-danger" onClick={this.cancelOrder}> {this.state.cancelled ? "Cancelled!" : "Cancel Order"} </button>
             </React.Fragment>
         );
     }

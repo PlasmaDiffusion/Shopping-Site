@@ -55,9 +55,9 @@ routes.post("/update/order/", async function (req, res) {
 });
 
 //Delete order (but it has to be proccessing)
-routes.post("/delete/order/:id", async function (req, res) {
+routes.post("/delete/order", async function (req, res) {
   //Find the order and check if it's proccessing
-  const id = req.params.id;
+  const id = req.body.id;
   const orderToCancel = await models.order.findOne({
     where: {
       id: id,
@@ -67,7 +67,7 @@ routes.post("/delete/order/:id", async function (req, res) {
 
   //Now put all products back in stock. Two arrays are needed, one for the ids and one for the amount put in the cart.
   const shopItemIds = req.body.shopItemIds;
-  const amountsInCart = req.body.amountsInCart;
+  const amountsInCart = req.body.itemQuantities;
 
   for (let i = 0; i < shopItemIds.length; i++) {
     const shopItem = await models.shopItem.findByPk(shopItemIds[i]);
@@ -75,7 +75,7 @@ routes.post("/delete/order/:id", async function (req, res) {
     //If the item is found, put all items back in stock.
     if (shopItem) {
       await models.shopItem.update(
-        { amountInStock: shopItem.amountInStock - amountsInCart[i] },
+        { amountInStock: shopItem.amountInStock + amountsInCart[i] },
         {
           where: {
             id: shopItemIds[i],
@@ -88,7 +88,7 @@ routes.post("/delete/order/:id", async function (req, res) {
   //Now destroy the order.
   await orderToCancel.destroy();
 
-  res.status(200).end();
+  res.status(201).send("The order has been cancelled.");
 });
 
 module.exports = routes;

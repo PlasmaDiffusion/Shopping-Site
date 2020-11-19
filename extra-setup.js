@@ -10,7 +10,10 @@ function applyExtraSetup(sequelize) {
   cartItem.belongsTo(cart);
 
   //When a cart is submitted, an order is created and has a reference to that cart
-  order.belongsTo(cart);
+  order.belongsTo(cart, {
+    onDelete: "cascade",
+    hooks: true,
+  });
 }
 
 //(User) Select * from carts where owner = username
