@@ -40,11 +40,11 @@ class Home extends Component {
           */}
         <Switch>
           <Route exact path="/">
-            <AuthNav />
+            <AuthNav title={"Home"} />
             <FeaturedProducts />
           </Route>
           <Route exact path="/search">
-            <AuthNav />
+            <AuthNav title={"Catalogue"} />
             <SearchBar searchResults={true} />
           </Route>
           <Route exact path="/product">
@@ -52,7 +52,7 @@ class Home extends Component {
             <ProductPage />
           </Route>
           <Route exact path="/support">
-            <AuthNav />
+            <AuthNav title={"Support"} />
             <SupportPage />
           </Route>
           {/* Private routes go below */}
@@ -60,7 +60,7 @@ class Home extends Component {
             <Profile />
           </PrivateRoute>
           <PrivateRoute exact path="/cart">
-            <AuthNav />
+            <AuthNav title={"Cart"}/>
             <Cart />
           </PrivateRoute>
           <PrivateRoute exact path="/api">

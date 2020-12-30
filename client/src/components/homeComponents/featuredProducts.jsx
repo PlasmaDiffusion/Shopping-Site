@@ -26,7 +26,7 @@ class FeaturedProducts extends Component {
       });
     });
 
-    axios.get(getServerUrl() + "/read/shopItem/" + 1).then((res) => {
+    axios.get(getServerUrl() + "/read/shopItem/" + 6).then((res) => {
       this.setState({
         product2: res.data,
       });

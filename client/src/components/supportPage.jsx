@@ -7,47 +7,59 @@ class SupportPage extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Support</h1>
+      <div className="container">
         <br></br>
-        <div class="list-group">
+        <h1>FAQ</h1>
+        <br></br>
+        <div className="list-group">
+        <a
+            href="#"
+            className="list-group-item list-group-item-action flex-column align-items-start"
+          >
+            <div className="d-flex w-100 justify-content-between">
+              <h5 className="mb-1">How can I change the amount of items in my cart?</h5>
+            </div>
+            <p className="mb-1">
+              Once you've logged in you can select Cart, then use the +/- and click on Update Quantity.
+            </p>
+          </a>
+
           <a
             href="#"
-            class="list-group-item list-group-item-action flex-column align-items-start"
+            className="list-group-item list-group-item-action flex-column align-items-start"
           >
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">How do I see my past orders?</h5>
+            <div className="d-flex w-100 justify-content-between">
+              <h5 className="mb-1">How do I see my past orders?</h5>
               {/*<small>3 days ago</small>*/}
             </div>
-            <p class="mb-1">
+            <p className="mb-1">
               Click Cart, and at the top of the page click View Orders. You
               don't have any orders if this doesn't show up.
             </p>
           </a>
+         
           <a
             href="#"
-            class="list-group-item list-group-item-action flex-column align-items-start"
+            className="list-group-item list-group-item-action flex-column align-items-start"
           >
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">Can I cancel an order?</h5>
+            <div className="d-flex w-100 justify-content-between">
+              <h5 className="mb-1">Can I cancel an order?</h5>
             </div>
-            <p class="mb-1">
-              Not at this time can you manually cancel an order. You'll have to
-              contact us for now. A manual order cancelling feature will be
-              added soon.
+            <p className="mb-1">
+              When viewing your orders, there is a button to cancel any order that's currently in progress.
             </p>
           </a>
-          <a
+          {/*<a
             href="#link"
             id="link"
-            class="list-group-item list-group-item-action flex-column align-items-start"
+            className="list-group-item list-group-item-action flex-column align-items-start"
           >
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">Customer Service</h5>
+            <div className="d-flex w-100 justify-content-between">
+              <h5 className="mb-1">Customer Service</h5>
             </div>
-            <p class="mb-1">A live chat service will be made later.</p>
-            <small class="text-muted">Click to go to a live chat.</small>
-          </a>
+            <p className="mb-1">A live chat service will be made later.</p>
+            <small className="text-muted">Click to go to a live chat.</small>
+          </a> */}
         </div>
       </div>
     );

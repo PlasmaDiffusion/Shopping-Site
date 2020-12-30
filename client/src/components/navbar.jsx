@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
-import { Container, Nav, Navbar, NavLink, NavItem } from "reactstrap";
+import { Container, Nav, Navbar, NavLink, NavItem, NavbarToggler, NavbarBrand,
+  Collapse, UncontrolledDropdown, DropdownMenu, DropdownToggle, DropdownItem } from "reactstrap";
 
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./auth/logout-button";
@@ -11,22 +12,66 @@ import SearchBar from "./searchComponents/searchBar";
 const AuthNav = (props) => {
   const { isAuthenticated } = useAuth0();
 
+  const [collapsed, setCollapsed] = useState(true);
+
+  const toggleNavbar = () => setCollapsed(!collapsed);
+
+  const checkIfInThisNav = (navName) => {
+    return (props.title == navName) ? "navItemCurrent" : "navItem";
+  }
+
   return (
     <React.Fragment>
+        <div className="mobileNav"> {/* Mobile only toggleable navbar below */}
+        <Navbar color="faded" light>
+          <NavbarBrand href="/" className="mr-auto">{props.title}</NavbarBrand>
+          <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+          <Collapse isOpen={!collapsed} navbar>
+            <Nav navbar>
+            <NavItem >
+              <NavLink href="/">Home</NavLink>
+            </NavItem>
+            <NavItem >
+              <NavLink href="/search/?search=default">Catalogue</NavLink>
+            </NavItem>
+
+            <NavItem >
+              <NavLink href="/support">Support</NavLink>
+            </NavItem>
+
+            <NavItem >
+              {isAuthenticated ? <NavLink href="/cart">Cart</NavLink> : ""}
+            </NavItem>
+            </Nav>
+          </Collapse>
+
+        </Navbar>
+          <Navbar>
+
+
+            <div className="navBar">{props.noLogin ? "" : <Profile />}</div>
+            
+            <div className="navBar">
+            {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+            </div>
+
+        </Navbar>
+      </div>
+      <div className="desktopNav"> {/* Desktop only navbar below */}
       <div className="navbar">
         <Nav className="justify-content-start">
-          <NavItem className="navItem">
+          <NavItem className={checkIfInThisNav("Home")}>
             <NavLink href="/">Home</NavLink>
           </NavItem>
-          <NavItem className="navItem">
+          <NavItem className={checkIfInThisNav("Catalogue")}>
             <NavLink href="/search/?search=default">Catalogue</NavLink>
           </NavItem>
 
-          <NavItem className="navItem">
+          <NavItem className={checkIfInThisNav("Support")}>
             <NavLink href="/support">Support</NavLink>
           </NavItem>
 
-          <NavItem className="navItem">
+          <NavItem className={checkIfInThisNav("Cart")}>
             {isAuthenticated ? <NavLink href="/cart">Cart</NavLink> : ""}
           </NavItem>
         </Nav>
@@ -38,6 +83,7 @@ const AuthNav = (props) => {
           <NavItem>{props.noLogin ? "" : <Profile />}</NavItem>
         </Nav>
       </div>
+      </div>
       <div className="tab"></div>
       <div
         className="justify-content-center"
@@ -45,6 +91,8 @@ const AuthNav = (props) => {
       >
         <SearchBar searchResults={false} />
       </div>
+
+
     </React.Fragment>
   );
 };

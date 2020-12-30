@@ -5,17 +5,16 @@ import { Button } from "reactstrap";
 const LogoutButton = () => {
   const { logout } = useAuth0();
   return (
-    <Button
+    <button
       onClick={() =>
         logout({
           returnTo: window.location.origin, //Make sure origins are set in the Auth0 settings
         })
       }
-      variant="danger"
-      className="btn-margin"
+      className="navButton"
     >
       Log Out
-    </Button>
+    </button>
   );
 };
 

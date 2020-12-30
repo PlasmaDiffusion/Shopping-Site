@@ -63,11 +63,10 @@ const ProductCarousel = (props) => {
             <a href={getClientUrl() + "/product/?id=" + item.id}>
               <img src={item.imageLink} className="center"></img>
             </a>
-            <CarouselCaption
-              className="text-dark"
-              captionText={item.description}
-              captionHeader={item.name}
-            />
+            <div className="featuredDescription carousel-caption">
+            <h3>{item.name}</h3>
+            <p>{item.description}</p>
+            </div>
           </div>
         ) : (
           ""

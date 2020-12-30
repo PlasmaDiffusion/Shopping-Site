@@ -5,13 +5,12 @@ import { Button } from "reactstrap";
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
   return (
-    <Button
+    <button
       onClick={() => loginWithRedirect()} //Redirects to the /authorize part of the url
-      variant="primary"
-      className="btn-margin"
+      className="navButton"
     >
       Log In
-    </Button>
+    </button>
   );
 };
 

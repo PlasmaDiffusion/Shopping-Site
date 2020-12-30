@@ -20,13 +20,20 @@ code {
   background-color: $bgCol;
 }
 
-.navItem {
+.navItem,
+.navButton {
   background-color: $navCol;
   a {
     color: black;
   }
 }
-.navItem:hover {
+.navButton {
+  border: none;
+  width: 120%;
+}
+.navItem:hover,
+.navButton:hover,
+.navItemCurrent {
   background-color: $light;
 }
 
@@ -35,6 +42,7 @@ code {
   border-right: none;
   border-left: none;
   border-top: none;
+  font-size: 1.5rem;
 }
 
 .searchbar {
@@ -64,6 +72,11 @@ a:hover {
 }
 .carousel-indicators .active {
   background-color: $navCol;
+}
+
+.featuredDescription {
+  color: rgb(109, 109, 109) !important;
+  text-shadow: white 1px 1px 2px;
 }
 
 //Colours
@@ -122,8 +135,35 @@ a:hover {
   padding: 0px 10px;
 }
 
+.mobileNav {
+  display: none;
+}
+
+.desktopNav {
+  display: block;
+}
+
+/* On smaller screens make the navigation menu better */
+@media screen and (max-width: 480px) {
+  .mobileNav {
+    display: block;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .nav-link {
+    font-size: 2rem;
+  }
+
+  .navButton {
+    padding: 5px;
+  }
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
+@media screen and (max-width: 480px) {
   .sidenav {
     padding-top: 15px;
   }
