@@ -15,6 +15,7 @@ import {
   NavbarText,
 } from "reactstrap";
 
+//The admin navbar. Displays admin only pages to edit part of the database. (Only specific users will be accepted as admins)
 class AdminNavigation extends Component {
   constructor(props) {
     super(props);

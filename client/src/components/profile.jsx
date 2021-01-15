@@ -5,9 +5,8 @@ import Loading from "./loading";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = (props) => {
-  //This prop does nothing unless user is logged in already
-  //const { isAuthenticated, } = useAuth0();
-  //if (!isAuthenticated) return <React.Fragment></React.Fragment>;
+  //This component does nothing unless user is logged in already.
+  //It returns a render of the email, and can also give the username/email to parent components via a passed in function.
 
   const { user } = useAuth0();
   const { name, picture, email } = user;
@@ -50,7 +49,3 @@ const Profile = (props) => {
 };
 
 export default Profile;
-
-/*export default withAuthenticationRequired(Profile, {
-  onRedirecting: () => <Loading />,
-});*/

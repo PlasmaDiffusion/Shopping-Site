@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import SearchBar from "../searchComponents/searchBar";
 
+//Searchbar but with slightly different parameteres to link to different pages.
 class AdminSearch extends Component {
   constructor(props) {
     super(props);

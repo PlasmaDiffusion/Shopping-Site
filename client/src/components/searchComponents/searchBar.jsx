@@ -10,6 +10,7 @@ import {
 
 import axios from "axios";
 
+//The search bar that is always at the top of the site. You can enter keywords and select item categories with it.
 class SearchBar extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +31,7 @@ class SearchBar extends Component {
     this.getCategories = this.getCategories.bind(this);
   }
 
-  //Search for stuff on mount, if there's search keywords in the url that is
+  //Search for stuff on mount (If there's search keywords in the url that is)
   componentDidMount() {
     var url = new URLSearchParams(window.location.search);
     var keywords = url.get("search");

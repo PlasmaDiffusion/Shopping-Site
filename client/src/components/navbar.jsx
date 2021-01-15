@@ -9,6 +9,8 @@ import LoginButton from "./auth/login-button";
 import Profile from "./profile";
 import SearchBar from "./searchComponents/searchBar";
 
+//A navbar that can display links only if logged in.
+//The name of the current page you're on can be passed in as a prop to highlight a specific link.
 const AuthNav = (props) => {
   const { isAuthenticated } = useAuth0();
 
@@ -16,6 +18,7 @@ const AuthNav = (props) => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
 
+  //Get a css class for either being a current or regular webpage link
   const checkIfInThisNav = (navName) => {
     return (props.title == navName) ? "navItemCurrent" : "navItem";
   }

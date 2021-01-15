@@ -1,6 +1,8 @@
 import { getClientUrl, getServerUrl } from "../../getUrl.js";
 import axios from "axios";
 
+//Functions used to update/create products from the admin pages
+
 //Get data to submit form arguments
 export function submitProduct(state, user) {
   const shopItemToSubmit = {

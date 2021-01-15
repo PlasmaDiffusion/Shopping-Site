@@ -3,7 +3,7 @@ import axios from "axios";
 import { getServerUrl, getClientUrl } from "../../getUrl.js";
 
 
-//Handles all code needed to send order to the server to be cancelled.
+//Handles all code needed to tell the server to cancel an order.
 class OrderCancelButton extends Component {
     constructor(props) {
         super(props);

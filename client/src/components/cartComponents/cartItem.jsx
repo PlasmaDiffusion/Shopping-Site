@@ -3,7 +3,7 @@ import { getClientUrl, getServerUrl } from "../../getUrl.js";
 
 import axios from "axios";
 
-//The search bar will display many of these search results. Each one is a product to display.
+//The Cart component will render many of these, each containing the product name and price.
 class CartItem extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +35,7 @@ class CartItem extends Component {
       });
   }
 
-  //Quantity was changed. Update the cart price and that item's stock.
+  //Quantity was changed. Update the cart price and that item's stock. (Usually called when the quantity buttons are used.)
   updateAmount() {
     axios
       .post(getServerUrl() + "/update/cartItem", {

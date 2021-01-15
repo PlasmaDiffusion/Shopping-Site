@@ -8,6 +8,7 @@ import { getClientUrl, getServerUrl } from "../../getUrl.js";
 import axios from "axios";
 import QuantityButtons from "../quantityButtons";
 
+//Renders all items in the user's cart, along with the total cost.
 class Cart extends Component {
   constructor(props) {
     super(props);

@@ -10,7 +10,8 @@ import {
   updateProduct,
 } from "../adminComponents/formServerFunctions.js";
 
-//If updating, read in product data. Display form, and call a submitter component when finished
+//A form that either is for creating a new product or updating an existing one.
+//If updating, read in product data. Display form, and call a submitter component when finished.
 class ShopItemForm extends Component {
   constructor(props) {
     super(props);

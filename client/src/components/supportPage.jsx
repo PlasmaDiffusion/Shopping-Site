@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+//The FAQ page. It's just a render function.
 class SupportPage extends Component {
   constructor(props) {
     super(props);

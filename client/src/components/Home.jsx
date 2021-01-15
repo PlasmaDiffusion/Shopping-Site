@@ -23,6 +23,7 @@ import ProductCarousel from "./homeComponents/productCarousel";
 import FeaturedProducts from "./homeComponents/featuredProducts.jsx";
 import SupportPage from "./supportPage.jsx";
 
+//All routes are placed here.
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -31,13 +32,6 @@ class Home extends Component {
   render() {
     return (
       <Router>
-        {/*
-            A <Switch> looks through all its children <Route>
-            elements and renders the first one whose path
-            matches the current URL. Use a <Switch> any time
-            you have multiple routes, but you want only one
-            of them to render at a time
-          */}
         <Switch>
           <Route exact path="/">
             <AuthNav title={"Home"} />

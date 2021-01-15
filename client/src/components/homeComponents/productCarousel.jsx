@@ -26,6 +26,7 @@ const items = [
   },
 ];
 
+//A bootstrap carousel that shows 3 "featured" products on the homepage
 const ProductCarousel = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);

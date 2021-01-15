@@ -63,7 +63,7 @@ class AddToCart extends Component {
     axios.post(getServerUrl() + "/create/cartItem", newCartItem).then((res) => {
       let finished = 0;
 
-      //Update the stock too
+      //Update the stock of the product too (Updates the product page and cart)
       let newStockData = {
         id: newCartItem.shopItemId,
         amountInStock: this.props.amountInStock - this.props.amountToAdd,
