@@ -172,7 +172,7 @@ class Cart extends Component {
           <h3>
           Total Price: $<i>{this.state.totalPrice}</i>
           </h3>
-          <button className="btn btn-warning" onClick={this.placeOrder} >Place Order</button>
+          <button className="btn-orange btn-wide" onClick={this.placeOrder} >Place Order</button>
           <div style={{ margin: "100px" }}></div>
         </div>)
         : (<div className="container"><br></br><p>Your cart seems to be empty.</p></div> )}

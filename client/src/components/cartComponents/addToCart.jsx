@@ -34,8 +34,10 @@ class AddToCart extends Component {
   findCart() {
     var req = { username: "anonymous" };
 
+    //Make sure logged in. If not let the user know they can't add stuff to their cart.
     if (!this.props.auth0.isAuthenticated) {
       alert("You need to login to add stuff to the cart.");
+      this.setState({clicked: false});
       //Or you could ask the user to add it using the name anonymous?
       return;
     }
@@ -87,9 +89,9 @@ class AddToCart extends Component {
     return (
       <button
         onClick={this.addToCartClicked}
-        className="btn btn-primary btn-lg active"
+        className="btn-orange btn-wide"
       >
-        {this.state.clicked ? "Adding..." : "Add to cart"}
+        {this.state.clicked ? "Adding..." : "Add To Cart"}
       </button>
     );
   }

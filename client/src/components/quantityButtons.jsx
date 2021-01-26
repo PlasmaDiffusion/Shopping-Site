@@ -34,7 +34,7 @@ class QuantityButtons extends Component {
           <div className="col-sm-1">
             <button
               id="decrement"
-              className="btn btn-danger"
+              className="btn-lightOrange btn-quantity"
               onClick={this.onDecrement}
             >
               -
@@ -46,7 +46,7 @@ class QuantityButtons extends Component {
           <div className="col-sm-1">
             <button
               id="increment"
-              className="btn btn-primary"
+              className="btn-darkOrange btn-quantity"
               onClick={this.onIncrement}
             >
               +

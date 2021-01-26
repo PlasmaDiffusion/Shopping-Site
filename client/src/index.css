@@ -79,6 +79,38 @@ a:hover {
   background-color: #fbdfd4;
   border-color: #fbdfd4; }
 
+.btn-darkOrange,
+.btn-lightOrange,
+.btn-orange {
+  border-radius: 8px;
+  border: none; }
+
+.btn-lightOrange {
+  background-color: #fbdfd4; }
+
+.btn-lightOrange:hover {
+  background-color: #f3a154; }
+
+.btn-darkOrange {
+  background-color: #ef7547; }
+
+.btn-darkOrange:hover {
+  background-color: #90310d; }
+
+.btn-orange {
+  background-color: #f3a154; }
+
+.btn-orange:hover {
+  background-color: #ef7547; }
+
+.btn-quantity {
+  font-size: 2rem;
+  width: 3rem; }
+
+.btn-wide {
+  width: 20%;
+  padding: 2%; }
+
 /* The sidebar menu ------------------------------------------------------------------------------------------------------------------------ */
 .sidenav {
   height: 100%;
@@ -141,7 +173,11 @@ a:hover {
     padding-top: 15px; }
 
   .sidenav a {
-    font-size: 18px; } }
+    font-size: 18px; }
+
+  .btn-wide {
+    width: 40%;
+    padding: 2%; } }
 /* Scrollbar of the sidebar */
 /* width */
 ::-webkit-scrollbar {

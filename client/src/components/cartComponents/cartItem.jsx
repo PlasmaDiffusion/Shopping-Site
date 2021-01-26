@@ -92,11 +92,11 @@ class CartItem extends Component {
             {//If constant, don't let the amount be changed or item be deleted.
             this.props.constant ? "" : (
               <div className="col-sm-">
-              <button className="btn btn-danger" onClick={this.deleteItem}>
-                Delete
+              <button className="btn-lightOrange" onClick={this.deleteItem}>
+                Remove Item
               </button>
               <br></br>
-              <button className="btn btn-secondary" onClick={this.updateAmount}>
+              <button className="btn-darkOrange" onClick={this.updateAmount}>
                 Update Quantity
               </button>
             </div>

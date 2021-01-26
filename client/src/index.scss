@@ -1,6 +1,7 @@
 $bgCol: #f3a154;
 $navCol: #ef7547;
-$light: lighten($navCol, 30%);
+$lightOrange: lighten($navCol, 30%);
+$darkOrange: darken($navCol, 30%);
 
 body {
   margin: 0;
@@ -34,7 +35,7 @@ code {
 .navItem:hover,
 .navButton:hover,
 .navItemCurrent {
-  background-color: $light;
+  background-color: $lightOrange;
 }
 
 .searchResult {
@@ -98,8 +99,49 @@ a:hover {
 #dropdown button:hover,
 #searchButton input:hover {
   border-radius: 0 0 0 0;
-  background-color: $light;
-  border-color: $light;
+  background-color: $lightOrange;
+  border-color: $lightOrange;
+}
+
+.btn-darkOrange,
+.btn-lightOrange,
+.btn-orange {
+  border-radius: 8px;
+  border: none;
+}
+
+.btn-lightOrange {
+  background-color: $lightOrange;
+}
+
+.btn-lightOrange:hover {
+  background-color: $bgCol;
+}
+
+.btn-darkOrange {
+  background-color: $navCol;
+}
+
+.btn-darkOrange:hover {
+  background-color: $darkOrange;
+}
+
+.btn-orange {
+  background-color: $bgCol;
+}
+
+.btn-orange:hover {
+  background-color: $navCol;
+}
+
+.btn-quantity {
+  font-size: 2rem;
+  width: 3rem;
+}
+
+.btn-wide {
+  width: 20%;
+  padding: 2%;
 }
 
 /* The sidebar menu ------------------------------------------------------------------------------------------------------------------------ */
@@ -169,6 +211,11 @@ a:hover {
   }
   .sidenav a {
     font-size: 18px;
+  }
+
+  .btn-wide {
+    width: 40%;
+    padding: 2%;
   }
 }
 /* Scrollbar of the sidebar */
