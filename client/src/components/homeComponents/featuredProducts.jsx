@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ProductCarousel from "./productCarousel";
-
+import ProductBanner from "./productBanner";
 import { getClientUrl, getServerUrl } from "../../getUrl.js";
 import axios from "axios";
 
@@ -37,13 +37,17 @@ class FeaturedProducts extends Component {
     return (
       <React.Fragment>
         <h1 className="center">Featured Products</h1>
-        <ProductCarousel
+        <ProductBanner product={this.state.product0} />
+        <ProductBanner product={this.state.product1} />
+        <ProductBanner product={this.state.product2} />
+
+        {/*<ProductCarousel
           products={[
             this.state.product0,
             this.state.product1,
             this.state.product2,
           ]}
-        />
+        />*/}
       </React.Fragment>
     );
   }

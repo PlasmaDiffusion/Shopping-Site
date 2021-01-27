@@ -65,8 +65,8 @@ const ProductCarousel = (props) => {
               <img src={item.imageLink} className="center"></img>
             </a>
             <div className="featuredDescription carousel-caption">
-            <h3>{item.name}</h3>
-            <p>{item.description}</p>
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
             </div>
           </div>
         ) : (
