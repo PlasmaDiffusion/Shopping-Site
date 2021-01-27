@@ -36,7 +36,7 @@ class AddToCart extends Component {
 
     //Make sure logged in. If not let the user know they can't add stuff to their cart.
     if (!this.props.auth0.isAuthenticated) {
-      alert("You need to login to add stuff to the cart.");
+      alert("You need to login to add items to your own cart.");
       this.setState({clicked: false});
       //Or you could ask the user to add it using the name anonymous?
       return;

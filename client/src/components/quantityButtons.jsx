@@ -31,7 +31,7 @@ class QuantityButtons extends Component {
     return (
       <div className="container searchResult">
         <div className="row">
-          <div className="col-sm-1">
+          <div className="col-sm-4">
             <button
               id="decrement"
               className="btn-lightOrange btn-quantity"
@@ -39,11 +39,7 @@ class QuantityButtons extends Component {
             >
               -
             </button>
-          </div>
-          <div className="col-sm-1">
-            <p>{this.state.amount}</p>
-          </div>
-          <div className="col-sm-1">
+            <p style={{margin: "2rem", display:"inline"}}>{this.state.amount}</p>
             <button
               id="increment"
               className="btn-darkOrange btn-quantity"
@@ -54,9 +50,8 @@ class QuantityButtons extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-sm-1"> </div>
-          <div className="col-sm-1">
-            <p>
+          <div className="col-sm-4">
+            <p style={{margin: "2rem"}}>
               <i>{this.props.stockAmount} in stock</i>
             </p>
           </div>

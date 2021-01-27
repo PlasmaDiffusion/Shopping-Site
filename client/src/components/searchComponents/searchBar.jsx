@@ -37,11 +37,19 @@ class SearchBar extends Component {
     var keywords = url.get("search");
     var categories = url.get("categories");
 
+    //Search values to default to when nothing is entered
+    if (!keywords) keywords="default";
+    if (!categories) categories="All";
+
     //If keywords were entered and this component has the showResults flag, try searching for items from the server.
     if (this.props.searchResults && keywords) {
       //Find all items by default if you click catalogue
-      if (keywords == "default")
+      if (keywords == "default" && categories == "All")
         axios.get(getServerUrl() + "/read/shopItems/").then((res) => {
+          this.setState({ results: res.data });
+        });
+      else if (keywords == "default")
+        axios.get(getServerUrl() + "/read/shopItems/"+ categories).then((res) => {
           this.setState({ results: res.data });
         });
       else
@@ -56,9 +64,8 @@ class SearchBar extends Component {
           });
     }
 
-    //Search values to default to when nothing is entered
+    //Don't actually show default in the search bar
     if (!keywords || keywords == "default") keywords = "";
-    if (!categories) categories = "All";
 
     //Set previous search values
     this.setState({

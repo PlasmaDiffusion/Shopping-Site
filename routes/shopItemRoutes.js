@@ -48,6 +48,23 @@ routes.get("/read/shopItems/:search/:category", async function (req, res) {
   res.status(200).json(foundItems);
 });
 
+//Reading shop item(s) from a category but NOT search terms
+routes.get("/read/shopItems/:category", async function (req, res) {
+  const category = req.params.category;
+
+  var foundItems = null;
+
+  // SELECT * FROM shopItem WHERE name LIKE %search keyword% and catergory LIKE %category%
+  foundItems = await models.shopItem.findAll({
+    where: {
+      category: category,
+    },
+  });
+
+  res.status(200).json(foundItems);
+});
+
+//Get a particular shop item (I.e. for a single product page)
 routes.get("/read/shopItem/:id", async function (req, res) {
   const id = req.params.id;
   const shopItem = await models.shopItem.findByPk(id);
