@@ -68,16 +68,53 @@ a:hover {
 }
 
 //Homepage
-.carousel-indicators li {
-  background-color: #555252;
-}
-.carousel-indicators .active {
-  background-color: $navCol;
+
+.btn-round {
+  border-radius: 20px;
+  border: none;
+  color: grey;
+  background-color: white;
+  text-decoration: none !important;
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 20px;
+  font-size: 1rem;
 }
 
-.featuredDescription {
-  color: rgb(109, 109, 109) !important;
-  text-shadow: white 1px 1px 2px;
+.btn-round:hover {
+  transform: scale(1.2);
+}
+
+.banner-blue,
+.banner-orange {
+  h3,
+  p {
+    color: white;
+  }
+  border-radius: 8px;
+}
+
+.banner-orange {
+  background-image: linear-gradient(
+    to bottom,
+    #f3a154,
+    #f2964f,
+    #f28c4b,
+    #f08049,
+    #ef7547
+  );
+}
+
+.banner-blue {
+  background-image: linear-gradient(
+    to bottom,
+    #54d6f3,
+    #2dc7f6,
+    #09b6f8,
+    #22a4f6,
+    #4790ef
+  );
 }
 
 //Colours
@@ -97,7 +134,7 @@ a:hover {
 }
 
 #dropdown button:hover,
-#searchButton input:hover {
+#searchButton:hover {
   border-radius: 0 0 0 0;
   background-color: $lightOrange;
   border-color: $lightOrange;
@@ -239,3 +276,18 @@ a:hover {
   background: #555;
 }
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
+
+// Unused -------------------------------------
+/*
+.carousel-indicators li {
+  background-color: #555252;
+}
+.carousel-indicators .active {
+  background-color: $navCol;
+}
+
+.featuredDescription {
+  color: rgb(109, 109, 109) !important;
+  text-shadow: white 1px 1px 2px;
+}
+*/

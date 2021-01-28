@@ -50,15 +50,35 @@ a:hover {
   width: 50%;
   text-align: center; }
 
-.carousel-indicators li {
-  background-color: #555252; }
+.btn-round {
+  border-radius: 20px;
+  border: none;
+  color: grey;
+  background-color: white;
+  text-decoration: none !important;
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 20px;
+  font-size: 1rem; }
 
-.carousel-indicators .active {
-  background-color: #ef7547; }
+.btn-round:hover {
+  transform: scale(1.2); }
 
-.featuredDescription {
-  color: #6d6d6d !important;
-  text-shadow: white 1px 1px 2px; }
+.banner-blue,
+.banner-orange {
+  border-radius: 8px; }
+  .banner-blue h3,
+  .banner-blue p,
+  .banner-orange h3,
+  .banner-orange p {
+    color: white; }
+
+.banner-orange {
+  background-image: linear-gradient(to bottom, #f3a154, #f2964f, #f28c4b, #f08049, #ef7547); }
+
+.banner-blue {
+  background-image: linear-gradient(to bottom, #54d6f3, #2dc7f6, #09b6f8, #22a4f6, #4790ef); }
 
 .orange {
   color: #ef7547;
@@ -74,7 +94,7 @@ a:hover {
   color: black; }
 
 #dropdown button:hover,
-#searchButton input:hover {
+#searchButton:hover {
   border-radius: 0 0 0 0;
   background-color: #fbdfd4;
   border-color: #fbdfd4; }
@@ -196,5 +216,18 @@ a:hover {
   background: #555; }
 
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
+/*
+.carousel-indicators li {
+  background-color: #555252;
+}
+.carousel-indicators .active {
+  background-color: $navCol;
+}
+
+.featuredDescription {
+  color: rgb(109, 109, 109) !important;
+  text-shadow: white 1px 1px 2px;
+}
+*/
 
 /*# sourceMappingURL=index.css.map */

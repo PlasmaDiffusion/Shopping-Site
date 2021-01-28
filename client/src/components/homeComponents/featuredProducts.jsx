@@ -36,10 +36,15 @@ class FeaturedProducts extends Component {
   render() {
     return (
       <React.Fragment>
-        <h1 className="center">Featured Products</h1>
-        <ProductBanner product={this.state.product0} />
-        <ProductBanner product={this.state.product1} />
-        <ProductBanner product={this.state.product2} />
+        <div style={{padding:"2rem"}}></div>
+        <h1 className="center display-4">Featured Products</h1>
+        <div style={{padding:"2rem"}}></div>
+        <ProductBanner product={this.state.product0} className="row banner-orange" />
+        <div style={{padding:"2rem"}}></div>
+        <ProductBanner product={this.state.product1} className="row banner-blue" />
+        <div style={{padding:"2rem"}}></div>
+        <ProductBanner product={this.state.product2} className="row banner-orange" />
+        <div style={{padding:"2rem"}}></div>
 
         {/*<ProductCarousel
           products={[

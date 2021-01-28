@@ -167,12 +167,17 @@ class SearchBar extends Component {
                 </div>
               </div>
               <div className="col-sm-">
-                <input
+                <button
                   type="submit"
                   id="searchButton"
-                  value="Search"
+                  value=" "
                   className="btn btn-primary"
-                />
+                
+                >
+                <img src="https://img.icons8.com/search" style={{width:"16px", height:"16px"}} />
+
+                </button>
+                
               </div>
             </div>
           </div>

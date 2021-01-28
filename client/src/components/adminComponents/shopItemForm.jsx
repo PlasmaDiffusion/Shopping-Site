@@ -160,7 +160,7 @@ class ShopItemForm extends Component {
               className="form-control-sm"
               value={this.state.price}
               onChange={this.onChangeField}
-              step={0.05}
+              step={0.01}
               required
             />
           </div>
