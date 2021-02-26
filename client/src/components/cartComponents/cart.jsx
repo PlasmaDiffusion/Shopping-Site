@@ -74,7 +74,7 @@ class Cart extends Component {
         totalPrice: cartRes.data.totalPrice,
       });
 
-      console.log(cartRes);
+      //console.log(cartRes);
 
       //After getting the id it's time to search for items within the cart
       axios
@@ -88,7 +88,7 @@ class Cart extends Component {
           let initialMax = [];
           let amountToDisplay = [];
           let initialCartAmounts = [];
-          console.log("Cart data", cartItemRes.data);
+          //console.log("Cart data", cartItemRes.data);
           for (let i = 0; i < cartItemRes.data.length; i++) {
             let item = cartItemRes.data[i];
             initialMax.push(item.amountInStock + item.amountInCart);

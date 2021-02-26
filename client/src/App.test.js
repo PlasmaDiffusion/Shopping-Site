@@ -1,104 +1,115 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { configure, shallow, mount } from "enzyme";
-import { expect } from "chai";
-import sinon from "sinon";
+import axios from "axios";
+
+import { getServerUrl } from "./getUrl.js";
+
+//Front end tests and events
+import { render, screen, act } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import userEvent from "@testing-library/user-event";
+
+//Api mocks
+import { rest } from "msw";
+import { setupServer } from "msw/node";
+
+//Components to test
 import App from "./App";
-import Adapter from "enzyme-adapter-react-16";
 import Loading from "./components/loading";
 import SearchBar from "./components/searchComponents/searchBar";
-import ProductPage from "./components/productPage";
+import ProductBanner from "./components/homeComponents/productBanner";
 import Cart from "./components/cartComponents/cart";
 import SearchResult from "./components/searchComponents/searchResult";
 import QuantityButtons from "./components/quantityButtons";
 import FeaturedProducts from "./components/homeComponents/featuredProducts";
 
-configure({ adapter: new Adapter() });
+//Mock request tests
+const server = setupServer(
+  rest.get("/read/categories/", (req, res, ctx) => {
+    return res(
+      ctx.json([
+        { id: 0, name: "All" },
+        { id: 1, name: "Food" },
+        { id: 2, name: "Office Supplies" },
+        { id: 3, name: "Test" },
+      ])
+    );
+  })
+);
 
-const clickSpy = sinon.spy();
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
-/*
 //Loading component
 describe("Loading component", function () {
-  it("renders a basic loading <p> message", function () {
-    const container = shallow(<Loading />);
-    const msg = <p>Loading...</p>;
-    expect(container.find("p").length).to.equal(1);
+  it("renders a basic loading <p> message, and should not render a heading unless logged in", function () {
+    render(<Loading />);
+
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
+
+    expect(screen.queryByRole("heading")).toBeNull();
   });
 });
 
-//Profile component
-describe("Profile component", function () {
-  it("renders a name in h2, but not when logged in", function () {
-    const container = shallow(<Loading />);
-    expect(container.find("h2").length).to.equal(0);
-  });
-});*/
-
 //Product
 describe("Product Page component", function () {
-  it("renders an apple if id is 1", async function () {
-    const wrapper = shallow(<ProductPage />);
+  it("renders 3 items", async function () {
+    const products = [
+      { id: 1, name: "Apple" },
+      { id: 2, name: "Orange" },
+      { id: 3, name: "Banana" },
+    ];
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    //const promise = Promise.resolve({ data: { hits: products } });
 
-    expect(wrapper.state().loaded).to.equal(true);
-    const name = <h2>Apple</h2>;
-    expect(wrapper.contains(name)).to.equal(true);
+    //axios.get.mockImplementationOnce(() => promise);
+
+    render(<ProductBanner product={products[0]} />);
+    render(<ProductBanner product={products[1]} />);
+    render(<ProductBanner product={products[2]} />);
+
+    //screen.debug();
+
+    //await act(() => promise);
+
+    expect(screen.getAllByRole("heading")).toHaveLength(3);
   });
 });
 
 //Cart
 describe("Cart component", function () {
   it("should have at least two items", async function () {
-    const wrapper = shallow(<Cart test={true} />);
+    render(<Cart test={true} />);
 
-    expect(wrapper.find("div")).to.have.lengthOf(5);
+    expect(screen.getAllByRole("heading")).toHaveLength(2);
   });
 });
 
 //Quantity buttons
-/*describe("Quanity button component", function () {
-  it("should have two buttons", function () {
-    const wrapper = shallow(<QuantityButtons amount={1} max={2} />);
+describe("Quanity button component", function () {
+  it("should have two buttons and show a quantity of 1, then a quantity of 2", async function () {
+    render(<QuantityButtons amount={1} max={3} onAmountChanged={() => {}} />);
 
-    expect(wrapper.find("button")).to.have.lengthOf(2);
-  });
+    expect(screen.getAllByRole("button")).toHaveLength(2);
 
-  it("should be clickable", async function () {
-    const wrapper = shallow(
-      <QuantityButtons amount={1} max={2} onAmountChanged={() => {}} />
-    );
+    expect(screen.getByText("1")).toBeInTheDocument();
 
-    wrapper.find("#increment").simulate("click");
-    expect(clickSpy.calledOnce).to.equal(true);
-  });
-});*/
+    userEvent.click(screen.getByText("+"));
 
-//Homepage
-describe("Featured Products component", function () {
-  it("should have three items", async function () {
-    const wrapper = shallow(<FeaturedProducts />);
-
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    expect(wrapper.state().product0).to.not.equal(null);
-    expect(wrapper.state().product1).to.not.equal(null);
-    expect(wrapper.state().product2).to.not.equal(null);
+    expect(await screen.findByText("2")).toBeInTheDocument();
   });
 });
 
 //Search bar
 describe("Searchbar", function () {
   it("should read in multiple categories", async function () {
-    const container = shallow(<SearchBar />);
+    render(<SearchBar />);
 
-    //await container.instance().componentDidMount();
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    expect(await screen.findByText("Food")).toBeInTheDocument();
+    expect(await screen.findAllByText("All")).toHaveLength(2);
+    expect(await screen.findByText("Office Supplies")).toBeInTheDocument();
+    expect(await screen.findByText("Test")).toBeInTheDocument();
 
-    expect(container.state().categories.length).to.be.greaterThan(1);
-
-    //container.find("#searchButton").simulate("click");
-    //expect(clickSpy.calledOnce).to.equal(true);
-    //expect(container.find("#searchButton")).to.equal(true);
+    screen.debug();
   });
 });

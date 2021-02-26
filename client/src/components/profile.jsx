@@ -9,9 +9,10 @@ const Profile = (props) => {
   //It returns a render of the email, and can also give the username/email to parent components via a passed in function.
 
   const { user } = useAuth0();
+  if (!user) return <React.Fragment></React.Fragment>;
+
   const { name, picture, email } = user;
 
-  if (!user) return <React.Fragment></React.Fragment>;
 
   //console.log(user);
 

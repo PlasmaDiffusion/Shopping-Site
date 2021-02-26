@@ -5,7 +5,7 @@ export function getClientUrl() {
 }
 
 export function getServerUrl() {
-  return process.env.NODE_ENV == "development"
-    ? "http://localhost:4000"
-    : "https://shopping-mockup.herokuapp.com";
+  if (process.env.NODE_ENV == "development") return "http://localhost:4000";
+  else if (process.env.NODE_ENV == "test") return "";
+  else return "https://shopping-mockup.herokuapp.com";
 }
