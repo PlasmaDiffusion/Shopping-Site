@@ -5,15 +5,10 @@ const { Op } = require("sequelize");
 
 models = sequelize.models;
 
-var tests = 0;
-
-// Will run after every test in every file
-afterEach(function () {
-  tests++;
-  if (tests >= 8) {
-    sequelize.close();
-    console.log("Sequlize connection closed");
-  }
+//Close server when done all tests
+after(function () {
+  sequelize.close();
+  console.log("Sequlize connection closed");
 });
 
 //ShopItem read testing -----------------------------------------------------------------------------------
