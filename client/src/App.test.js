@@ -16,7 +16,7 @@ import { setupServer } from "msw/node";
 import App from "./App";
 import Loading from "./components/loading";
 import SearchBar from "./components/searchComponents/searchBar";
-import ProductBanner from "./components/homeComponents/productBanner";
+import ProductCard from "./components/homeComponents/productCard";
 import Cart from "./components/cartComponents/cart";
 import SearchResult from "./components/searchComponents/searchResult";
 import QuantityButtons from "./components/quantityButtons";
@@ -64,9 +64,9 @@ describe("Product Page component", function () {
 
     //axios.get.mockImplementationOnce(() => promise);
 
-    render(<ProductBanner product={products[0]} />);
-    render(<ProductBanner product={products[1]} />);
-    render(<ProductBanner product={products[2]} />);
+    render(<ProductCard product={products[0]} />);
+    render(<ProductCard product={products[1]} />);
+    render(<ProductCard product={products[2]} />);
 
     //screen.debug();
 
