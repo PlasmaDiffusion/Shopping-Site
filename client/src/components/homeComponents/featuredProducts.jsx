@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ProductCarousel from "./productCarousel";
-import ProductBanner from "./productBanner";
+import ProductCard from "./productCard";
 import { getClientUrl, getServerUrl } from "../../getUrl.js";
 import axios from "axios";
 
@@ -39,13 +39,12 @@ class FeaturedProducts extends Component {
       <React.Fragment>
         <div style={{padding:"2rem"}}></div>
         <h1 className="center display-4">Featured Products</h1>
-        <div style={{padding:"2rem"}}></div>
-        <ProductBanner product={this.state.product0} className="row banner-orange" />
-        <div style={{padding:"2rem"}}></div>
-        <ProductBanner product={this.state.product1} className="row banner-blue" />
-        <div style={{padding:"2rem"}}></div>
-        <ProductBanner product={this.state.product2} className="row banner-orange" />
-        <div style={{padding:"2rem"}}></div>
+        <div style={{padding:"20px"}}></div>
+        <div className="flex-container">
+          <ProductCard product={this.state.product0} imageWidth="256px" imageHeight="256px" className="row productCard" />
+          <ProductCard product={this.state.product1} imageWidth="256px" imageHeight="256px" className="row productCard" />
+          <ProductCard product={this.state.product2} imageWidth="256px" imageHeight="256px" className="row productCard" />
+        </div>
 
         {/*<ProductCarousel
           products={[

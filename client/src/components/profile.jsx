@@ -36,7 +36,7 @@ const Profile = (props) => {
             />
           </Col>*/}
           <Col md>
-            <p className="lead text-muted">{email}</p>
+            <p id="userText" className="lead text-muted">{email}</p>
           </Col>
         </Row>
         {/*<Row className="align-items-center profile-header mb-5 text-center text-md-left">

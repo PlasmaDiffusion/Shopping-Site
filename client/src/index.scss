@@ -1,7 +1,15 @@
+//The colours of the navbar
 $bgCol: #f3a154;
 $navCol: #ef7547;
-$lightOrange: lighten($navCol, 30%);
+
+//Lighter/Darker variants used with some buttons
+$lightCol: lighten($navCol, 30%);
 $darkOrange: darken($navCol, 30%);
+
+//Colours for featured product "cards" on the home page
+$cardTextCol: rgb(126, 126, 126);
+$cardCol: rgb(235, 235, 235);
+$cardColDark: rgb(214, 214, 214);
 
 body {
   margin: 0;
@@ -17,27 +25,52 @@ code {
     monospace;
 }
 
-.navbar {
+/*Default navbar*/
+.navbar,
+.searchContainer {
   background-color: $bgCol;
 }
-
+/*Navbar buttons NOT selected*/
 .navItem,
 .navButton {
   background-color: $navCol;
-  a {
-    color: black;
-  }
+  color: black;
+}
+.navItem {
+  background: none;
+}
+/*Navbar links NOT selected*/
+.navItem a,
+.navButton a,
+.navButton a:visited {
+  background: none;
+  color: black !important;
+  text-decoration: bold;
 }
 .navButton {
   border: none;
   width: 120%;
-}
-.navItem:hover,
-.navButton:hover,
-.navItemCurrent {
-  background-color: $lightOrange;
+  border-radius: 8px;
 }
 
+.navItem a:hover {
+  color: white !important;
+}
+
+/*Navbar links/buttons selected*/
+.navItem:hover,
+.navButton:hover {
+  background-color: $navCol;
+  border-radius: 8px;
+  color: whitesmoke;
+}
+
+.navItemCurrent a {
+  color: rgb(0, 0, 0) !important;
+  font-weight: bold;
+}
+
+/*Search related stuff*/
 .searchResult {
   border: 2px double whitesmoke;
   border-right: none;
@@ -51,78 +84,7 @@ code {
   font-size: 16pt;
 }
 
-/*a:link {
-  color: $bgCol;
-}*/
-
-a:hover {
-  color: darken($navCol, 20%);
-}
-
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  text-align: center;
-}
-
-//Homepage
-
-.btn-round {
-  border-radius: 20px;
-  border: none;
-  color: grey;
-  background-color: white;
-  text-decoration: none !important;
-  padding: 10px;
-  padding-right: 20px;
-  padding-left: 20px;
-  margin: 20px;
-  font-size: 1rem;
-}
-
-.btn-round:hover {
-  transform: scale(1.2);
-}
-
-.banner-blue,
-.banner-orange {
-  h3,
-  p {
-    color: white;
-  }
-  border-radius: 8px;
-}
-
-.banner-orange {
-  background-image: linear-gradient(
-    to bottom,
-    #f3a154,
-    #f2964f,
-    #f28c4b,
-    #f08049,
-    #ef7547
-  );
-}
-
-.banner-blue {
-  background-image: linear-gradient(
-    to bottom,
-    #54d6f3,
-    #2dc7f6,
-    #09b6f8,
-    #22a4f6,
-    #4790ef
-  );
-}
-
-//Colours
-.orange {
-  color: $navCol;
-  text-emphasis-color: $navCol;
-}
-
+/*Search button and drop down menu for search categories*/
 #searchButton,
 #dropdown button {
   border-radius: 0 0 0 0;
@@ -136,10 +98,109 @@ a:hover {
 #dropdown button:hover,
 #searchButton:hover {
   border-radius: 0 0 0 0;
-  background-color: $lightOrange;
-  border-color: $lightOrange;
+  background-color: $lightCol;
+  border-color: $lightCol;
 }
 
+a:hover {
+  color: #bf4011;
+}
+
+/*General class for centering */
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  text-align: center;
+}
+
+/*Outer flex container of all featured products */
+.flex-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/*Inner flex container of featurd product "cards".
+(Includes an image title and price, plus a hovered description and buy button)*/
+.flex-card {
+  display: flex;
+  width: 256px;
+  flex-wrap: wrap;
+}
+
+.productCard {
+  border-radius: none;
+  background: $cardCol;
+}
+
+.card-image {
+  margin: auto;
+}
+
+/*Bottom block of a card */
+.card-title {
+  background: $cardColDark;
+  text-align: center;
+  width: 100%;
+  height: 30%;
+}
+
+/*Text within a card */
+.productCard h3,
+.productCard p {
+  color: $cardTextCol;
+}
+
+/*Part of the card that will fade in once hovered over */
+.card-buy {
+  font-size: 1rem;
+  opacity: 0;
+  position: absolute;
+  height: 256px;
+  width: 256px;
+  text-align: center;
+  transition: 0.5s;
+}
+
+.productCard:hover .card-buy {
+  opacity: 0.8;
+  background-color: $cardCol;
+}
+
+.card-desc {
+  font-size: 1rem;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0%);
+  -ms-transform: translate(-50%, 0%);
+  transform: translate(-50%, 00%);
+  text-align: center;
+}
+
+/*The buy button */
+.btn-round {
+  border-radius: 20px;
+  border: none;
+  color: grey;
+  background-color: white;
+  text-decoration: none !important;
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 20px;
+  font-size: 1rem;
+  position: relative;
+  top: 60%;
+}
+
+.orange {
+  color: $navCol;
+  text-emphasis-color: $navCol;
+}
+
+/* Other button variants */
 .btn-darkOrange,
 .btn-lightOrange,
 .btn-orange {
@@ -148,7 +209,7 @@ a:hover {
 }
 
 .btn-lightOrange {
-  background-color: $lightOrange;
+  background-color: $lightCol;
 }
 
 .btn-lightOrange:hover {
@@ -160,7 +221,7 @@ a:hover {
 }
 
 .btn-darkOrange:hover {
-  background-color: $darkOrange;
+  background-color: #90310d;
 }
 
 .btn-orange {
@@ -171,26 +232,102 @@ a:hover {
   background-color: $navCol;
 }
 
-.btn-quantity {
-  font-size: 2rem;
-  width: 3rem;
-}
-
 .btn-wide {
   width: 20%;
   padding: 2%;
 }
 
+/* +/- buttons */
+.btn-quantity {
+  font-size: 2rem;
+  width: 3rem;
+}
+
+/*Desktop only */
+@media screen and (min-width: 991px) {
+  /*Button corners*/
+  #dropdown button {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  #searchButton {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  #dropdown button:hover {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  #searchButton:hover {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+}
+/* Tablets and phones */
+@media screen and (max-width: 780px) {
+  //Navbar
+  .mobileNav {
+    display: block;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .nav-link {
+    font-size: 2rem;
+  }
+
+  .navButton {
+    padding: 5px;
+  }
+
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
+
+  .btn-wide {
+    width: 40%;
+    padding: 2%;
+  }
+
+  #userText {
+    font-size: 1rem;
+  }
+
+  .flex-container {
+    flex-flow: column wrap;
+    justify-content: space-between;
+  }
+
+  .flex-card {
+    margin: auto;
+    padding-bottom: 3rem;
+  }
+}
+
 /* The sidebar menu ------------------------------------------------------------------------------------------------------------------------ */
 .sidenav {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 20%; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
+  height: 100%;
+  /* Full-height: remove this if you want "auto" height */
+  width: 20%;
+  /* Set the width of the sidebar */
+  position: fixed;
+  /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1;
+  /* Stay on top */
+  top: 0;
+  /* Stay at the top */
   right: 0;
-  background-color: #111; /* Black */
-  overflow-x: hidden; /* Disable horizontal scroll */
+  background-color: #111;
+  /* Black */
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
   padding-top: 20px;
 }
 
@@ -210,7 +347,8 @@ a:hover {
 
 /* Style page content */
 .main {
-  margin-left: 160px; /* Same as the width of the sidebar */
+  margin-left: 160px;
+  /* Same as the width of the sidebar */
   padding: 0px 10px;
 }
 
@@ -222,40 +360,7 @@ a:hover {
   display: block;
 }
 
-/* On smaller screens make the navigation menu better */
-@media screen and (max-width: 480px) {
-  .mobileNav {
-    display: block;
-  }
-
-  .desktopNav {
-    display: none;
-  }
-
-  .nav-link {
-    font-size: 2rem;
-  }
-
-  .navButton {
-    padding: 5px;
-  }
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-@media screen and (max-width: 480px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-  .sidenav a {
-    font-size: 18px;
-  }
-
-  .btn-wide {
-    width: 40%;
-    padding: 2%;
-  }
-}
-/* Scrollbar of the sidebar */
+/* Scrollbar of the sidebar ------------------------------------------------------------------------------------- */
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -275,19 +380,3 @@ a:hover {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-/* ---------------------------------------------------------------------------------------------------------------------------------- */
-
-// Unused -------------------------------------
-/*
-.carousel-indicators li {
-  background-color: #555252;
-}
-.carousel-indicators .active {
-  background-color: $navCol;
-}
-
-.featuredDescription {
-  color: rgb(109, 109, 109) !important;
-  text-shadow: white 1px 1px 2px;
-}
-*/

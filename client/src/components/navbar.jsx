@@ -89,8 +89,7 @@ const AuthNav = (props) => {
       </div>
       <div className="tab"></div>
       <div
-        className="justify-content-center"
-        style={{ backgroundColor: "#f3a154" }}
+        className="justify-content-center searchContainer"
       >
         <SearchBar searchResults={false} />
       </div>
