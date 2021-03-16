@@ -129,7 +129,7 @@ class OrderList extends Component {
               {cart.cartItems.map((product, i) => (
                 <div key={i}>
                     <CartItem product={product.shopItem} amountInCart={product.amountInCart} id={product.shopItemId} imageSize={128} cartId={this.state.id} constant={true} />
-                    <div className="searchResult" style={{paddingLeft: 128}}>{product.amountInCart}</div>
+                    <div  style={{paddingLeft: 128}}>{product.amountInCart}</div>
                     <br></br><br></br>
                 </div>
                 

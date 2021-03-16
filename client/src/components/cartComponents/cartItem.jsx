@@ -60,7 +60,7 @@ class CartItem extends Component {
     return (
       <React.Fragment>
         <div className="container">
-          <div className="row searchResult">
+          <div className="row">
             <div className="col-sm-">
               <a href={"/product/?id=" + this.props.id}>
                 <img

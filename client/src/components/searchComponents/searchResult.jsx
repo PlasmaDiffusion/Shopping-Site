@@ -9,7 +9,7 @@ class SearchResult extends Component {
 
   render() {
     return (
-      <React.Fragment>
+        <div className="searchResult">
         <a
           href={
             (this.props.admin ? "/admin/update/?id=" : "/product/?id=") +
@@ -25,7 +25,7 @@ class SearchResult extends Component {
           />
         </a>
 
-        <div className="searchResult">
+        <div className="searchResult-bottom">
           <a
             href={
               (this.props.admin ? "/admin/update/?id=" : "/product/?id=") +
@@ -37,7 +37,7 @@ class SearchResult extends Component {
           <p>${this.props.product.price}</p>
           {/*<p>{this.props.product.description}</p>*/}
         </div>
-      </React.Fragment>
+        </div>
     );
   }
 }

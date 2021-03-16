@@ -80,7 +80,7 @@ class ProductPage extends Component {
               />
             </div>
 
-            <div className="row searchResult">
+            <div className="row">
               <AddToCart
                 productId={this.state.id}
                 amountInStock={this.state.amountInStock}

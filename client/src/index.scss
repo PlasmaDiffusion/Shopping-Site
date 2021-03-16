@@ -71,12 +71,34 @@ code {
 }
 
 /*Search related stuff*/
-.searchResult {
+.searchResult{
+  background-color: rgb(247, 247, 247);
+  border-radius: 10px;
+  margin: 2rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+
+  animation: shrink 1s;
+
+  }
+
+
+.searchResult:hover{
+  animation: grow 1s forwards;
+}
+
+.searchResult-bottom {
   border: 2px double whitesmoke;
-  border-right: none;
-  border-left: none;
-  border-top: none;
+  border-radius: 10px;
   font-size: 1.5rem;
+  
+  a{
+    color:$cardTextCol;
+  }
+  a:hover{
+    text-decoration: none;
+    color:$cardColDark;
+  }
 }
 
 .searchbar {
@@ -130,9 +152,12 @@ a:hover {
 }
 
 .productCard {
-  border-radius: none;
+  border-radius: 10px;
   background: $cardCol;
+  animation: shrink 1s;
+
 }
+
 
 .card-image {
   margin: auto;
@@ -141,6 +166,9 @@ a:hover {
 /*Bottom block of a card */
 .card-title {
   background: $cardColDark;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
   text-align: center;
   width: 100%;
   height: 30%;
@@ -163,9 +191,16 @@ a:hover {
   transition: 0.5s;
 }
 
-.productCard:hover .card-buy {
+.productCard:hover{
+  
+  animation: grow 1s forwards;
+
+  .card-buy {
   opacity: 0.8;
   background-color: $cardCol;
+}
+
+
 }
 
 .card-desc {
@@ -241,6 +276,15 @@ a:hover {
 .btn-quantity {
   font-size: 2rem;
   width: 3rem;
+}
+
+
+.mobileNav {
+  display: none;
+}
+
+.desktopNav {
+  display: block;
 }
 
 /*Desktop only */
@@ -352,12 +396,15 @@ a:hover {
   padding: 0px 10px;
 }
 
-.mobileNav {
-  display: none;
+//Animations --------------------------
+@keyframes grow {
+  from {transform: scale(1.0)}
+  to {transform: scale(1.05)}
 }
 
-.desktopNav {
-  display: block;
+@keyframes shrink {
+  to {transform: scale(1.0)}
+  from {transform: scale(1.05)}
 }
 
 /* Scrollbar of the sidebar ------------------------------------------------------------------------------------- */
@@ -380,3 +427,4 @@ a:hover {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+

@@ -50,11 +50,25 @@ code {
 
 /*Search related stuff*/
 .searchResult {
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  margin: 2rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  animation: shrink 1s; }
+
+.searchResult:hover {
+  animation: grow 1s forwards; }
+
+.searchResult-bottom {
   border: 2px double whitesmoke;
-  border-right: none;
-  border-left: none;
-  border-top: none;
+  border-radius: 10px;
   font-size: 1.5rem; }
+  .searchResult-bottom a {
+    color: #7e7e7e; }
+  .searchResult-bottom a:hover {
+    text-decoration: none;
+    color: #d6d6d6; }
 
 .searchbar {
   width: 100%;
@@ -100,8 +114,9 @@ a:hover {
   flex-wrap: wrap; }
 
 .productCard {
-  border-radius: none;
-  background: #ebebeb; }
+  border-radius: 10px;
+  background: #ebebeb;
+  animation: shrink 1s; }
 
 .card-image {
   margin: auto; }
@@ -109,6 +124,9 @@ a:hover {
 /*Bottom block of a card */
 .card-title {
   background: #d6d6d6;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
   text-align: center;
   width: 100%;
   height: 30%; }
@@ -128,9 +146,11 @@ a:hover {
   text-align: center;
   transition: 0.5s; }
 
-.productCard:hover .card-buy {
-  opacity: 0.8;
-  background-color: #ebebeb; }
+.productCard:hover {
+  animation: grow 1s forwards; }
+  .productCard:hover .card-buy {
+    opacity: 0.8;
+    background-color: #ebebeb; }
 
 .card-desc {
   font-size: 1rem;
@@ -194,6 +214,12 @@ a:hover {
 .btn-quantity {
   font-size: 2rem;
   width: 3rem; }
+
+.mobileNav {
+  display: none; }
+
+.desktopNav {
+  display: block; }
 
 /*Desktop only */
 @media screen and (min-width: 991px) {
@@ -284,12 +310,16 @@ a:hover {
   /* Same as the width of the sidebar */
   padding: 0px 10px; }
 
-.mobileNav {
-  display: none; }
-
-.desktopNav {
-  display: block; }
-
+@keyframes grow {
+  from {
+    transform: scale(1); }
+  to {
+    transform: scale(1.05); } }
+@keyframes shrink {
+  to {
+    transform: scale(1); }
+  from {
+    transform: scale(1.05); } }
 /* Scrollbar of the sidebar ------------------------------------------------------------------------------------- */
 /* width */
 ::-webkit-scrollbar {
