@@ -109,7 +109,5 @@ describe("Searchbar", function () {
     expect(await screen.findAllByText("All")).toHaveLength(2);
     expect(await screen.findByText("Office Supplies")).toBeInTheDocument();
     expect(await screen.findByText("Test")).toBeInTheDocument();
-
-    screen.debug();
   });
 });
