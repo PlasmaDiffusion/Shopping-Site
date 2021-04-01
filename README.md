@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Tests
 
-See the test folder for back end tests, and the client/App.test.js for front end tests.
+See the test folder for back end tests, and client/App.test.js for front end tests.
 
 ## Available Scripts
 
