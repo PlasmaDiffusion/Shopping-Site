@@ -6,9 +6,11 @@ It uses React at the front end and NodeJS/Express at the back end. The back end 
 
 See the client folder for the front end, and the outer folders for the back end.
 
-
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Tests
+
+See the test folder for back end tests, and the client/App.test.js for front end tests.
 
 ## Available Scripts
 
