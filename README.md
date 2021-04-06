@@ -1,3 +1,5 @@
+https://shopping-site-mockup.netlify.app/
+
 ## About Project
 
 This project lets you browse for products, add them to your cart and then "order" them.
@@ -11,6 +13,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Tests
 
 See the test folder for back end tests, and client/App.test.js for front end tests.
+
+## CSS
+
+The project has a custom index.scss file, and it also uses a small amount of bootstrap.
 
 ## Available Scripts
 
