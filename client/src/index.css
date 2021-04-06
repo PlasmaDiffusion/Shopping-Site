@@ -55,10 +55,10 @@ code {
   margin: 2rem;
   margin-right: 1rem;
   margin-left: 1rem;
-  animation: shrink 1s; }
+  animation: shrink 0.5s; }
 
 .searchResult:hover {
-  animation: grow 1s forwards; }
+  animation: grow 0.5s forwards; }
 
 .searchResult-bottom {
   border: 2px double whitesmoke;
@@ -116,7 +116,7 @@ a:hover {
 .productCard {
   border-radius: 10px;
   background: #ebebeb;
-  animation: shrink 1s; }
+  animation: shrink 0.5s; }
 
 .card-image {
   margin: auto; }
@@ -144,10 +144,10 @@ a:hover {
   height: 256px;
   width: 256px;
   text-align: center;
-  transition: 0.5s; }
+  transition: 0.25s; }
 
 .productCard:hover {
-  animation: grow 1s forwards; }
+  animation: grow 0.5s forwards; }
   .productCard:hover .card-buy {
     opacity: 0.8;
     background-color: #ebebeb; }
@@ -192,13 +192,13 @@ a:hover {
   background-color: #fbdfd4; }
 
 .btn-lightOrange:hover {
-  background-color: #f3a154; }
+  background-color: #d67856; }
 
 .btn-darkOrange {
   background-color: #ef7547; }
 
 .btn-darkOrange:hover {
-  background-color: #90310d; }
+  background-color: #bd4b21; }
 
 .btn-orange {
   background-color: #f3a154; }

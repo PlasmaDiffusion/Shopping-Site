@@ -11,7 +11,7 @@ import {
 
 import AuthNav from "./navbar.jsx";
 import Profile from "./profile.jsx";
-import PrivateRoute from "./private-route.jsx";
+import PrivateRoute from "./privateRoute.jsx";
 import ExternalApi from "./external-api.jsx";
 import ShopItemForm from "./adminComponents/shopItemForm";
 import AdminNavigation from "./adminComponents/adminNavigation";

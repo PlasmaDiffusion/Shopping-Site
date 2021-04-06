@@ -18,9 +18,11 @@ class OrderList extends Component {
 
         this.getOrders = this.getOrders.bind(this);
         this.listOrders = this.listOrders.bind(this);
+        this.getUsername = this.getUsername.bind(this);
     }
 
-
+    //Get the username prop or return Guest if nothing was sent
+    getUsername(){return this.props.user ? this.props.user : "Guest";}
 
     componentDidUpdate() {
 
@@ -36,10 +38,13 @@ class OrderList extends Component {
             axios.post(getServerUrl() + "/prepareForOrder", {id:id})
             .then((res) => {
 
+
+                var username = this.getUsername();
+
                 //The order now needs to be created with a reference to the cart
                 const newOrderData = {
                     cartId: id,
-                    owner: this.props.user,
+                    owner: username,
                     status: "Proccessing",
                 }
 
@@ -61,7 +66,11 @@ class OrderList extends Component {
     {
         if (this.state.orders.length == 0)
         {
-            axios.post(getServerUrl() + "/read/orders", {username:this.props.user})
+
+            var orderOwner = this.getUsername();
+
+
+            axios.post(getServerUrl() + "/read/orders", {username:orderOwner})
             .then((res) => {
 
                 this.setState({orders: res.data});
@@ -72,7 +81,7 @@ class OrderList extends Component {
 
                 //Each order has a cart id. We need to basically load in a bunch of carts.
                 axios
-                .post(getServerUrl() + "/read/cartsWithItems/" , {username:this.props.user})
+                .post(getServerUrl() + "/read/cartsWithItems/" , {username:orderOwner})
                 .then((cartItemRes) => {
                     
                     console.log("Cart items", cartItemRes.data)
@@ -114,18 +123,20 @@ class OrderList extends Component {
         
         //Display orders here. (Ignore the user's current cart) TODO: Only display orders in progress, and have an option to display all orders.
         <div key={index} className="container">
-            <h1>Order {index+1}</h1>
-            <h2>{this.state.orders[index].status}</h2>
-            <i>{this.formatDate(this.state.orders[index].createdAt)}</i>
-            <h4>${cart.totalPrice} Total</h4>
-            {/* Option to cancel the order, if it's only proccessing and not delivered */}
-            {this.state.orders[index].status == "Proccessing" ?
-            <OrderCancelButton cart={cart} orderId={this.state.orders[index].id} />
-            : ""}
+            {this.state.orders[index] ? <div>
+            <div className="border">
+                <h2>Order {index+1} - {this.state.orders[index].status}</h2>
+                <i>Placed on {this.formatDate(this.state.orders[index].createdAt)}</i>
+                <h4>${cart.totalPrice} Total</h4>
+                {/* Option to cancel the order, if it's only proccessing and not delivered */}
+                {this.state.orders[index].status == "Proccessing" ?
+                <OrderCancelButton cart={cart} orderId={this.state.orders[index].id} />
+                : ""}
+            </div>
 
         
 
-            <div>
+            <div className="border">
               {cart.cartItems.map((product, i) => (
                 <div key={i}>
                     <CartItem product={product.shopItem} amountInCart={product.amountInCart} id={product.shopItemId} imageSize={128} cartId={this.state.id} constant={true} />
@@ -138,7 +149,7 @@ class OrderList extends Component {
 
             <br></br><br></br><br></br><br></br><br></br>
         
-
+            </div>: ""}
         </div>
       )))
       }

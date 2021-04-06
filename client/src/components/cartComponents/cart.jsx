@@ -21,13 +21,14 @@ class Cart extends Component {
       amountToDisplayInStock: [], //Starting stock amount?
       initialCartAmounts: [], //Initial, saved cart amounts
       placingOrder: false,
+      guestCart: false, //Flag to notify you aren't logged in
     };
 
     //We read this from profile
     this.user = null;
 
     this.showItemsInCart = this.showItemsInCart.bind(this);
-    this.getUsername = this.getUsername.bind(this);
+    this.setUsername = this.setUsername.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
   }
 
@@ -60,12 +61,11 @@ class Cart extends Component {
       return;
     }
     //Read in the cart data of a user
-    const request = { username: this.user };
+    var request = { username: this.user };
 
     if (!this.user) {
-      //TODO: Make an anonymous cart work
-      alert("User not loaded yet. A new cart can't be created");
-      return;
+      request = { username: "Guest" }
+      this.setState({guestCart: true});
     }
 
     axios.post(getServerUrl() + "/read/cart", request).then((cartRes) => {
@@ -132,7 +132,7 @@ class Cart extends Component {
     );
   }
 
-  getUsername(username) {
+  setUsername(username) {
     this.user = username;
   }
 
@@ -166,8 +166,12 @@ class Cart extends Component {
   render() {
     return (
       <React.Fragment>
-        <Profile onAuthenticated={this.getUsername} invisible={true} />
+        <Profile onAuthenticated={this.setUsername} invisible={true} />
+        <div style={{padding: "50px"}}></div>
         {this.showItemsInCart()}
+        {this.state.guestCart ? <div className="container">
+          <p className="outline outline-warning">You're using a shared guest cart. Login to get your own.</p>
+        </div> : ""}
         {this.state.totalPrice > 0 ? (<div className="container">
           <h3>
           Total Price: $<i>{this.state.totalPrice}</i>
@@ -176,6 +180,7 @@ class Cart extends Component {
           <div style={{ margin: "100px" }}></div>
         </div>)
         : (<div className="container"><br></br><p>Your cart seems to be empty.</p></div> )}
+
 
         <OrderList id={this.state.id} placingOrder={this.state.placingOrder} user={this.user}/>
       </React.Fragment>

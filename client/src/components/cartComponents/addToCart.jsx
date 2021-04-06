@@ -34,17 +34,11 @@ class AddToCart extends Component {
   findCart() {
     var req = { username: "anonymous" };
 
-    //Make sure logged in. If not let the user know they can't add stuff to their cart.
-    if (!this.props.auth0.isAuthenticated) {
-      alert("You need to login to add items to your own cart.");
-      this.setState({clicked: false});
-      //Or you could ask the user to add it using the name anonymous?
-      return;
-    }
-
+    //Check if logged in. If not default to the guest cart.
     if (this.props.auth0.user) req.username = this.props.auth0.user.name;
+    else req.username= "Guest";
 
-    console.log(this.props.auth0.user, req.username);
+    //console.log(this.props.auth0.user, req.username);
 
     //Get/create the cart for the user
     axios.post(getServerUrl() + "/read/cart", req).then((res) => {

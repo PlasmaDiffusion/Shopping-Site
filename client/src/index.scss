@@ -71,33 +71,31 @@ code {
 }
 
 /*Search related stuff*/
-.searchResult{
+.searchResult {
   background-color: rgb(247, 247, 247);
   border-radius: 10px;
   margin: 2rem;
   margin-right: 1rem;
   margin-left: 1rem;
 
-  animation: shrink 1s;
+  animation: shrink 0.5s;
+}
 
-  }
-
-
-.searchResult:hover{
-  animation: grow 1s forwards;
+.searchResult:hover {
+  animation: grow 0.5s forwards;
 }
 
 .searchResult-bottom {
   border: 2px double whitesmoke;
   border-radius: 10px;
   font-size: 1.5rem;
-  
-  a{
-    color:$cardTextCol;
+
+  a {
+    color: $cardTextCol;
   }
-  a:hover{
+  a:hover {
     text-decoration: none;
-    color:$cardColDark;
+    color: $cardColDark;
   }
 }
 
@@ -154,10 +152,8 @@ a:hover {
 .productCard {
   border-radius: 10px;
   background: $cardCol;
-  animation: shrink 1s;
-
+  animation: shrink 0.5s;
 }
-
 
 .card-image {
   margin: auto;
@@ -188,19 +184,16 @@ a:hover {
   height: 256px;
   width: 256px;
   text-align: center;
-  transition: 0.5s;
+  transition: 0.25s;
 }
 
-.productCard:hover{
-  
-  animation: grow 1s forwards;
+.productCard:hover {
+  animation: grow 0.5s forwards;
 
   .card-buy {
-  opacity: 0.8;
-  background-color: $cardCol;
-}
-
-
+    opacity: 0.8;
+    background-color: $cardCol;
+  }
 }
 
 .card-desc {
@@ -248,7 +241,7 @@ a:hover {
 }
 
 .btn-lightOrange:hover {
-  background-color: $bgCol;
+  background-color: #d67856;
 }
 
 .btn-darkOrange {
@@ -256,7 +249,7 @@ a:hover {
 }
 
 .btn-darkOrange:hover {
-  background-color: #90310d;
+  background-color: #bd4b21;
 }
 
 .btn-orange {
@@ -277,7 +270,6 @@ a:hover {
   font-size: 2rem;
   width: 3rem;
 }
-
 
 .mobileNav {
   display: none;
@@ -398,13 +390,21 @@ a:hover {
 
 //Animations --------------------------
 @keyframes grow {
-  from {transform: scale(1.0)}
-  to {transform: scale(1.05)}
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
 }
 
 @keyframes shrink {
-  to {transform: scale(1.0)}
-  from {transform: scale(1.05)}
+  to {
+    transform: scale(1);
+  }
+  from {
+    transform: scale(1.05);
+  }
 }
 
 /* Scrollbar of the sidebar ------------------------------------------------------------------------------------- */
@@ -427,4 +427,3 @@ a:hover {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-
