@@ -6,7 +6,7 @@ import {
   CarouselIndicators,
   CarouselCaption,
 } from "reactstrap";
-import { getClientUrl } from "../../getUrl";
+import { getClientUrl } from "../../services/getUrl.js";
 
 /*
 A "card" that shows information on a product, passed in as a prop.

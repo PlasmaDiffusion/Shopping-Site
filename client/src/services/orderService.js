@@ -1,21 +1,21 @@
 import axios from "axios";
-import { getServerUrl } from "../getUrl";
+import { getServerUrl } from "./getUrl.js";
 
-export async function placeOrder(username, id) {
+export function placeOrder(username, id) {
   //The cart needs to get its owner name modified. This will keep the cart on the server but let the user have a new one.
-  axios.post(getServerUrl() + "/prepareForOrder", { id: id }).then((res) => {
-    //The order now needs to be created with a reference to the cart
-    const newOrderData = {
-      cartId: id,
-      owner: username,
-      status: "Proccessing",
-    };
+  return axios
+    .post(getServerUrl() + "/prepareForOrder", { id: id })
+    .then((res) => {
+      //The order now needs to be created with a reference to the cart
+      const newOrderData = {
+        cartId: id,
+        owner: username,
+        status: "Proccessing",
+      };
 
-    //Pass in the new order to the server
-    axios.post(getServerUrl() + "/create/order", newOrderData).then((res) => {
-      return res;
+      //Pass in the new order to the server
+      axios.post(getServerUrl() + "/create/order", newOrderData);
     });
-  });
 }
 
 //Read in general order information (Like the order status and when it was placed)

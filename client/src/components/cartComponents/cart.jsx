@@ -3,7 +3,7 @@ import CartItem from "../cartComponents/cartItem";
 import Profile from "../profile";
 import OrderList from "../orderComponents/orderList"
 
-import { getClientUrl, getServerUrl } from "../../getUrl.js";
+import { getClientUrl, getServerUrl } from "../../services/getUrl.js";
 
 import axios from "axios";
 import QuantityButtons from "../quantityButtons";

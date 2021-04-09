@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { getServerUrl, getClientUrl } from "../../getUrl.js";
+import { getServerUrl, getClientUrl } from "../../services/getUrl.js";
 
 
 //Handles all code needed to tell the server to cancel an order.

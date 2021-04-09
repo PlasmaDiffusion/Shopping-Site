@@ -14,9 +14,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 See the test folder for back end tests, and client/App.test.js for front end tests.
 
-## CSS
+## React Folders
 
-The project has a custom index.scss file, and it also uses a small amount of bootstrap.
+client/src/components has all React components. Most of these are class components but there are a few hooks as well..
+client/src/services has refactored functions for API calls.
+client/src has the main app file, test file and SCSS files.
 
 ## Available Scripts
 

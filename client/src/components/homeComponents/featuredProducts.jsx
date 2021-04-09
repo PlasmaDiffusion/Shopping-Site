@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ProductCarousel from "./productCarousel";
 import ProductCard from "./productCard";
-import { getClientUrl, getServerUrl } from "../../getUrl.js";
+import { getClientUrl, getServerUrl } from "../../services/getUrl.js";
 import axios from "axios";
 
 //Loads in data for a product carousel

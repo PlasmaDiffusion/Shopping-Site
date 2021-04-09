@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { getServerUrl, getClientUrl } from "../../getUrl.js";
+import { getServerUrl, getClientUrl } from "../../services/getUrl.js";
 import { withAuth0 } from "@auth0/auth0-react";
 import { Button } from "reactstrap";
+import {addItemToCart} from "../../services/cartService.js";
 
 //The add to cart button. When pressed it connects to the server to add the item to a user's cart
 class AddToCart extends Component {
@@ -38,44 +39,25 @@ class AddToCart extends Component {
     if (this.props.auth0.user) req.username = this.props.auth0.user.name;
     else req.username= "Guest";
 
-    //console.log(this.props.auth0.user, req.username);
-
     //Get/create the cart for the user
     axios.post(getServerUrl() + "/read/cart", req).then((res) => {
       this.setState({ cartId: res.data.id });
       //Create a cart item
-      this.addItemToCart();
+      this.createCartItem();
     });
   }
 
   //Create a cart item and put it in the server (with a reference to the product and cart)
-  addItemToCart() {
+  createCartItem() {
     const newCartItem = {
       cartId: this.state.cartId,
       shopItemId: this.props.productId,
       amountInCart: this.props.amountToAdd,
     };
 
-    axios.post(getServerUrl() + "/create/cartItem", newCartItem).then((res) => {
-      let finished = 0;
 
-      //Update the stock of the product too (Updates the product page and cart)
-      let newStockData = {
-        id: newCartItem.shopItemId,
-        amountInStock: this.props.amountInStock - this.props.amountToAdd,
-      };
+    addItemToCart(newCartItem, this.props.amountInStock, this.props.amountToAdd);
 
-      axios
-        .post(getServerUrl() + "/update/shopItemStock", newStockData)
-        .then((res) => {
-          //Update the total price of the cart (Server side handles this)
-          axios
-            .post(getServerUrl() + "/update/cart", { id: this.state.cartId })
-            .then((res) => {
-              window.location.replace(getClientUrl() + "/cart");
-            });
-        });
-    });
   }
 
   //Just render the Add To Cart button

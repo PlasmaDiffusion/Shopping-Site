@@ -1,4 +1,4 @@
-import { getClientUrl, getServerUrl } from "../../getUrl.js";
+import { getClientUrl, getServerUrl } from "../../services/getUrl.js";
 import axios from "axios";
 
 //Functions used to update/create products from the admin pages

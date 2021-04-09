@@ -3,7 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import Loading from "../loading";
 import Profile from "../profile";
 import axios from "axios";
-import { getClientUrl, getServerUrl } from "../../getUrl.js";
+import { getClientUrl, getServerUrl } from "../../services/getUrl.js";
 
 import {
   submitProduct,
@@ -88,7 +88,6 @@ class ShopItemForm extends Component {
 
   //A profile component will call this function to send the user that's currently logged in
   adminCheck(username) {
-    //this.setState({ user: username });
     this.user = username;
   }
 

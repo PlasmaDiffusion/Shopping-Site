@@ -6,7 +6,7 @@ import {
   CarouselIndicators,
   CarouselCaption,
 } from "reactstrap";
-import { getClientUrl } from "../../getUrl";
+import { getClientUrl } from "../../services/getUrl.js";
 
 const items = [
   {
