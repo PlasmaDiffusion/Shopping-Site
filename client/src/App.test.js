@@ -1,8 +1,6 @@
 import React from "react";
 import axios from "axios";
 
-import { getServerUrl } from "./getUrl.js";
-
 //Front end tests and events
 import { render, screen, act } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
