@@ -23,7 +23,7 @@ class OrderCancelButton extends Component {
     cancelOrder()
     {
         //Have to have an order id prepared.
-        if (this.props.orderId && !this.props.cancelled)
+        if (this.props.orderId && !this.state.cancelled)
         {
             if(window.confirm("Cancel this order?"))
                 this.setupCancelData();

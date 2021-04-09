@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import axios from "axios";
-import { getServerUrl, getClientUrl } from "../../getUrl.js";
-import CartItem from "../cartComponents/cartItem";
-import OrderCancelButton from "./orderCancelButton";
+import Order from "./order";
+import { placeOrder, readOrders, readOrderItems } from '../../services/orderService.js';
+
 
 //An order displays information, like that of a cart, alongside its progress and if you can cancel it
 class OrderList extends Component {
@@ -11,7 +10,7 @@ class OrderList extends Component {
 
         this.state = {
             orderState: 0, //0 is not placing, 1 is placing, 2 is successfully placed
-            showOrders: false,
+            loadOrders: false,
             orders: [],
             orderItems: []
         }
@@ -33,66 +32,34 @@ class OrderList extends Component {
         if (id && this.props.placingOrder && this.state.orderState == 0)
         {
             this.setState({orderState: 1});
+            placeOrder(this.getUsername(), id).then((res) => {
+                this.setState({ orderState: 2 });
+                alert("The order has been placed!");
 
-            //The cart needs to get its owner name modified. This will keep the cart on the server but let the user have a new one.
-            axios.post(getServerUrl() + "/prepareForOrder", {id:id})
-            .then((res) => {
-
-
-                var username = this.getUsername();
-
-                //The order now needs to be created with a reference to the cart
-                const newOrderData = {
-                    cartId: id,
-                    owner: username,
-                    status: "Proccessing",
-                }
-
-                axios.post(getServerUrl() + "/create/order", newOrderData)
-                .then((res) => {
-    
-                    this.setState({orderState: 2});
-                    alert("The order has been placed!");
-                    window.location.reload();
-                });
+                //Reload to get a new, empty cart ready
+                window.location.reload();
             });
+
+     
         }
-
-
+        
     }
 
     //Load in all previous orders if the user clicks the button to do so.
-    getOrders()
+    async getOrders()
     {
         if (this.state.orders.length == 0)
         {
 
-            var orderOwner = this.getUsername();
+            await readOrders(this.getUsername()).then((res) => {                
+                if (!res) alert("No orders found.")
+                else this.setState({ orders: res});
+              });
 
-
-            axios.post(getServerUrl() + "/read/orders", {username:orderOwner})
-            .then((res) => {
-
-                this.setState({orders: res.data});
-                console.log("Orders", res.data);
-
-                var orderItems = []
-
-
-                //Each order has a cart id. We need to basically load in a bunch of carts.
-                axios
-                .post(getServerUrl() + "/read/cartsWithItems/" , {username:orderOwner})
-                .then((cartItemRes) => {
-                    
-                    console.log("Cart items", cartItemRes.data)
-                    this.setState({orderItems: cartItemRes.data});
-
-                    if (cartItemRes.data.length == 0) alert("No orders found.");
-
-                    })
-
-                })
+            await readOrderItems(this.getUsername()).then((res) => {
+                if (res) this.setState({orderItems: res});
                 
+            });
         }
     }
 
@@ -115,44 +82,20 @@ class OrderList extends Component {
         return "";
     }
 
-  
 
-    listOrders() {
-      console.log("Order items (state)", this.state.orderItems);
-      return(this.state.orderItems.map((cart, index) => (
-        
-        //Display orders here. (Ignore the user's current cart) TODO: Only display orders in progress, and have an option to display all orders.
-        <div key={index} className="container">
-            {this.state.orders[index] ? <div>
-            <div className="border">
-                <h2>Order {index+1} - {this.state.orders[index].status}</h2>
-                <i>Placed on {this.formatDate(this.state.orders[index].createdAt)}</i>
-                <h4>${cart.totalPrice} Total</h4>
-                {/* Option to cancel the order, if it's only proccessing and not delivered */}
-                {this.state.orders[index].status == "Proccessing" ?
-                <OrderCancelButton cart={cart} orderId={this.state.orders[index].id} />
-                : ""}
-            </div>
-
-        
-
-            <div className="border">
-              {cart.cartItems.map((product, i) => (
-                <div key={i}>
-                    <CartItem product={product.shopItem} amountInCart={product.amountInCart} id={product.shopItemId} imageSize={128} cartId={this.state.id} constant={true} />
-                    <div  style={{paddingLeft: 128}}>{product.amountInCart}</div>
-                    <br></br><br></br>
-                </div>
-                
-              ))}
-            </div>
-
-            <br></br><br></br><br></br><br></br><br></br>
-        
-            </div>: ""}
-        </div>
-      )))
-      }
+    listOrders()
+    {
+        console.log("Order items (state)", this.state.orderItems);
+        return this.state.orderItems.map((cart, index) => (
+            <Order
+            status={this.state.orders[index].status}
+            createdAt={this.state.orders[index].createdAt}
+            cart={cart}
+            id = {this.state.orders[index].id}
+            index={index}
+            />
+        ))
+    }
     
     
 
@@ -175,3 +118,4 @@ class OrderList extends Component {
 }
 
 export default OrderList;
+
