@@ -1,0 +1,75 @@
+@import "../../variables.scss";
+
+/*Search related stuff*/
+.searchResult {
+  background-color: rgb(247, 247, 247);
+  border-radius: 10px;
+  margin: 2rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+
+  animation: shrink 0.5s;
+}
+
+.searchResult:hover {
+  animation: grow 0.5s forwards;
+}
+
+.searchResult-bottom {
+  border: 2px double whitesmoke;
+  border-radius: 10px;
+  font-size: 1.5rem;
+
+  a {
+    color: $cardTextCol;
+  }
+  a:hover {
+    text-decoration: none;
+    color: $cardColDark;
+  }
+}
+
+.searchbar {
+  width: 100%;
+  font-size: 16pt;
+}
+
+/*Search button and drop down menu for search categories*/
+#searchButton,
+#dropdown button {
+  border-radius: 0 0 0 0;
+  background-color: $navCol;
+  border-color: $bgCol;
+  z-index: 1;
+  position: relative;
+  color: black;
+}
+
+#dropdown button:hover,
+#searchButton:hover {
+  border-radius: 0 0 0 0;
+  background-color: $lightCol;
+  border-color: $lightCol;
+}
+
+/*Desktop only */
+@media screen and (min-width: 991px) {
+  /*Button corners*/
+  #dropdown button {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  #searchButton {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  #dropdown button:hover {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  #searchButton:hover {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+}

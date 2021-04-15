@@ -58,17 +58,9 @@ describe("Product Page component", function () {
       { id: 3, name: "Banana" },
     ];
 
-    //const promise = Promise.resolve({ data: { hits: products } });
-
-    //axios.get.mockImplementationOnce(() => promise);
-
     render(<ProductCard product={products[0]} />);
     render(<ProductCard product={products[1]} />);
     render(<ProductCard product={products[2]} />);
-
-    //screen.debug();
-
-    //await act(() => promise);
 
     expect(screen.getAllByRole("heading")).toHaveLength(3);
   });

@@ -1,0 +1,111 @@
+@import "../../variables.scss";
+
+/*Outer flex container of all featured products */
+.flex-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/*Inner flex container of featurd product "cards".
+  (Includes an image title and price, plus a hovered description and buy button)*/
+.flex-card {
+  display: flex;
+  width: 256px;
+  flex-wrap: wrap;
+}
+
+.productCard {
+  border-radius: 10px;
+  background: $cardCol;
+  animation: shrink 0.5s;
+}
+
+.card-image {
+  margin: auto;
+}
+
+/*Bottom block of a card */
+.card-title {
+  background: $cardColDark;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  text-align: center;
+  width: 100%;
+  height: 30%;
+}
+
+/*Text within a card */
+.productCard h3,
+.productCard p {
+  color: $cardTextCol;
+}
+
+/*Part of the card that will fade in once hovered over */
+.card-buy {
+  font-size: 1rem;
+  opacity: 0;
+  position: absolute;
+  height: 256px;
+  width: 256px;
+  text-align: center;
+  transition: 0.25s;
+}
+
+.productCard:hover {
+  animation: grow 0.5s forwards;
+
+  .card-buy {
+    opacity: 0.8;
+    background-color: $cardCol;
+  }
+}
+
+.card-desc {
+  font-size: 1rem;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0%);
+  -ms-transform: translate(-50%, 0%);
+  transform: translate(-50%, 00%);
+  text-align: center;
+}
+
+/*The buy button */
+.btn-round {
+  border-radius: 20px;
+  border: none;
+  color: grey;
+  background-color: white;
+  text-decoration: none !important;
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 20px;
+  font-size: 1rem;
+  position: relative;
+  top: 60%;
+}
+
+/* Tablets and phones */
+@media screen and (max-width: 780px) {
+  .btn-wide {
+    width: 40%;
+    padding: 2%;
+  }
+
+  #userText {
+    font-size: 1rem;
+  }
+
+  .flex-container {
+    flex-flow: column wrap;
+    justify-content: space-between;
+  }
+
+  .flex-card {
+    margin: auto;
+    padding-bottom: 3rem;
+  }
+}

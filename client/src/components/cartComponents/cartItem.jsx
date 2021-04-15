@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { getClientUrl, getServerUrl } from "../../services/getUrl.js";
+import "./cart.scss";
+
 
 import axios from "axios";
 
@@ -92,11 +94,11 @@ class CartItem extends Component {
             {//If constant, don't let the amount be changed or item be deleted.
             this.props.constant ? "" : (
               <div className="col-sm-">
-              <button className="btn-lightOrange" onClick={this.deleteItem}>
+              <button className="btn-lightOrange btn-padding" onClick={this.deleteItem}>
                 Remove Item
               </button>
               <br></br>
-              <button className="btn-darkOrange" onClick={this.updateAmount}>
+              <button className="btn-lightOrange btn-padding" onClick={this.updateAmount}>
                 Update Quantity
               </button>
             </div>

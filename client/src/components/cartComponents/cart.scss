@@ -1,0 +1,60 @@
+@import "../../variables.scss";
+
+/* Other button variants */
+.btn-darkOrange,
+.btn-lightOrange,
+.btn-orange {
+  border-radius: 8px;
+  border: none;
+}
+
+.btn-lightOrange {
+  background-color: $lightCol;
+}
+
+.btn-lightOrange:hover {
+  background-color: #d67856;
+}
+
+.btn-darkOrange {
+  background-color: $navCol;
+}
+
+.btn-darkOrange:hover {
+  background-color: #bd4b21;
+}
+
+.btn-orange {
+  background-color: $bgCol;
+}
+
+.btn-orange:hover {
+  background-color: $navCol;
+}
+
+.btn-wide {
+  width: 20%;
+  padding: 2%;
+}
+
+/* +/- buttons */
+.btn-quantity {
+  font-size: 2rem;
+  width: 3rem;
+}
+
+.btn-padding {
+  padding: 5px;
+}
+
+/* Tablets and phones */
+@media screen and (max-width: 780px) {
+  .btn-wide {
+    width: 40%;
+    padding: 2%;
+  }
+
+  .mobile-margin {
+    margin: 10px;
+  }
+}

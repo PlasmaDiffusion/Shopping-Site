@@ -16,9 +16,13 @@ See the test folder for back end tests, and client/App.test.js for front end tes
 
 ## React Folders
 
-client/src/components has all React components. Most of these are class components but there are a few hooks as well..
+client/src/components has all React components. Most of these are class components but there are a few hooks as well.
 client/src/services has refactored functions for API calls.
 client/src has the main app file, test file and SCSS files.
+
+## Sass Modules
+
+Look for scss files in component folders. There's also the global index.scss file with a few definitions.
 
 ## Available Scripts
 

@@ -3,6 +3,8 @@ import CartItem from "../cartComponents/cartItem";
 import Profile from "../profile";
 import OrderList from "../orderComponents/orderList"
 
+import "./cart.scss";
+
 import { getClientUrl, getServerUrl } from "../../services/getUrl.js";
 
 import axios from "axios";
@@ -111,10 +113,12 @@ class Cart extends Component {
         {this.state.cartItems.map((product, index) => (
           <div className="row" key={index}>
             <CartItem product={product} id={product.shopItemId} amountInCart={product.amountInCart} imageSize={128} cartId={this.state.id} />
+            <div className="mobile-margin" />
             <QuantityButtons
               max={this.state.initialMaxAmounts[index]}
               min={1}
               stockAmount={this.state.amountToDisplayInStock[index]}
+              stockMessage={"more"}
               amount={product.amountInCart}
               onAmountChanged={(newAmount) => {
                 //Function that updates item count

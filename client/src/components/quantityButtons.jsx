@@ -34,7 +34,7 @@ class QuantityButtons extends Component {
           <div className="col-sm-4">
             <button
               id="decrement"
-              className="btn-lightOrange btn-quantity"
+              className="btn-darkOrange btn-quantity"
               onClick={this.onDecrement}
             >
               -
@@ -52,7 +52,7 @@ class QuantityButtons extends Component {
         <div className="row">
           <div className="col-sm-4">
             <p style={{margin: "2rem"}}>
-              <i>{this.props.stockAmount} in stock</i>
+              <i>{this.props.stockAmount} {this.props.stockMessage} in stock</i>
             </p>
           </div>
         </div>

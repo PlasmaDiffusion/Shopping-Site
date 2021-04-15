@@ -9,7 +9,7 @@ import {
   useHistory,
 } from "react-router-dom";
 
-import AuthNav from "./navbar.jsx";
+import AuthNav from "./navigation/navbar.jsx";
 import Profile from "./profile.jsx";
 import PrivateRoute from "./privateRoute.jsx";
 import ExternalApi from "./external-api.jsx";

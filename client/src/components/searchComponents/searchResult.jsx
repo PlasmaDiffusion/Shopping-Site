@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { getClientUrl, getServerUrl } from "../../services/getUrl.js";
 
+import "./search.scss";
+
 //The search bar will display many of these search results. Each one is a product to display.
 class SearchResult extends Component {
   constructor(props) {

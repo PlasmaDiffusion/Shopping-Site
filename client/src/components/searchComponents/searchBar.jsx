@@ -8,6 +8,8 @@ import {
   DropdownMenu,
 } from "reactstrap";
 
+import "./search.scss";
+
 import axios from "axios";
 
 //The search bar that is always at the top of the site. You can enter keywords and select item categories with it.

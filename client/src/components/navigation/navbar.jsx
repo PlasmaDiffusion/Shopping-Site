@@ -4,10 +4,12 @@ import { Container, Nav, Navbar, NavLink, NavItem, NavbarToggler, NavbarBrand,
   Collapse, UncontrolledDropdown, DropdownMenu, DropdownToggle, DropdownItem } from "reactstrap";
 
 import { useAuth0 } from "@auth0/auth0-react";
-import LogoutButton from "./auth/logout-button";
-import LoginButton from "./auth/login-button";
-import Profile from "./profile";
-import SearchBar from "./searchComponents/searchBar";
+import LogoutButton from "../auth/logout-button";
+import LoginButton from "../auth/login-button";
+import Profile from "../profile";
+import SearchBar from "../searchComponents/searchBar";
+
+import "./navbar.scss";
 
 //A navbar that can display links only if logged in.
 //The name of the current page you're on can be passed in as a prop to highlight a specific link.

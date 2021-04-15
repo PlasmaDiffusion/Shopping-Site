@@ -1,0 +1,89 @@
+@import "../../variables.scss";
+
+/*Default navbar*/
+.navbar,
+.searchContainer {
+  background-color: $bgCol;
+}
+/*Navbar buttons NOT selected*/
+.navItem,
+.navButton {
+  background-color: $navCol;
+  color: black;
+}
+.navItem {
+  background: none;
+}
+/*Navbar links NOT selected*/
+.navItem a,
+.navButton a,
+.navButton a:visited {
+  background: none;
+  color: black !important;
+  text-decoration: bold;
+}
+.navButton {
+  border: none;
+  width: 120%;
+  border-radius: 8px;
+}
+
+.navItem a:hover {
+  color: white !important;
+}
+
+/*Navbar links/buttons selected*/
+.navItem:hover,
+.navButton:hover {
+  background-color: $navCol;
+  border-radius: 8px;
+  color: whitesmoke;
+}
+
+.navItemCurrent a {
+  color: rgb(0, 0, 0) !important;
+  font-weight: bold;
+}
+
+.mobileNav {
+  display: none;
+}
+
+.desktopNav {
+  display: block;
+}
+
+/* Tablets and phones */
+@media screen and (max-width: 780px) {
+  //Navbar
+  .mobileNav {
+    display: block;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .nav-link {
+    font-size: 2rem;
+  }
+
+  .navButton {
+    padding: 5px;
+  }
+
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+/* Tablets and phones */
+@media screen and (max-width: 780px) {
+  #userText {
+    font-size: 1rem;
+  }
+}

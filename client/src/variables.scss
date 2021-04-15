@@ -1,0 +1,12 @@
+//The colours of the navbar
+$bgCol: #f3a154;
+$navCol: #ef7547;
+
+//Lighter/Darker variants used with some buttons
+$lightCol: lighten($navCol, 30%);
+$darkOrange: darken($navCol, 30%);
+
+//Colours for featured product "cards" on the home page
+$cardTextCol: rgb(126, 126, 126);
+$cardCol: rgb(235, 235, 235);
+$cardColDark: rgb(214, 214, 214);
