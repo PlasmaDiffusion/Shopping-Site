@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { getClientUrl, getServerUrl } from "../services/getUrl.js";
+import { getServerUrl } from "../../services/getUrl.js";
 import axios from "axios";
-import QuantityButtons from "./quantityButtons";
-import AddToCart from "./cartComponents/addToCart";
+import QuantityButtons from "../quantityComponents/quantityButtons";
+import AddToCart from "../cartComponents/addToCart";
 
 //A component that shows information of the product and the ability to add one or more of it to your cart.
 class ProductPage extends Component {

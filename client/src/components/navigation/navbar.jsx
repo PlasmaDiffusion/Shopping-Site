@@ -6,7 +6,7 @@ import { Container, Nav, Navbar, NavLink, NavItem, NavbarToggler, NavbarBrand,
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "../auth/logout-button";
 import LoginButton from "../auth/login-button";
-import Profile from "../profile";
+import Profile from "../auth/profile";
 import SearchBar from "../searchComponents/searchBar";
 
 import "./navbar.scss";

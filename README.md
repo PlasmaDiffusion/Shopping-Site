@@ -1,4 +1,4 @@
-https://shopping-site-mockup.netlify.app/
+﻿https://shopping-site-mockup.netlify.app/
 
 ## About Project
 
@@ -6,13 +6,13 @@ This project lets you browse for products, add them to your cart and then "order
 
 It uses React at the front end and NodeJS/Express at the back end. The back end uses MySQL with Sequelize.
 
-See the client folder for the front end, and the outer folders for the back end.
+See the client folder for the front end, and the server folder for the back end.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Tests
 
-See the test folder for back end tests, and client/App.test.js for front end tests.
+See the and client/App.test.js for front end tests, and server/test for back end tests,
 
 ## React Folders
 

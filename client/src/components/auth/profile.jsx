@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-import Loading from "./loading";
+import Loading from "../loading";
 
 import { useAuth0 } from "@auth0/auth0-react";
 

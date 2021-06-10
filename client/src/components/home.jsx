@@ -10,18 +10,17 @@ import {
 } from "react-router-dom";
 
 import AuthNav from "./navigation/navbar.jsx";
-import Profile from "./profile.jsx";
-import PrivateRoute from "./privateRoute.jsx";
-import ExternalApi from "./external-api.jsx";
+import Profile from "./auth/profile.jsx";
+import PrivateRoute from "./auth/privateRoute.jsx";
+import ExternalApi from "./auth/external-api.jsx";
 import ShopItemForm from "./adminComponents/shopItemForm";
 import AdminNavigation from "./adminComponents/adminNavigation";
 import AdminSearch from "./adminComponents/adminSearch";
 import SearchBar from "./searchComponents/searchBar.jsx";
-import ProductPage from "./productPage.jsx";
+import ProductPage from "./productComponents/productPage.jsx";
 import Cart from "./cartComponents/cart.jsx";
-import ProductCarousel from "./homeComponents/productCarousel";
 import FeaturedProducts from "./homeComponents/featuredProducts.jsx";
-import SupportPage from "./supportPage.jsx";
+import SupportPage from "./navigation/supportPage.jsx";
 
 //All routes are placed here.
 class Home extends Component {

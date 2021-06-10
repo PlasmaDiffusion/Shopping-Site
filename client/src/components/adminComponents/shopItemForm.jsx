@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
 import Loading from "../loading";
-import Profile from "../profile";
+import Profile from "../auth/profile";
 import axios from "axios";
 import { getClientUrl, getServerUrl } from "../../services/getUrl.js";
 

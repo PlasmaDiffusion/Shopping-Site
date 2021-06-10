@@ -85,7 +85,7 @@ class OrderList extends Component {
 
     listOrders()
     {
-        console.log("Order items (state)", this.state.orderItems);
+        //console.log("Order items (state)", this.state.orderItems);
         return this.state.orderItems.map((cart, index) => (
             <Order
             status={this.state.orders[index].status}

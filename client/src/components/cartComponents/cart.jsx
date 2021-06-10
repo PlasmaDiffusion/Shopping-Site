@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CartItem from "../cartComponents/cartItem";
-import Profile from "../profile";
+import Profile from "../auth/profile";
 import OrderList from "../orderComponents/orderList"
 
 import "./cart.scss";
@@ -8,7 +8,7 @@ import "./cart.scss";
 import { getClientUrl, getServerUrl } from "../../services/getUrl.js";
 
 import axios from "axios";
-import QuantityButtons from "../quantityButtons";
+import QuantityButtons from "../quantityComponents/quantityButtons";
 
 //Renders all items in the user's cart, along with the total cost.
 class Cart extends Component {
