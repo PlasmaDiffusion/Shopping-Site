@@ -30,8 +30,8 @@ class QuantityButtons extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-sm-4">
+        <div>
+          <div >
             <button
               id="decrement"
               className="btn-darkOrange btn-quantity"
@@ -49,8 +49,8 @@ class QuantityButtons extends Component {
             </button>
           </div>
         </div>
-        <div className="row">
-          <div className="col-sm-4">
+        <div >
+          <div >
             <p style={{margin: "2rem"}}>
               <i>{this.props.stockAmount} {this.props.stockMessage} in stock</i>
             </p>

@@ -1,0 +1,39 @@
+@import "../../variables.scss";
+
+.product-flex-container {
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  margin-left: 20%;
+  margin-top: 100px;
+  justify-content: space-evenly;
+
+  .btn-wide {
+    height: 50px;
+    width: 300px;
+  }
+}
+
+.flex-div:first-child {
+  flex-grow: 1;
+}
+
+/* Tablets and phones */
+@media screen and (max-width: 780px) {
+  .product-flex-container {
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 0;
+    justify-content: space-evenly;
+  }
+
+  .flex-div:first-child {
+    flex-grow: 0;
+  }
+
+  .btn-wide {
+    width: 70% !important;
+    margin-bottom: 50px;
+  }
+}
