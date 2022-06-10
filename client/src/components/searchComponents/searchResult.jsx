@@ -37,7 +37,7 @@ class SearchResult extends Component {
             <h2>{this.props.product.name}</h2>
           </a>
           <p>${this.props.product.price}</p>
-          {/*<p>{this.props.product.description}</p>*/}
+
         </div>
         </div>
     );

@@ -11,11 +11,11 @@ const { triggerAsyncId } = require("async_hooks");
 
 //Connection to database
 const sequelize = new Sequelize(
-  "oJXx5IKlWW",
-  "oJXx5IKlWW",
+  "sql5498968",
+  "sql5498968",
   process.env.DB_PASSWORD,
   {
-    host: "remotemysql.com",
+    host: "sql5.freemysqlhosting.net",
     dialect: "mysql",
   }
 );

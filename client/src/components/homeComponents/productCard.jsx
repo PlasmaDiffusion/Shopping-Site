@@ -10,7 +10,7 @@ import { getClientUrl } from "../../services/getUrl.js";
 
 /*
 A "card" that shows information on a product, passed in as a prop.
-(Needs to check for props, as the featuredProducts component gets them asynchrously)
+(Needs to check for props, as the featuredProducts component gets them asynchronously)
 The top of the card is the image plus a description & buy button when hovered.
 The very bottom of the card has the price and name.
 */

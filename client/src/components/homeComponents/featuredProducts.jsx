@@ -16,7 +16,7 @@ class FeaturedProducts extends Component {
   componentDidMount() {
     
     //Read data for each featured product
-    axios.get(getServerUrl() + "/read/shopItem/" + 5).then((res) => {
+    axios.get(getServerUrl() + "/read/shopItem/" + 1).then((res) => {
       this.setState({
         product0: res.data,
       });

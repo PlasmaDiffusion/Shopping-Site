@@ -3,12 +3,16 @@
 /*Search related stuff*/
 .searchResult {
   background-color: rgb(247, 247, 247);
-  border-radius: 10px;
+  border-radius: 1px;
   margin: 2rem;
   margin-right: 1rem;
   margin-left: 1rem;
 
   animation: shrink 0.5s;
+
+  img {
+    margin: 4px;
+  }
 }
 
 .searchResult:hover {
