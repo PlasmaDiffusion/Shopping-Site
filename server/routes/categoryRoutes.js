@@ -6,7 +6,7 @@ models = sequelize.models;
 //Creating shop item
 routes.post("/create/category", async function (req, res) {
   if (req.body.id || req.body.user != process.env.ADMIN) {
-    res.status(400).send(`Bad request. Are you not logged in as an admin?`);
+    res.status(400).send(`Bad request. Are you not logged in as an admin? Also DO NOT provide a category id.`);
   } else {
     await models.category.create(req.body);
     res.status(201).send(req.body.name + " was added successfully.");
