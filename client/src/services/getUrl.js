@@ -1,7 +1,7 @@
 export function getClientUrl() {
   return process.env.NODE_ENV == "development"
     ? "http://localhost:3000"
-    : "https://shopping-site-mockup.netlify.app/";
+    : "https://shopping-site-mockup.netlify.app";
 }
 
 export function getServerUrl() {
